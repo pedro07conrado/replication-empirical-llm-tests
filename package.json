@@ -1,0 +1,28 @@
+{
+  "name": "replication-empirical-llm-tests",
+  "version": "0.1.0",
+  "description": "Replication infrastructure for empirical evaluation of LLM-based unit test generation.",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "collect:functions": "tsx src/experiment/collectApiFunctions.ts",
+    "estimate:tokens": "tsx src/experiment/estimateTokens.ts",
+    "generate:prompts": "tsx src/experiment/generatePrompts.ts",
+    "generate:tests:llm": "tsx src/experiment/generateTestsWithLLM.ts",
+    "sample:functions": "tsx src/experiment/sampleApiFunctions.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "complex.js": "^2.4.2",
+    "countries-and-timezones": "^3.8.0",
+    "geo-point": "^2.0.1",
+    "plural": "^0.2.0",
+    "quill-delta": "^5.1.0",
+    "simple-statistics": "^7.9.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.10",
+    "tsx": "^4.20.3",
+    "typescript": "^5.5.3"
+  }
+}

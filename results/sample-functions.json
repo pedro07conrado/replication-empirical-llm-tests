@@ -1,0 +1,1101 @@
+[
+  {
+    "packageName": "complex.js",
+    "functionPath": "complex.js.Complex",
+    "parameterCount": 2,
+    "functionSignature": "function Complex(a, b)",
+    "functionBody": "function Complex(a, b) {\n\n  if (!(this instanceof Complex)) {\n    return new Complex(a, b);\n  }\n\n  const z = parse(a, b);\n\n  this['re'] = z['re'];\n  this['im'] = z['im'];\n}"
+  },
+  {
+    "packageName": "complex.js",
+    "functionPath": "complex.js.Complex.prototype.abs",
+    "parameterCount": 0,
+    "functionSignature": "function ()",
+    "functionBody": "function () {\n\n    return hypot(this['re'], this['im']);\n  }"
+  },
+  {
+    "packageName": "complex.js",
+    "functionPath": "complex.js.Complex.prototype.acos",
+    "parameterCount": 0,
+    "functionSignature": "function ()",
+    "functionBody": "function () {\n\n    // acos(c) = i * log(c - i * sqrt(1 - c^2))\n\n    const a = this['re'];\n    const b = this['im'];\n\n    const t1 = new Complex(\n      b * b - a * a + 1,\n      -2 * a * b)['sqrt']();\n\n    const t2 = new Complex(\n      t1['re'] - b,\n      t1['im'] + a)['log']();\n\n    return new Complex(Math.PI / 2 - t2['im'], t2['re']);\n  }"
+  },
+  {
+    "packageName": "complex.js",
+    "functionPath": "complex.js.Complex.prototype.acosh",
+    "parameterCount": 0,
+    "functionSignature": "function ()",
+    "functionBody": "function () {\n\n    // acosh(z)= log(z + sqrt(z^2 - 1)) = log(z + sqrt(z - 1) * sqrt(z + 1))\n\n    const a = this['re'];\n    const b = this['im'];\n\n    if (b === 0) {\n\n      // z = a is real\n      if (a > 1) {\n        // acosh(a) = log(a + sqrt(a - 1) * sqrt(a + 1)),  a > 1\n        return new Complex(\n          Math.log(a + Math.sqrt(a - 1) * Math.sqrt(a + 1)), 0);\n      }\n\n      if (a < -1) {\n        // acosh(a) = log(-a + sqrt(a^2 - 1)) + i*pi,  a < -1\n        const t = Math.sqrt(a * a - 1);\n        return new Complex(Math.log(-a + t), Math.PI);\n      }\n\n      // -1 <= a <= 1 : purely imaginary\n      // acosh(a) = i * acos(a)\n      return new Complex(0, Math.acos(a));\n    }\n\n    const t1 = new Complex(a - 1, b)['sqrt'](); // sqrt(z - 1)\n    const t2 = new Complex(a + 1, b)['sqrt'](); // sqrt(z + 1)\n\n    return new Complex(\n      a + t1['re'] * t2['re'] - t1['im'] * t2['im'],\n      b + t1['re'] * t2['im'] + t1['im'] * t2['re']\n    )['log']();\n  }"
+  },
+  {
+    "packageName": "complex.js",
+    "functionPath": "complex.js.Complex.prototype.acot",
+    "parameterCount": 0,
+    "functionSignature": "function ()",
+    "functionBody": "function () {\n\n    // acot(c) = i / 2 log((c - i) / (c + i))\n\n    const a = this['re'];\n    const b = this['im'];\n\n    if (b === 0) {\n      return new Complex(Math.atan2(1, a), 0);\n    }\n\n    const d = a * a + b * b;\n    return (d !== 0)\n      ? new Complex(\n        a / d,\n        -b / d).atan()\n      : new Complex(\n        (a !== 0) ? a / 0 : 0,\n        (b !== 0) ? -b / 0 : 0).atan();\n  }"
+  },
+  {
+    "packageName": "complex.js",
+    "functionPath": "complex.js.Complex.prototype.acoth",
+    "parameterCount": 0,
+    "functionSignature": "function ()",
+    "functionBody": "function () {\n\n    // acoth(z) = log((z + 1) / (z - 1)) / 2 = atanh(1 / z)\n\n    const a = this['re'];\n    const b = this['im'];\n\n    // z = 0 -> acoth(0) = i * π / 2  (log((1+0)/(1-0))/2 = log(-1)/2)\n    if (a === 0 && b === 0) {\n      return new Complex(0, Math.PI / 2);\n    }\n\n    const d = a * a + b * b;\n\n    if (d !== 0) {\n      // 1 / z = (a - i b) / (a^2 + b^2)\n      return new Complex(a / d, -b / d)['atanh']();\n    }\n\n    // Fallback for weird infinities/NaNs: mirror other functions' style\n    return new Complex(\n      (a !== 0) ? a / 0 : 0,\n      (b !== 0) ? -b / 0 : 0\n    )['atanh']();\n  }"
+  },
+  {
+    "packageName": "complex.js",
+    "functionPath": "complex.js.Complex.prototype.acsc",
+    "parameterCount": 0,
+    "functionSignature": "function ()",
+    "functionBody": "function () {\n\n    // acsc(c) = -i * log(i / c + sqrt(1 - 1 / c^2))\n\n    const a = this['re'];\n    const b = this['im'];\n\n    if (a === 0 && b === 0) {\n      return new Complex(Math.PI / 2, Infinity);\n    }\n\n    const d = a * a + b * b;\n    return (d !== 0)\n      ? new Complex(\n        a / d,\n        -b / d).asin()\n      : new Complex(\n        (a !== 0) ? a / 0 : 0,\n        (b !== 0) ? -b / 0 : 0).asin();\n  }"
+  },
+  {
+    "packageName": "complex.js",
+    "functionPath": "complex.js.Complex.prototype.arg",
+    "parameterCount": 0,
+    "functionSignature": "function ()",
+    "functionBody": "function () {\n\n    return Math.atan2(this['im'], this['re']);\n  }"
+  },
+  {
+    "packageName": "complex.js",
+    "functionPath": "complex.js.Complex.prototype.asech",
+    "parameterCount": 0,
+    "functionSignature": "function ()",
+    "functionBody": "function () {\n\n    // asech(z) = acosh(1 / z)\n\n    const a = this['re'];\n    const b = this['im'];\n\n    if (this['isZero']()) {\n      // asech(0) = acosh(∞) -> ∞\n      return Complex['INFINITY'];\n    }\n\n    const d = a * a + b * b;\n\n    if (d !== 0) {\n      // 1 / z = (a - i b) / (a^2 + b^2)\n      return new Complex(a / d, -b / d)['acosh']();\n    }\n\n    // Fallback for weird infinities/NaNs\n    return new Complex(\n      (a !== 0) ? a / 0 : 0,\n      (b !== 0) ? -b / 0 : 0)['acosh']();\n  }"
+  },
+  {
+    "packageName": "complex.js",
+    "functionPath": "complex.js.Complex.prototype.asinh",
+    "parameterCount": 0,
+    "functionSignature": "function ()",
+    "functionBody": "function () {\n\n    // asinh(z) = log(z + sqrt(z^2 + 1))\n\n    const a = this['re'];\n    const b = this['im'];\n\n    if (b === 0) {\n\n      if (a === 0) {\n        return new Complex(0, 0);\n      }\n\n      // Use |a| to keep asinh(-a) = -asinh(a) and avoid cancellation for large -a\n      const x = Math.abs(a);\n      const r = Math.log(x + Math.sqrt(x * x + 1));\n\n      return new Complex(a < 0 ? -r : r, 0);\n    }\n\n    // z^2 + 1 = (a^2 - b^2 + 1) + i (2ab)\n    const re2 = a * a - b * b + 1;\n    const im2 = 2 * a * b;\n\n    const t = new Complex(re2, im2)['sqrt'](); // sqrt(z^2 + 1)\n\n    return new Complex(a + t['re'], b + t['im'])['log']();\n  }"
+  },
+  {
+    "packageName": "complex.js",
+    "functionPath": "complex.js.Complex.prototype.atan",
+    "parameterCount": 0,
+    "functionSignature": "function ()",
+    "functionBody": "function () {\n\n    // atan(c) = i / 2 log((i + x) / (i - x))\n\n    const a = this['re'];\n    const b = this['im'];\n\n    if (a === 0) {\n\n      if (b === 1) {\n        return new Complex(0, Infinity);\n      }\n\n      if (b === -1) {\n        return new Complex(0, -Infinity);\n      }\n    }\n\n    const d = a * a + (1.0 - b) * (1.0 - b);\n\n    const t1 = new Complex(\n      (1 - b * b - a * a) / d,\n      -2 * a / d).log();\n\n    return new Complex(-0.5 * t1['im'], 0.5 * t1['re']);\n  }"
+  },
+  {
+    "packageName": "complex.js",
+    "functionPath": "complex.js.Complex.prototype.atanh",
+    "parameterCount": 0,
+    "functionSignature": "function ()",
+    "functionBody": "function () {\n\n    // atanh(z) = log((1 + z) / (1 - z)) / 2\n\n    const a = this['re'];\n    const b = this['im'];\n\n    if (b === 0) {\n\n      if (a === 0) {\n        return new Complex(0, 0);\n      }\n\n      if (a === 1) {\n        // limit x -> 1^- atanh(x) = +Infinity\n        return new Complex(Infinity, 0);\n      }\n\n      if (a === -1) {\n        // limit x -> -1^+ atanh(x) = -Infinity\n        return new Complex(-Infinity, 0);\n      }\n\n      if (-1 < a && a < 1) {\n        // Purely real\n        return new Complex(\n          0.5 * Math.log((1 + a) / (1 - a)),\n          0\n        );\n      }\n\n      if (a > 1) {\n        // Our branch: Im(atanh(a)) = -π/2 for a > 1\n        const t = (a + 1) / (a - 1); // > 0\n        return new Complex(\n          0.5 * Math.log(t),\n          -Math.PI / 2\n        );\n      }\n\n      // a < -1: Im(atanh(a)) = +π/2\n      const t = (1 + a) / (1 - a); // < 0\n      return new Complex(\n        0.5 * Math.log(-t), // log((1 - a)/(1 + a))\n        Math.PI / 2\n      );\n    }\n\n    // Use atanh(z) = 0.5 * Log((1+z)/(1-z)) with principal Log.\n    const oneMinus = 1 - a;\n    const onePlus = 1 + a;\n    const d = oneMinus * oneMinus + b * b; // |1 - z|^2\n\n    if (d === 0) {\n      // (1 - z) == 0 for finite z only at z = 1+0i, already handled above.\n      // If we ever get here, just propagate infinities consistently:\n      return new Complex(\n        (a !== -1) ? (a / 0) : 0,\n        (b !== 0) ? (b / 0) : 0\n      );\n    }\n\n    // (1 + z) / (1 - z) with a single complex division\n    const xr = (onePlus * oneMinus - b * b) / d;\n    const xi = (b * oneMinus + onePlus * b) / d;\n\n    // 0.5 * log(xr + i xi)\n    return new Complex(\n      logHypot(xr, xi) / 2,\n      Math.atan2(xi, xr) / 2\n    );\n  }"
+  },
+  {
+    "packageName": "complex.js",
+    "functionPath": "complex.js.Complex.prototype.ceil",
+    "parameterCount": 1,
+    "functionSignature": "function (places)",
+    "functionBody": "function (places) {\n\n    places = Math.pow(10, places || 0);\n\n    return new Complex(\n      Math.ceil(this['re'] * places) / places,\n      Math.ceil(this['im'] * places) / places);\n  }"
+  },
+  {
+    "packageName": "complex.js",
+    "functionPath": "complex.js.Complex.prototype.clone",
+    "parameterCount": 0,
+    "functionSignature": "function ()",
+    "functionBody": "function () {\n\n    return new Complex(this['re'], this['im']);\n  }"
+  },
+  {
+    "packageName": "complex.js",
+    "functionPath": "complex.js.Complex.prototype.conjugate",
+    "parameterCount": 0,
+    "functionSignature": "function ()",
+    "functionBody": "function () {\n\n    return new Complex(this['re'], -this['im']);\n  }"
+  },
+  {
+    "packageName": "complex.js",
+    "functionPath": "complex.js.Complex.prototype.coth",
+    "parameterCount": 0,
+    "functionSignature": "function ()",
+    "functionBody": "function () {\n\n    // coth(c) = (e^c + e^-c) / (e^c - e^-c)\n\n    const a = 2 * this['re'];\n    const b = 2 * this['im'];\n    const d = cosh(a) - Math.cos(b);\n\n    return new Complex(\n      sinh(a) / d,\n      -Math.sin(b) / d);\n  }"
+  },
+  {
+    "packageName": "complex.js",
+    "functionPath": "complex.js.Complex.prototype.csch",
+    "parameterCount": 0,
+    "functionSignature": "function ()",
+    "functionBody": "function () {\n\n    // csch(c) = 2 / (e^c - e^-c)\n\n    const a = this['re'];\n    const b = this['im'];\n    const d = Math.cos(2 * b) - cosh(2 * a);\n\n    return new Complex(\n      -2 * sinh(a) * Math.cos(b) / d,\n      2 * cosh(a) * Math.sin(b) / d);\n  }"
+  },
+  {
+    "packageName": "complex.js",
+    "functionPath": "complex.js.Complex.prototype.equals",
+    "parameterCount": 2,
+    "functionSignature": "function (a, b)",
+    "functionBody": "function (a, b) {\n\n    const z = parse(a, b);\n\n    return Math.abs(z['re'] - this['re']) <= Complex['EPSILON'] &&\n      Math.abs(z['im'] - this['im']) <= Complex['EPSILON'];\n  }"
+  },
+  {
+    "packageName": "complex.js",
+    "functionPath": "complex.js.Complex.prototype.exp",
+    "parameterCount": 0,
+    "functionSignature": "function ()",
+    "functionBody": "function () {\n\n    const er = Math.exp(this['re']);\n\n    if (this['im'] === 0) {\n      return new Complex(er, 0);\n    }\n    return new Complex(\n      er * Math.cos(this['im']),\n      er * Math.sin(this['im']));\n  }"
+  },
+  {
+    "packageName": "complex.js",
+    "functionPath": "complex.js.Complex.prototype.floor",
+    "parameterCount": 1,
+    "functionSignature": "function (places)",
+    "functionBody": "function (places) {\n\n    places = Math.pow(10, places || 0);\n\n    return new Complex(\n      Math.floor(this['re'] * places) / places,\n      Math.floor(this['im'] * places) / places);\n  }"
+  },
+  {
+    "packageName": "complex.js",
+    "functionPath": "complex.js.Complex.prototype.isInfinite",
+    "parameterCount": 0,
+    "functionSignature": "function ()",
+    "functionBody": "function () {\n    return !this['isFinite']();\n  }"
+  },
+  {
+    "packageName": "complex.js",
+    "functionPath": "complex.js.Complex.prototype.isZero",
+    "parameterCount": 0,
+    "functionSignature": "function ()",
+    "functionBody": "function () {\n    return this['im'] === 0 && this['re'] === 0;\n  }"
+  },
+  {
+    "packageName": "complex.js",
+    "functionPath": "complex.js.Complex.prototype.log",
+    "parameterCount": 0,
+    "functionSignature": "function ()",
+    "functionBody": "function () {\n\n    const a = this['re'];\n    const b = this['im'];\n\n    if (b === 0 && a > 0) {\n      return new Complex(Math.log(a), 0);\n    }\n\n    return new Complex(\n      logHypot(a, b),\n      Math.atan2(b, a));\n  }"
+  },
+  {
+    "packageName": "complex.js",
+    "functionPath": "complex.js.Complex.prototype.mul",
+    "parameterCount": 2,
+    "functionSignature": "function (a, b)",
+    "functionBody": "function (a, b) {\n\n    const z = parse(a, b);\n\n    const tInfin = this['isInfinite']();\n    const zInfin = !(isFinite(z['re']) && isFinite(z['im']));\n    const tIsZero = this['re'] === 0 && this['im'] === 0;\n    const zIsZero = z['re'] === 0 && z['im'] === 0;\n\n    // Infinity * 0 = NaN\n    if (tInfin && zIsZero || zInfin && tIsZero) {\n      return Complex['NAN'];\n    }\n\n    // Infinity * z = Infinity { where z != 0 }\n    if (tInfin || zInfin) {\n      return Complex['INFINITY'];\n    }\n\n    // Shortcut for real values\n    if (z['im'] === 0 && this['im'] === 0) {\n      return new Complex(this['re'] * z['re'], 0);\n    }\n\n    return new Complex(\n      this['re'] * z['re'] - this['im'] * z['im'],\n      this['re'] * z['im'] + this['im'] * z['re']);\n  }"
+  },
+  {
+    "packageName": "complex.js",
+    "functionPath": "complex.js.Complex.prototype.round",
+    "parameterCount": 1,
+    "functionSignature": "function (places)",
+    "functionBody": "function (places) {\n\n    places = Math.pow(10, places || 0);\n\n    return new Complex(\n      Math.round(this['re'] * places) / places,\n      Math.round(this['im'] * places) / places);\n  }"
+  },
+  {
+    "packageName": "complex.js",
+    "functionPath": "complex.js.Complex.prototype.sec",
+    "parameterCount": 0,
+    "functionSignature": "function ()",
+    "functionBody": "function () {\n\n    // sec(c) = 2 / (e^(ci) + e^(-ci))\n\n    const a = this['re'];\n    const b = this['im'];\n    const d = 0.5 * cosh(2 * b) + 0.5 * Math.cos(2 * a);\n\n    return new Complex(\n      Math.cos(a) * cosh(b) / d,\n      Math.sin(a) * sinh(b) / d);\n  }"
+  },
+  {
+    "packageName": "complex.js",
+    "functionPath": "complex.js.Complex.prototype.sech",
+    "parameterCount": 0,
+    "functionSignature": "function ()",
+    "functionBody": "function () {\n\n    // sech(c) = 2 / (e^c + e^-c)\n\n    const a = this['re'];\n    const b = this['im'];\n    const d = Math.cos(2 * b) + cosh(2 * a);\n\n    return new Complex(\n      2 * cosh(a) * Math.cos(b) / d,\n      -2 * sinh(a) * Math.sin(b) / d);\n  }"
+  },
+  {
+    "packageName": "complex.js",
+    "functionPath": "complex.js.Complex.prototype.sign",
+    "parameterCount": 0,
+    "functionSignature": "function ()",
+    "functionBody": "function () {\n\n    const abs = hypot(this['re'], this['im']);\n\n    return new Complex(\n      this['re'] / abs,\n      this['im'] / abs);\n  }"
+  },
+  {
+    "packageName": "complex.js",
+    "functionPath": "complex.js.Complex.prototype.sinh",
+    "parameterCount": 0,
+    "functionSignature": "function ()",
+    "functionBody": "function () {\n\n    // sinh(c) = (e^c - e^-c) / 2\n\n    const a = this['re'];\n    const b = this['im'];\n\n    return new Complex(\n      sinh(a) * Math.cos(b),\n      cosh(a) * Math.sin(b));\n  }"
+  },
+  {
+    "packageName": "complex.js",
+    "functionPath": "complex.js.Complex.prototype.sqrt",
+    "parameterCount": 0,
+    "functionSignature": "function ()",
+    "functionBody": "function () {\n\n    const a = this['re'];\n    const b = this['im'];\n\n    if (b === 0) {\n      // Real number case\n      if (a >= 0) {\n        return new Complex(Math.sqrt(a), 0);\n      } else {\n        return new Complex(0, Math.sqrt(-a));\n      }\n    }\n\n    const r = hypot(a, b);\n\n    let re = Math.sqrt(0.5 * (r + Math.abs(a))); // sqrt(2x) / 2 = sqrt(x / 2)\n    let im = Math.abs(b) / (2 * re);\n\n    if (a >= 0) {\n      return new Complex(re, b < 0 ? -im : im);\n    } else {\n      return new Complex(im, b < 0 ? -re : re);\n    }\n  }"
+  },
+  {
+    "packageName": "complex.js",
+    "functionPath": "complex.js.Complex.prototype.tanh",
+    "parameterCount": 0,
+    "functionSignature": "function ()",
+    "functionBody": "function () {\n\n    // tanh(c) = (e^c - e^-c) / (e^c + e^-c)\n\n    const a = 2 * this['re'];\n    const b = 2 * this['im'];\n    const d = cosh(a) + Math.cos(b);\n\n    return new Complex(\n      sinh(a) / d,\n      Math.sin(b) / d);\n  }"
+  },
+  {
+    "packageName": "complex.js",
+    "functionPath": "complex.js.Complex.prototype.toString",
+    "parameterCount": 0,
+    "functionSignature": "function ()",
+    "functionBody": "function () {\n\n    let a = this['re'];\n    let b = this['im'];\n    let ret = \"\";\n\n    if (this['isNaN']()) {\n      return 'NaN';\n    }\n\n    if (this['isInfinite']()) {\n      return 'Infinity';\n    }\n\n    if (Math.abs(a) < Complex['EPSILON']) {\n      a = 0;\n    }\n\n    if (Math.abs(b) < Complex['EPSILON']) {\n      b = 0;\n    }\n\n    // If is real number\n    if (b === 0) {\n      return ret + a;\n    }\n\n    if (a !== 0) {\n      ret += a;\n      ret += \" \";\n      if (b < 0) {\n        b = -b;\n        ret += \"-\";\n      } else {\n        ret += \"+\";\n      }\n      ret += \" \";\n    } else if (b < 0) {\n      b = -b;\n      ret += \"-\";\n    }\n\n    if (1 !== b) { // b is the absolute imaginary part\n      ret += b;\n    }\n    return ret + \"i\";\n  }"
+  },
+  {
+    "packageName": "complex.js",
+    "functionPath": "complex.js.Complex.prototype.toVector",
+    "parameterCount": 0,
+    "functionSignature": "function ()",
+    "functionBody": "function () {\n\n    return [this['re'], this['im']];\n  }"
+  },
+  {
+    "packageName": "complex.js",
+    "functionPath": "complex.js.Complex.prototype.valueOf",
+    "parameterCount": 0,
+    "functionSignature": "function ()",
+    "functionBody": "function () {\n\n    if (this['im'] === 0) {\n      return this['re'];\n    }\n    return null;\n  }"
+  },
+  {
+    "packageName": "complex.js",
+    "functionPath": "complex.js.default",
+    "parameterCount": 2,
+    "functionSignature": "function Complex(a, b)",
+    "functionBody": "function Complex(a, b) {\n\n  if (!(this instanceof Complex)) {\n    return new Complex(a, b);\n  }\n\n  const z = parse(a, b);\n\n  this['re'] = z['re'];\n  this['im'] = z['im'];\n}"
+  },
+  {
+    "packageName": "countries-and-timezones",
+    "functionPath": "countries-and-timezones.default.getAllTimezones",
+    "parameterCount": 0,
+    "functionSignature": "function getAllTimezones(options =",
+    "functionBody": "function getAllTimezones(options = {}) {\n\tif (totalTimezones !== memoizedTimezones) for (const name of Object.keys(data_default.timezones)) getTimezone(name);\n\treturn deliverTimezones(timezones, options);\n}"
+  },
+  {
+    "packageName": "countries-and-timezones",
+    "functionPath": "countries-and-timezones.default.getCountriesForTimezone",
+    "parameterCount": 1,
+    "functionSignature": "function getCountriesForTimezone(tzName, options =",
+    "functionBody": "function getCountriesForTimezone(tzName, options = {}) {\n\treturn ((getTimezone(tzName) || {}).countries || []).map((c) => getCountry(c, options));\n}"
+  },
+  {
+    "packageName": "countries-and-timezones",
+    "functionPath": "countries-and-timezones.default.getCountry",
+    "parameterCount": 1,
+    "functionSignature": "function getCountry(id, options =",
+    "functionBody": "function getCountry(id, options = {}) {\n\tif (!countries[id]) memoizeCountry(buildCountry(data_default, id));\n\treturn deliverCountry(countries[id], options);\n}"
+  },
+  {
+    "packageName": "countries-and-timezones",
+    "functionPath": "countries-and-timezones.default.getCountryForTimezone",
+    "parameterCount": 1,
+    "functionSignature": "function getCountryForTimezone(tzName, options =",
+    "functionBody": "function getCountryForTimezone(tzName, options = {}) {\n\tconst [main] = getCountriesForTimezone(tzName, options);\n\treturn main || null;\n}"
+  },
+  {
+    "packageName": "countries-and-timezones",
+    "functionPath": "countries-and-timezones.default.getTimezone",
+    "parameterCount": 1,
+    "functionSignature": "function getTimezone(name)",
+    "functionBody": "function getTimezone(name) {\n\tif (!timezones[name]) memoizeTimezone(buildTimezone(data_default, name));\n\treturn timezones[name] ? { ...timezones[name] } : null;\n}"
+  },
+  {
+    "packageName": "countries-and-timezones",
+    "functionPath": "countries-and-timezones.default.getTimezonesForCountry",
+    "parameterCount": 1,
+    "functionSignature": "function getTimezonesForCountry(countryId, options =",
+    "functionBody": "function getTimezonesForCountry(countryId, options = {}) {\n\tconst country = getCountry(countryId, options);\n\tif (!country) return null;\n\treturn (country.timezones || []).map((timezone) => getTimezone(timezone));\n}"
+  },
+  {
+    "packageName": "countries-and-timezones",
+    "functionPath": "countries-and-timezones.getAllCountries",
+    "parameterCount": 0,
+    "functionSignature": "function getAllCountries(options =",
+    "functionBody": "function getAllCountries(options = {}) {\n\treturn Object.keys(data_default.countries).reduce((previous, id) => {\n\t\treturn Object.assign(previous, { [id]: getCountry(id, options) });\n\t}, {});\n}"
+  },
+  {
+    "packageName": "countries-and-timezones",
+    "functionPath": "countries-and-timezones.getAllTimezones",
+    "parameterCount": 0,
+    "functionSignature": "function getAllTimezones(options =",
+    "functionBody": "function getAllTimezones(options = {}) {\n\tif (totalTimezones !== memoizedTimezones) for (const name of Object.keys(data_default.timezones)) getTimezone(name);\n\treturn deliverTimezones(timezones, options);\n}"
+  },
+  {
+    "packageName": "countries-and-timezones",
+    "functionPath": "countries-and-timezones.getCountry",
+    "parameterCount": 1,
+    "functionSignature": "function getCountry(id, options =",
+    "functionBody": "function getCountry(id, options = {}) {\n\tif (!countries[id]) memoizeCountry(buildCountry(data_default, id));\n\treturn deliverCountry(countries[id], options);\n}"
+  },
+  {
+    "packageName": "geo-point",
+    "functionPath": "geo-point.GeoPoint",
+    "parameterCount": 2,
+    "functionSignature": "class GeoPoint",
+    "functionBody": "class GeoPoint {\n    /**\n     *\n     * @param latitude\n     * @param longitude\n     */\n    constructor(latitude, longitude) {\n        if (typeof latitude !== 'number' || typeof longitude !== 'number') {\n            throw new RangeError('Bad geo point arguments');\n        }\n        if (latitude < -90 || latitude > 90) {\n            throw new RangeError('bad latitude value');\n        }\n        if (longitude < -180 || longitude > 180) {\n            throw new RangeError('bad longitude value');\n        }\n        this.latitude = latitude;\n        this.longitude = longitude;\n    }\n    /**\n     *\n     * @param point {{type: String, coordinates: Array}}\n     * @returns {GeoPoint}\n     */\n    static fromGeoJSON(point) {\n        if (!isObject(point)) {\n            throw new TypeError('GeoPoint: Argument must be an object');\n        }\n        if (!point.hasOwnProperty('type') || !point.hasOwnProperty('coordinates')) {\n            throw new TypeError('Object must have type and coordinates');\n        }\n        if (point.type !== 'Point') {\n            throw new TypeError('The value of type should be \\'Point\\'');\n        }\n        if (!Array.isArray(point.coordinates) || point.coordinates.length !== 2) {\n            throw new TypeError('coordinates must be an array and contain 2 elements');\n        }\n        return this.fromLngLatArray(point.coordinates);\n    }\n    /**\n     *\n     * @param object {{latitude: Number, longitude: Number}}\n     * @returns {GeoPoint}\n     */\n    static fromObject(object) {\n        if (!isObject(object)) {\n            throw new TypeError('GeoPoint: Argument must be an object');\n        }\n        if (!object.hasOwnProperty('latitude') || !object.hasOwnProperty('longitude')) {\n            throw new TypeError('Object must have latitude and longitude');\n        }\n        return new GeoPoint(object.latitude, object.longitude);\n    }\n    /**\n     *\n     * @param point1\n     * @param point2\n     * @returns {number}\n     */\n    static calculateDistance(point1, point2) {\n        const point1Rad = deg2rad(point1.latitude);\n        const point2Rad = deg2rad(point2.latitude);\n        const a = deg2rad(point2.longitude) - deg2rad(point1.longitude);\n        const b = cos(point1Rad) * cos(point2Rad) * cos(a);\n        const c = sin(point1Rad) * sin(point2Rad);\n        const r = b + c;\n        return acos(r > 1 ? 1 : r) * 6371392.896;\n    }\n    /**\n     *\n     * @param point1 {GeoPoint}\n     * @param point2 {GeoPoint}\n     * @returns {number}\n     */\n    static calculateBearing(point1, point2) {\n        const φ1 = deg2rad(point1.latitude), φ2 = deg2rad(point2.latitude);\n        const Δλ = deg2rad(point2.longitude - point1.longitude);\n        // see http://mathforum.org/library/drmath/view/55417.html\n        const y = sin(Δλ) * cos(φ2);\n        const x = cos(φ1) * sin(φ2) - sin(φ1) * cos(φ2) * cos(Δλ);\n        const θ = atan2(y, x);\n        return (rad2deg(θ) + 360) % 360;\n    }\n    /**\n     *\n     * @param coordinate {GeoPoint}\n     * @param distance {Number} distance in meters\n     * @param bearing {Number} bearing in degrees\n     * @returns {GeoPoint}\n     */\n    static calculateDestination(coordinate, distance, bearing) {\n        // sinφ2 = sinφ1⋅cosδ + cosφ1⋅sinδ⋅cosθ\n        // tanΔλ = sinθ⋅sinδ⋅cosφ1 / cosδ−sinφ1⋅sinφ2\n        // see http://williams.best.vwh.net/avform.htm#LL\n        const δ = Number(distance) / radius; // angular distance in radians\n        const θ = deg2rad(Number(bearing));\n        const φ1 = deg2rad(coordinate.latitude);\n        const λ1 = deg2rad(coordinate.longitude);\n        const sinφ1 = sin(φ1), cosφ1 = cos(φ1);\n        const sinδ = sin(δ), cosδ = cos(δ);\n        const sinθ = sin(θ), cosθ = cos(θ);\n        const sinφ2 = sinφ1 * cosδ + cosφ1 * sinδ * cosθ;\n        const φ2 = asin(sinφ2);\n        const y = sinθ * sinδ * cosφ1;\n        const x = cosδ - sinφ1 * sinφ2;\n        const λ2 = λ1 + atan2(y, x);\n        const latitude = rad2deg(φ2);\n        const longitude = (rad2deg(λ2) + 540) % 360 - 180; // normalise to −180..+180°\n        return new GeoPoint(latitude, longitude);\n    }\n    /**\n     *\n     * @param array\n     * @returns {GeoPoint}\n     */\n    static fromLatLngArray(array) {\n        return new GeoPoint(array[0], array[1]);\n    }\n    /**\n     *\n     * @param array\n     * @returns {GeoPoint}\n     */\n    static fromLngLatArray(array) {\n        return new GeoPoint(array[1], array[0]);\n    }\n    static toTile(coordinate, zoom) {\n        // retrieved from: https://wiki.openstreetmap.org/wiki/Slippy_map_tilenames#ECMAScript_.28JavaScript.2FActionScript.2C_etc..29\n        const x = Math.floor((coordinate.longitude + 180) / 360 * Math.pow(2, zoom));\n        const y = Math.floor((1 - Math.log(Math.tan(coordinate.latitude * Math.PI / 180) + 1 / Math.cos(coordinate.latitude * Math.PI / 180)) / Math.PI) / 2 * Math.pow(2, zoom));\n        return { x, y };\n    }\n    /**\n     *\n     * @param distance {Number} distance in meters\n     * @param bearing {Number} bearing in degrees\n     * @returns {GeoPoint} destination point\n     */\n    calculateDestination(distance, bearing) {\n        return GeoPoint.calculateDestination(this, distance, bearing);\n    }\n    /**\n     *\n     * @param point {GeoPoint} destination geo point\n     * @returns {number} bearing in degrees\n     */\n    calculateBearing(point) {\n        return GeoPoint.calculateBearing(this, point);\n    }\n    /**\n     *\n     * @param point {GeoPoint}\n     * @returns {number} distance in meters\n     */\n    calculateDistance(point) {\n        return GeoPoint.calculateDistance(this, point);\n    }\n    /**\n     *\n     * @returns {string}\n     */\n    toString() {\n        return `${this.latitude},${this.longitude}`;\n    }\n    /**\n     *\n     * @returns {{type: string, coordinates: *[]}}\n     */\n    toGeoJSON() {\n        return {\n            type: 'Point',\n            coordinates: [\n                this.longitude,\n                this.latitude,\n            ],\n        };\n    }\n    /**\n     *\n     * @returns {{latitude: *, longitude: *}}\n     */\n    toObject() {\n        return {\n            latitude: this.latitude,\n            longitude: this.longitude,\n        };\n    }\n    /**\n     *\n     * @returns {*[]}\n     */\n    toLatLngArray() {\n        return [this.latitude, this.longitude];\n    }\n    /**\n     *\n     * @returns {*[]}\n     */\n    toLngLatArray() {\n        return [this.longitude, this.latitude];\n    }\n    toTile(zoom) {\n        return GeoPoint.toTile(this, zoom);\n    }\n    /**\n     *\n     * https://gis.stackexchange.com/questions/8650/measuring-accuracy-of-latitude-and-longitude\n     *       The sign tells us whether we are north or south, east or west on the globe.\n     *       A nonzero hundreds digit tells us we're using longitude, not latitude!\n     *       The tens digit gives a position to about 1,000 kilometers. It gives us useful information about what continent or ocean we are on.\n     *       The units digit (one decimal degree) gives a position up to 111 kilometers (60 nautical miles, about 69 miles). It can tell us roughly what large state or country we are in.\n     *       The first decimal place is worth up to 11.1 km: it can distinguish the position of one large city from a neighboring large city.\n     *       The second decimal place is worth up to 1.1 km: it can separate one village from the next.\n     *       The third decimal place is worth up to 110 m: it can identify a large agricultural field or institutional campus.\n     *       The fourth decimal place is worth up to 11 m: it can identify a parcel of land. It is comparable to the typical accuracy of an uncorrected GPS unit with no interference.\n     *       The fifth decimal place is worth up to 1.1 m: it distinguish trees from each other. Accuracy to this level with commercial GPS units can only be achieved with differential correction.\n     *       The sixth decimal place is worth up to 0.11 m: you can use this for laying out structures in detail, for designing landscapes, building roads. It should be more than good enough for tracking movements of glaciers and rivers. This can be achieved by taking painstaking measures with GPS, such as differentially corrected GPS.\n     *       The seventh decimal place is worth up to 11 mm: this is good for much surveying and is near the limit of what GPS-based techniques can achieve.\n     *       The eighth decimal place is worth up to 1.1 mm: this is good for charting motions of tectonic plates and movements of volcanoes. Permanent, corrected, constantly-running GPS base stations might be able to achieve this level of accuracy.\n     *       The ninth decimal place is worth up to 110 microns: we are getting into the range of microscopy. For almost any conceivable application with earth positions, this is overkill and will be more precise than the accuracy of any surveying device.\n     *       Ten or more decimal places indicates a computer or calculator was used and that no attention was paid to the fact that the extra decimals are useless. Be careful, because unless you are the one reading these numbers off the device, this can indicate low quality processing!\n     *\n     * @param {number} precision\n     * @returns {GeoPoint}\n     */\n    adjustPrecision(precision) {\n        const adjust = (input) => parseFloat(input.toFixed(precision));\n        return new GeoPoint(adjust(this.latitude), adjust(this.longitude));\n    }\n}"
+  },
+  {
+    "packageName": "geo-point",
+    "functionPath": "geo-point.GeoPoint.calculateDistance",
+    "parameterCount": 2,
+    "functionSignature": "calculateDistance(point1, point2)",
+    "functionBody": "calculateDistance(point1, point2) {\n        const point1Rad = deg2rad(point1.latitude);\n        const point2Rad = deg2rad(point2.latitude);\n        const a = deg2rad(point2.longitude) - deg2rad(point1.longitude);\n        const b = cos(point1Rad) * cos(point2Rad) * cos(a);\n        const c = sin(point1Rad) * sin(point2Rad);\n        const r = b + c;\n        return acos(r > 1 ? 1 : r) * 6371392.896;\n    }"
+  },
+  {
+    "packageName": "geo-point",
+    "functionPath": "geo-point.GeoPoint.fromLatLngArray",
+    "parameterCount": 1,
+    "functionSignature": "fromLatLngArray(array)",
+    "functionBody": "fromLatLngArray(array) {\n        return new GeoPoint(array[0], array[1]);\n    }"
+  },
+  {
+    "packageName": "geo-point",
+    "functionPath": "geo-point.GeoPoint.fromLngLatArray",
+    "parameterCount": 1,
+    "functionSignature": "fromLngLatArray(array)",
+    "functionBody": "fromLngLatArray(array) {\n        return new GeoPoint(array[1], array[0]);\n    }"
+  },
+  {
+    "packageName": "geo-point",
+    "functionPath": "geo-point.GeoPoint.fromObject",
+    "parameterCount": 1,
+    "functionSignature": "fromObject(object)",
+    "functionBody": "fromObject(object) {\n        if (!isObject(object)) {\n            throw new TypeError('GeoPoint: Argument must be an object');\n        }\n        if (!object.hasOwnProperty('latitude') || !object.hasOwnProperty('longitude')) {\n            throw new TypeError('Object must have latitude and longitude');\n        }\n        return new GeoPoint(object.latitude, object.longitude);\n    }"
+  },
+  {
+    "packageName": "geo-point",
+    "functionPath": "geo-point.GeoPoint.prototype.adjustPrecision",
+    "parameterCount": 1,
+    "functionSignature": "adjustPrecision(precision)",
+    "functionBody": "adjustPrecision(precision) {\n        const adjust = (input) => parseFloat(input.toFixed(precision));\n        return new GeoPoint(adjust(this.latitude), adjust(this.longitude));\n    }"
+  },
+  {
+    "packageName": "geo-point",
+    "functionPath": "geo-point.GeoPoint.prototype.calculateDestination",
+    "parameterCount": 2,
+    "functionSignature": "calculateDestination(distance, bearing)",
+    "functionBody": "calculateDestination(distance, bearing) {\n        return GeoPoint.calculateDestination(this, distance, bearing);\n    }"
+  },
+  {
+    "packageName": "geo-point",
+    "functionPath": "geo-point.GeoPoint.prototype.calculateDistance",
+    "parameterCount": 1,
+    "functionSignature": "calculateDistance(point)",
+    "functionBody": "calculateDistance(point) {\n        return GeoPoint.calculateDistance(this, point);\n    }"
+  },
+  {
+    "packageName": "geo-point",
+    "functionPath": "geo-point.GeoPoint.prototype.toLatLngArray",
+    "parameterCount": 0,
+    "functionSignature": "toLatLngArray()",
+    "functionBody": "toLatLngArray() {\n        return [this.latitude, this.longitude];\n    }"
+  },
+  {
+    "packageName": "geo-point",
+    "functionPath": "geo-point.GeoPoint.prototype.toObject",
+    "parameterCount": 0,
+    "functionSignature": "toObject()",
+    "functionBody": "toObject() {\n        return {\n            latitude: this.latitude,\n            longitude: this.longitude,\n        };\n    }"
+  },
+  {
+    "packageName": "geo-point",
+    "functionPath": "geo-point.GeoPoint.prototype.toString",
+    "parameterCount": 0,
+    "functionSignature": "toString()",
+    "functionBody": "toString() {\n        return `${this.latitude},${this.longitude}`;\n    }"
+  },
+  {
+    "packageName": "geo-point",
+    "functionPath": "geo-point.GeoPoint.toTile",
+    "parameterCount": 2,
+    "functionSignature": "toTile(coordinate, zoom)",
+    "functionBody": "toTile(coordinate, zoom) {\n        // retrieved from: https://wiki.openstreetmap.org/wiki/Slippy_map_tilenames#ECMAScript_.28JavaScript.2FActionScript.2C_etc..29\n        const x = Math.floor((coordinate.longitude + 180) / 360 * Math.pow(2, zoom));\n        const y = Math.floor((1 - Math.log(Math.tan(coordinate.latitude * Math.PI / 180) + 1 / Math.cos(coordinate.latitude * Math.PI / 180)) / Math.PI) / 2 * Math.pow(2, zoom));\n        return { x, y };\n    }"
+  },
+  {
+    "packageName": "plural",
+    "functionPath": "plural.addRule",
+    "parameterCount": 2,
+    "functionSignature": "function addRule(match, result)",
+    "functionBody": "function addRule(match, result) {\n  rules.unshift([match, result])\n  return plural\n}"
+  },
+  {
+    "packageName": "plural",
+    "functionPath": "plural.default",
+    "parameterCount": 2,
+    "functionSignature": "function plural(word, num)",
+    "functionBody": "function plural(word, num) {\n  var i\n    , rule\n\n  if (num !== 1 || num === undefined) {\n    for (i = 0; i < rules.length; i++) {\n      rule = rules[i]\n\n      if (type(rule[0]) === 'RegExp' && rule[0].test(word)) {\n        return type(rule[1]) === 'Function' ? rule[1](word, rule[0]) : rule[1]\n      }\n      if (type(rule[0]) === 'String' && rule[0] === word) {\n        return type(rule[1]) === 'Function' ? rule[1](word) : rule[1]\n      }\n\n    }\n\n    return word + 's'\n  }\n  return word\n}"
+  },
+  {
+    "packageName": "plural",
+    "functionPath": "plural.default.monkeyPatch",
+    "parameterCount": 0,
+    "functionSignature": "function()",
+    "functionBody": "function() {\n  if (String.prototype.plural === undefined) {\n    String.prototype.plural = function(num) {\n      return plural(this, num)\n    }\n  }\n  else {\n    throw new Error('Unable to add plural function to String object')\n  }\n}"
+  },
+  {
+    "packageName": "plural",
+    "functionPath": "plural.default.unmonkeyPatch",
+    "parameterCount": 0,
+    "functionSignature": "function()",
+    "functionBody": "function() {\n  String.prototype.plural = null;\n}"
+  },
+  {
+    "packageName": "plural",
+    "functionPath": "plural.unmonkeyPatch",
+    "parameterCount": 0,
+    "functionSignature": "function()",
+    "functionBody": "function() {\n  String.prototype.plural = null;\n}"
+  },
+  {
+    "packageName": "quill-delta",
+    "functionPath": "quill-delta.AttributeMap.compose",
+    "parameterCount": 0,
+    "functionSignature": "function compose(a =",
+    "functionBody": "function compose(a = {}, b = {}, keepNull = false) {\n        if (typeof a !== 'object') {\n            a = {};\n        }\n        if (typeof b !== 'object') {\n            b = {};\n        }\n        let attributes = cloneDeep(b);\n        if (!keepNull) {\n            attributes = Object.keys(attributes).reduce((copy, key) => {\n                if (attributes[key] != null) {\n                    copy[key] = attributes[key];\n                }\n                return copy;\n            }, {});\n        }\n        for (const key in a) {\n            if (a[key] !== undefined && b[key] === undefined) {\n                attributes[key] = a[key];\n            }\n        }\n        return Object.keys(attributes).length > 0 ? attributes : undefined;\n    }"
+  },
+  {
+    "packageName": "quill-delta",
+    "functionPath": "quill-delta.AttributeMap.diff",
+    "parameterCount": 0,
+    "functionSignature": "function diff(a =",
+    "functionBody": "function diff(a = {}, b = {}) {\n        if (typeof a !== 'object') {\n            a = {};\n        }\n        if (typeof b !== 'object') {\n            b = {};\n        }\n        const attributes = Object.keys(a)\n            .concat(Object.keys(b))\n            .reduce((attrs, key) => {\n            if (!isEqual(a[key], b[key])) {\n                attrs[key] = b[key] === undefined ? null : b[key];\n            }\n            return attrs;\n        }, {});\n        return Object.keys(attributes).length > 0 ? attributes : undefined;\n    }"
+  },
+  {
+    "packageName": "quill-delta",
+    "functionPath": "quill-delta.default",
+    "parameterCount": 1,
+    "functionSignature": "class Delta",
+    "functionBody": "class Delta {\n    constructor(ops) {\n        // Assume we are given a well formed ops\n        if (Array.isArray(ops)) {\n            this.ops = ops;\n        }\n        else if (ops != null && Array.isArray(ops.ops)) {\n            this.ops = ops.ops;\n        }\n        else {\n            this.ops = [];\n        }\n    }\n    static registerEmbed(embedType, handler) {\n        this.handlers[embedType] = handler;\n    }\n    static unregisterEmbed(embedType) {\n        delete this.handlers[embedType];\n    }\n    static getHandler(embedType) {\n        const handler = this.handlers[embedType];\n        if (!handler) {\n            throw new Error(`no handlers for embed type \"${embedType}\"`);\n        }\n        return handler;\n    }\n    insert(arg, attributes) {\n        const newOp = {};\n        if (typeof arg === 'string' && arg.length === 0) {\n            return this;\n        }\n        newOp.insert = arg;\n        if (attributes != null &&\n            typeof attributes === 'object' &&\n            Object.keys(attributes).length > 0) {\n            newOp.attributes = attributes;\n        }\n        return this.push(newOp);\n    }\n    delete(length) {\n        if (length <= 0) {\n            return this;\n        }\n        return this.push({ delete: length });\n    }\n    retain(length, attributes) {\n        if (typeof length === 'number' && length <= 0) {\n            return this;\n        }\n        const newOp = { retain: length };\n        if (attributes != null &&\n            typeof attributes === 'object' &&\n            Object.keys(attributes).length > 0) {\n            newOp.attributes = attributes;\n        }\n        return this.push(newOp);\n    }\n    push(newOp) {\n        let index = this.ops.length;\n        let lastOp = this.ops[index - 1];\n        newOp = cloneDeep(newOp);\n        if (typeof lastOp === 'object') {\n            if (typeof newOp.delete === 'number' &&\n                typeof lastOp.delete === 'number') {\n                this.ops[index - 1] = { delete: lastOp.delete + newOp.delete };\n                return this;\n            }\n            // Since it does not matter if we insert before or after deleting at the same index,\n            // always prefer to insert first\n            if (typeof lastOp.delete === 'number' && newOp.insert != null) {\n                index -= 1;\n                lastOp = this.ops[index - 1];\n                if (typeof lastOp !== 'object') {\n                    this.ops.unshift(newOp);\n                    return this;\n                }\n            }\n            if (isEqual(newOp.attributes, lastOp.attributes)) {\n                if (typeof newOp.insert === 'string' &&\n                    typeof lastOp.insert === 'string') {\n                    this.ops[index - 1] = { insert: lastOp.insert + newOp.insert };\n                    if (typeof newOp.attributes === 'object') {\n                        this.ops[index - 1].attributes = newOp.attributes;\n                    }\n                    return this;\n                }\n                else if (typeof newOp.retain === 'number' &&\n                    typeof lastOp.retain === 'number') {\n                    this.ops[index - 1] = { retain: lastOp.retain + newOp.retain };\n                    if (typeof newOp.attributes === 'object') {\n                        this.ops[index - 1].attributes = newOp.attributes;\n                    }\n                    return this;\n                }\n            }\n        }\n        if (index === this.ops.length) {\n            this.ops.push(newOp);\n        }\n        else {\n            this.ops.splice(index, 0, newOp);\n        }\n        return this;\n    }\n    chop() {\n        const lastOp = this.ops[this.ops.length - 1];\n        if (lastOp && typeof lastOp.retain === 'number' && !lastOp.attributes) {\n            this.ops.pop();\n        }\n        return this;\n    }\n    filter(predicate) {\n        return this.ops.filter(predicate);\n    }\n    forEach(predicate) {\n        this.ops.forEach(predicate);\n    }\n    map(predicate) {\n        return this.ops.map(predicate);\n    }\n    partition(predicate) {\n        const passed = [];\n        const failed = [];\n        this.forEach((op) => {\n            const target = predicate(op) ? passed : failed;\n            target.push(op);\n        });\n        return [passed, failed];\n    }\n    reduce(predicate, initialValue) {\n        return this.ops.reduce(predicate, initialValue);\n    }\n    changeLength() {\n        return this.reduce((length, elem) => {\n            if (elem.insert) {\n                return length + Op_1.default.length(elem);\n            }\n            else if (elem.delete) {\n                return length - elem.delete;\n            }\n            return length;\n        }, 0);\n    }\n    length() {\n        return this.reduce((length, elem) => {\n            return length + Op_1.default.length(elem);\n        }, 0);\n    }\n    slice(start = 0, end = Infinity) {\n        const ops = [];\n        const iter = new OpIterator_1.default(this.ops);\n        let index = 0;\n        while (index < end && iter.hasNext()) {\n            let nextOp;\n            if (index < start) {\n                nextOp = iter.next(start - index);\n            }\n            else {\n                nextOp = iter.next(end - index);\n                ops.push(nextOp);\n            }\n            index += Op_1.default.length(nextOp);\n        }\n        return new Delta(ops);\n    }\n    compose(other) {\n        const thisIter = new OpIterator_1.default(this.ops);\n        const otherIter = new OpIterator_1.default(other.ops);\n        const ops = [];\n        const firstOther = otherIter.peek();\n        if (firstOther != null &&\n            typeof firstOther.retain === 'number' &&\n            firstOther.attributes == null) {\n            let firstLeft = firstOther.retain;\n            while (thisIter.peekType() === 'insert' &&\n                thisIter.peekLength() <= firstLeft) {\n                firstLeft -= thisIter.peekLength();\n                ops.push(thisIter.next());\n            }\n            if (firstOther.retain - firstLeft > 0) {\n                otherIter.next(firstOther.retain - firstLeft);\n            }\n        }\n        const delta = new Delta(ops);\n        while (thisIter.hasNext() || otherIter.hasNext()) {\n            if (otherIter.peekType() === 'insert') {\n                delta.push(otherIter.next());\n            }\n            else if (thisIter.peekType() === 'delete') {\n                delta.push(thisIter.next());\n            }\n            else {\n                const length = Math.min(thisIter.peekLength(), otherIter.peekLength());\n                const thisOp = thisIter.next(length);\n                const otherOp = otherIter.next(length);\n                if (otherOp.retain) {\n                    const newOp = {};\n                    if (typeof thisOp.retain === 'number') {\n                        newOp.retain =\n                            typeof otherOp.retain === 'number' ? length : otherOp.retain;\n                    }\n                    else {\n                        if (typeof otherOp.retain === 'number') {\n                            if (thisOp.retain == null) {\n                                newOp.insert = thisOp.insert;\n                            }\n                            else {\n                                newOp.retain = thisOp.retain;\n                            }\n                        }\n                        else {\n                            const action = thisOp.retain == null ? 'insert' : 'retain';\n                            const [embedType, thisData, otherData] = getEmbedTypeAndData(thisOp[action], otherOp.retain);\n                            const handler = Delta.getHandler(embedType);\n                            newOp[action] = {\n                                [embedType]: handler.compose(thisData, otherData, action === 'retain'),\n                            };\n                        }\n                    }\n                    // Preserve null when composing with a retain, otherwise remove it for inserts\n                    const attributes = AttributeMap_1.default.compose(thisOp.attributes, otherOp.attributes, typeof thisOp.retain === 'number');\n                    if (attributes) {\n                        newOp.attributes = attributes;\n                    }\n                    delta.push(newOp);\n                    // Optimization if rest of other is just retain\n                    if (!otherIter.hasNext() &&\n                        isEqual(delta.ops[delta.ops.length - 1], newOp)) {\n                        const rest = new Delta(thisIter.rest());\n                        return delta.concat(rest).chop();\n                    }\n                    // Other op should be delete, we could be an insert or retain\n                    // Insert + delete cancels out\n                }\n                else if (typeof otherOp.delete === 'number' &&\n                    (typeof thisOp.retain === 'number' ||\n                        (typeof thisOp.retain === 'object' && thisOp.retain !== null))) {\n                    delta.push(otherOp);\n                }\n            }\n        }\n        return delta.chop();\n    }\n    concat(other) {\n        const delta = new Delta(this.ops.slice());\n        if (other.ops.length > 0) {\n            delta.push(other.ops[0]);\n            delta.ops = delta.ops.concat(other.ops.slice(1));\n        }\n        return delta;\n    }\n    diff(other, cursor) {\n        if (this.ops === other.ops) {\n            return new Delta();\n        }\n        const strings = [this, other].map((delta) => {\n            return delta\n                .map((op) => {\n                if (op.insert != null) {\n                    return typeof op.insert === 'string' ? op.insert : NULL_CHARACTER;\n                }\n                const prep = delta === other ? 'on' : 'with';\n                throw new Error('diff() called ' + prep + ' non-document');\n            })\n                .join('');\n        });\n        const retDelta = new Delta();\n        const diffResult = diff(strings[0], strings[1], cursor, true);\n        const thisIter = new OpIterator_1.default(this.ops);\n        const otherIter = new OpIterator_1.default(other.ops);\n        diffResult.forEach((component) => {\n            let length = component[1].length;\n            while (length > 0) {\n                let opLength = 0;\n                switch (component[0]) {\n                    case diff.INSERT:\n                        opLength = Math.min(otherIter.peekLength(), length);\n                        retDelta.push(otherIter.next(opLength));\n                        break;\n                    case diff.DELETE:\n                        opLength = Math.min(length, thisIter.peekLength());\n                        thisIter.next(opLength);\n                        retDelta.delete(opLength);\n                        break;\n                    case diff.EQUAL:\n                        opLength = Math.min(thisIter.peekLength(), otherIter.peekLength(), length);\n                        const thisOp = thisIter.next(opLength);\n                        const otherOp = otherIter.next(opLength);\n                        if (isEqual(thisOp.insert, otherOp.insert)) {\n                            retDelta.retain(opLength, AttributeMap_1.default.diff(thisOp.attributes, otherOp.attributes));\n                        }\n                        else {\n                            retDelta.push(otherOp).delete(opLength);\n                        }\n                        break;\n                }\n                length -= opLength;\n            }\n        });\n        return retDelta.chop();\n    }\n    eachLine(predicate, newline = '\\n') {\n        const iter = new OpIterator_1.default(this.ops);\n        let line = new Delta();\n        let i = 0;\n        while (iter.hasNext()) {\n            if (iter.peekType() !== 'insert') {\n                return;\n            }\n            const thisOp = iter.peek();\n            const start = Op_1.default.length(thisOp) - iter.peekLength();\n            const index = typeof thisOp.insert === 'string'\n                ? thisOp.insert.indexOf(newline, start) - start\n                : -1;\n            if (index < 0) {\n                line.push(iter.next());\n            }\n            else if (index > 0) {\n                line.push(iter.next(index));\n            }\n            else {\n                if (predicate(line, iter.next(1).attributes || {}, i) === false) {\n                    return;\n                }\n                i += 1;\n                line = new Delta();\n            }\n        }\n        if (line.length() > 0) {\n            predicate(line, {}, i);\n        }\n    }\n    invert(base) {\n        const inverted = new Delta();\n        this.reduce((baseIndex, op) => {\n            if (op.insert) {\n                inverted.delete(Op_1.default.length(op));\n            }\n            else if (typeof op.retain === 'number' && op.attributes == null) {\n                inverted.retain(op.retain);\n                return baseIndex + op.retain;\n            }\n            else if (op.delete || typeof op.retain === 'number') {\n                const length = (op.delete || op.retain);\n                const slice = base.slice(baseIndex, baseIndex + length);\n                slice.forEach((baseOp) => {\n                    if (op.delete) {\n                        inverted.push(baseOp);\n                    }\n                    else if (op.retain && op.attributes) {\n                        inverted.retain(Op_1.default.length(baseOp), AttributeMap_1.default.invert(op.attributes, baseOp.attributes));\n                    }\n                });\n                return baseIndex + length;\n            }\n            else if (typeof op.retain === 'object' && op.retain !== null) {\n                const slice = base.slice(baseIndex, baseIndex + 1);\n                const baseOp = new OpIterator_1.default(slice.ops).next();\n                const [embedType, opData, baseOpData] = getEmbedTypeAndData(op.retain, baseOp.insert);\n                const handler = Delta.getHandler(embedType);\n                inverted.retain({ [embedType]: handler.invert(opData, baseOpData) }, AttributeMap_1.default.invert(op.attributes, baseOp.attributes));\n                return baseIndex + 1;\n            }\n            return baseIndex;\n        }, 0);\n        return inverted.chop();\n    }\n    transform(arg, priority = false) {\n        priority = !!priority;\n        if (typeof arg === 'number') {\n            return this.transformPosition(arg, priority);\n        }\n        const other = arg;\n        const thisIter = new OpIterator_1.default(this.ops);\n        const otherIter = new OpIterator_1.default(other.ops);\n        const delta = new Delta();\n        while (thisIter.hasNext() || otherIter.hasNext()) {\n            if (thisIter.peekType() === 'insert' &&\n                (priority || otherIter.peekType() !== 'insert')) {\n                delta.retain(Op_1.default.length(thisIter.next()));\n            }\n            else if (otherIter.peekType() === 'insert') {\n                delta.push(otherIter.next());\n            }\n            else {\n                const length = Math.min(thisIter.peekLength(), otherIter.peekLength());\n                const thisOp = thisIter.next(length);\n                const otherOp = otherIter.next(length);\n                if (thisOp.delete) {\n                    // Our delete either makes their delete redundant or removes their retain\n                    continue;\n                }\n                else if (otherOp.delete) {\n                    delta.push(otherOp);\n                }\n                else {\n                    const thisData = thisOp.retain;\n                    const otherData = otherOp.retain;\n                    let transformedData = typeof otherData === 'object' && otherData !== null\n                        ? otherData\n                        : length;\n                    if (typeof thisData === 'object' &&\n                        thisData !== null &&\n                        typeof otherData === 'object' &&\n                        otherData !== null) {\n                        const embedType = Object.keys(thisData)[0];\n                        if (embedType === Object.keys(otherData)[0]) {\n                            const handler = Delta.getHandler(embedType);\n                            if (handler) {\n                                transformedData = {\n                                    [embedType]: handler.transform(thisData[embedType], otherData[embedType], priority),\n                                };\n                            }\n                        }\n                    }\n                    // We retain either their retain or insert\n                    delta.retain(transformedData, AttributeMap_1.default.transform(thisOp.attributes, otherOp.attributes, priority));\n                }\n            }\n        }\n        return delta.chop();\n    }\n    transformPosition(index, priority = false) {\n        priority = !!priority;\n        const thisIter = new OpIterator_1.default(this.ops);\n        let offset = 0;\n        while (thisIter.hasNext() && offset <= index) {\n            const length = thisIter.peekLength();\n            const nextType = thisIter.peekType();\n            thisIter.next();\n            if (nextType === 'delete') {\n                index -= Math.min(length, index - offset);\n                continue;\n            }\n            else if (nextType === 'insert' && (offset < index || !priority)) {\n                index += length;\n            }\n            offset += length;\n        }\n        return index;\n    }\n}"
+  },
+  {
+    "packageName": "quill-delta",
+    "functionPath": "quill-delta.default.default",
+    "parameterCount": 1,
+    "functionSignature": "class Delta",
+    "functionBody": "class Delta {\n    constructor(ops) {\n        // Assume we are given a well formed ops\n        if (Array.isArray(ops)) {\n            this.ops = ops;\n        }\n        else if (ops != null && Array.isArray(ops.ops)) {\n            this.ops = ops.ops;\n        }\n        else {\n            this.ops = [];\n        }\n    }\n    static registerEmbed(embedType, handler) {\n        this.handlers[embedType] = handler;\n    }\n    static unregisterEmbed(embedType) {\n        delete this.handlers[embedType];\n    }\n    static getHandler(embedType) {\n        const handler = this.handlers[embedType];\n        if (!handler) {\n            throw new Error(`no handlers for embed type \"${embedType}\"`);\n        }\n        return handler;\n    }\n    insert(arg, attributes) {\n        const newOp = {};\n        if (typeof arg === 'string' && arg.length === 0) {\n            return this;\n        }\n        newOp.insert = arg;\n        if (attributes != null &&\n            typeof attributes === 'object' &&\n            Object.keys(attributes).length > 0) {\n            newOp.attributes = attributes;\n        }\n        return this.push(newOp);\n    }\n    delete(length) {\n        if (length <= 0) {\n            return this;\n        }\n        return this.push({ delete: length });\n    }\n    retain(length, attributes) {\n        if (typeof length === 'number' && length <= 0) {\n            return this;\n        }\n        const newOp = { retain: length };\n        if (attributes != null &&\n            typeof attributes === 'object' &&\n            Object.keys(attributes).length > 0) {\n            newOp.attributes = attributes;\n        }\n        return this.push(newOp);\n    }\n    push(newOp) {\n        let index = this.ops.length;\n        let lastOp = this.ops[index - 1];\n        newOp = cloneDeep(newOp);\n        if (typeof lastOp === 'object') {\n            if (typeof newOp.delete === 'number' &&\n                typeof lastOp.delete === 'number') {\n                this.ops[index - 1] = { delete: lastOp.delete + newOp.delete };\n                return this;\n            }\n            // Since it does not matter if we insert before or after deleting at the same index,\n            // always prefer to insert first\n            if (typeof lastOp.delete === 'number' && newOp.insert != null) {\n                index -= 1;\n                lastOp = this.ops[index - 1];\n                if (typeof lastOp !== 'object') {\n                    this.ops.unshift(newOp);\n                    return this;\n                }\n            }\n            if (isEqual(newOp.attributes, lastOp.attributes)) {\n                if (typeof newOp.insert === 'string' &&\n                    typeof lastOp.insert === 'string') {\n                    this.ops[index - 1] = { insert: lastOp.insert + newOp.insert };\n                    if (typeof newOp.attributes === 'object') {\n                        this.ops[index - 1].attributes = newOp.attributes;\n                    }\n                    return this;\n                }\n                else if (typeof newOp.retain === 'number' &&\n                    typeof lastOp.retain === 'number') {\n                    this.ops[index - 1] = { retain: lastOp.retain + newOp.retain };\n                    if (typeof newOp.attributes === 'object') {\n                        this.ops[index - 1].attributes = newOp.attributes;\n                    }\n                    return this;\n                }\n            }\n        }\n        if (index === this.ops.length) {\n            this.ops.push(newOp);\n        }\n        else {\n            this.ops.splice(index, 0, newOp);\n        }\n        return this;\n    }\n    chop() {\n        const lastOp = this.ops[this.ops.length - 1];\n        if (lastOp && typeof lastOp.retain === 'number' && !lastOp.attributes) {\n            this.ops.pop();\n        }\n        return this;\n    }\n    filter(predicate) {\n        return this.ops.filter(predicate);\n    }\n    forEach(predicate) {\n        this.ops.forEach(predicate);\n    }\n    map(predicate) {\n        return this.ops.map(predicate);\n    }\n    partition(predicate) {\n        const passed = [];\n        const failed = [];\n        this.forEach((op) => {\n            const target = predicate(op) ? passed : failed;\n            target.push(op);\n        });\n        return [passed, failed];\n    }\n    reduce(predicate, initialValue) {\n        return this.ops.reduce(predicate, initialValue);\n    }\n    changeLength() {\n        return this.reduce((length, elem) => {\n            if (elem.insert) {\n                return length + Op_1.default.length(elem);\n            }\n            else if (elem.delete) {\n                return length - elem.delete;\n            }\n            return length;\n        }, 0);\n    }\n    length() {\n        return this.reduce((length, elem) => {\n            return length + Op_1.default.length(elem);\n        }, 0);\n    }\n    slice(start = 0, end = Infinity) {\n        const ops = [];\n        const iter = new OpIterator_1.default(this.ops);\n        let index = 0;\n        while (index < end && iter.hasNext()) {\n            let nextOp;\n            if (index < start) {\n                nextOp = iter.next(start - index);\n            }\n            else {\n                nextOp = iter.next(end - index);\n                ops.push(nextOp);\n            }\n            index += Op_1.default.length(nextOp);\n        }\n        return new Delta(ops);\n    }\n    compose(other) {\n        const thisIter = new OpIterator_1.default(this.ops);\n        const otherIter = new OpIterator_1.default(other.ops);\n        const ops = [];\n        const firstOther = otherIter.peek();\n        if (firstOther != null &&\n            typeof firstOther.retain === 'number' &&\n            firstOther.attributes == null) {\n            let firstLeft = firstOther.retain;\n            while (thisIter.peekType() === 'insert' &&\n                thisIter.peekLength() <= firstLeft) {\n                firstLeft -= thisIter.peekLength();\n                ops.push(thisIter.next());\n            }\n            if (firstOther.retain - firstLeft > 0) {\n                otherIter.next(firstOther.retain - firstLeft);\n            }\n        }\n        const delta = new Delta(ops);\n        while (thisIter.hasNext() || otherIter.hasNext()) {\n            if (otherIter.peekType() === 'insert') {\n                delta.push(otherIter.next());\n            }\n            else if (thisIter.peekType() === 'delete') {\n                delta.push(thisIter.next());\n            }\n            else {\n                const length = Math.min(thisIter.peekLength(), otherIter.peekLength());\n                const thisOp = thisIter.next(length);\n                const otherOp = otherIter.next(length);\n                if (otherOp.retain) {\n                    const newOp = {};\n                    if (typeof thisOp.retain === 'number') {\n                        newOp.retain =\n                            typeof otherOp.retain === 'number' ? length : otherOp.retain;\n                    }\n                    else {\n                        if (typeof otherOp.retain === 'number') {\n                            if (thisOp.retain == null) {\n                                newOp.insert = thisOp.insert;\n                            }\n                            else {\n                                newOp.retain = thisOp.retain;\n                            }\n                        }\n                        else {\n                            const action = thisOp.retain == null ? 'insert' : 'retain';\n                            const [embedType, thisData, otherData] = getEmbedTypeAndData(thisOp[action], otherOp.retain);\n                            const handler = Delta.getHandler(embedType);\n                            newOp[action] = {\n                                [embedType]: handler.compose(thisData, otherData, action === 'retain'),\n                            };\n                        }\n                    }\n                    // Preserve null when composing with a retain, otherwise remove it for inserts\n                    const attributes = AttributeMap_1.default.compose(thisOp.attributes, otherOp.attributes, typeof thisOp.retain === 'number');\n                    if (attributes) {\n                        newOp.attributes = attributes;\n                    }\n                    delta.push(newOp);\n                    // Optimization if rest of other is just retain\n                    if (!otherIter.hasNext() &&\n                        isEqual(delta.ops[delta.ops.length - 1], newOp)) {\n                        const rest = new Delta(thisIter.rest());\n                        return delta.concat(rest).chop();\n                    }\n                    // Other op should be delete, we could be an insert or retain\n                    // Insert + delete cancels out\n                }\n                else if (typeof otherOp.delete === 'number' &&\n                    (typeof thisOp.retain === 'number' ||\n                        (typeof thisOp.retain === 'object' && thisOp.retain !== null))) {\n                    delta.push(otherOp);\n                }\n            }\n        }\n        return delta.chop();\n    }\n    concat(other) {\n        const delta = new Delta(this.ops.slice());\n        if (other.ops.length > 0) {\n            delta.push(other.ops[0]);\n            delta.ops = delta.ops.concat(other.ops.slice(1));\n        }\n        return delta;\n    }\n    diff(other, cursor) {\n        if (this.ops === other.ops) {\n            return new Delta();\n        }\n        const strings = [this, other].map((delta) => {\n            return delta\n                .map((op) => {\n                if (op.insert != null) {\n                    return typeof op.insert === 'string' ? op.insert : NULL_CHARACTER;\n                }\n                const prep = delta === other ? 'on' : 'with';\n                throw new Error('diff() called ' + prep + ' non-document');\n            })\n                .join('');\n        });\n        const retDelta = new Delta();\n        const diffResult = diff(strings[0], strings[1], cursor, true);\n        const thisIter = new OpIterator_1.default(this.ops);\n        const otherIter = new OpIterator_1.default(other.ops);\n        diffResult.forEach((component) => {\n            let length = component[1].length;\n            while (length > 0) {\n                let opLength = 0;\n                switch (component[0]) {\n                    case diff.INSERT:\n                        opLength = Math.min(otherIter.peekLength(), length);\n                        retDelta.push(otherIter.next(opLength));\n                        break;\n                    case diff.DELETE:\n                        opLength = Math.min(length, thisIter.peekLength());\n                        thisIter.next(opLength);\n                        retDelta.delete(opLength);\n                        break;\n                    case diff.EQUAL:\n                        opLength = Math.min(thisIter.peekLength(), otherIter.peekLength(), length);\n                        const thisOp = thisIter.next(opLength);\n                        const otherOp = otherIter.next(opLength);\n                        if (isEqual(thisOp.insert, otherOp.insert)) {\n                            retDelta.retain(opLength, AttributeMap_1.default.diff(thisOp.attributes, otherOp.attributes));\n                        }\n                        else {\n                            retDelta.push(otherOp).delete(opLength);\n                        }\n                        break;\n                }\n                length -= opLength;\n            }\n        });\n        return retDelta.chop();\n    }\n    eachLine(predicate, newline = '\\n') {\n        const iter = new OpIterator_1.default(this.ops);\n        let line = new Delta();\n        let i = 0;\n        while (iter.hasNext()) {\n            if (iter.peekType() !== 'insert') {\n                return;\n            }\n            const thisOp = iter.peek();\n            const start = Op_1.default.length(thisOp) - iter.peekLength();\n            const index = typeof thisOp.insert === 'string'\n                ? thisOp.insert.indexOf(newline, start) - start\n                : -1;\n            if (index < 0) {\n                line.push(iter.next());\n            }\n            else if (index > 0) {\n                line.push(iter.next(index));\n            }\n            else {\n                if (predicate(line, iter.next(1).attributes || {}, i) === false) {\n                    return;\n                }\n                i += 1;\n                line = new Delta();\n            }\n        }\n        if (line.length() > 0) {\n            predicate(line, {}, i);\n        }\n    }\n    invert(base) {\n        const inverted = new Delta();\n        this.reduce((baseIndex, op) => {\n            if (op.insert) {\n                inverted.delete(Op_1.default.length(op));\n            }\n            else if (typeof op.retain === 'number' && op.attributes == null) {\n                inverted.retain(op.retain);\n                return baseIndex + op.retain;\n            }\n            else if (op.delete || typeof op.retain === 'number') {\n                const length = (op.delete || op.retain);\n                const slice = base.slice(baseIndex, baseIndex + length);\n                slice.forEach((baseOp) => {\n                    if (op.delete) {\n                        inverted.push(baseOp);\n                    }\n                    else if (op.retain && op.attributes) {\n                        inverted.retain(Op_1.default.length(baseOp), AttributeMap_1.default.invert(op.attributes, baseOp.attributes));\n                    }\n                });\n                return baseIndex + length;\n            }\n            else if (typeof op.retain === 'object' && op.retain !== null) {\n                const slice = base.slice(baseIndex, baseIndex + 1);\n                const baseOp = new OpIterator_1.default(slice.ops).next();\n                const [embedType, opData, baseOpData] = getEmbedTypeAndData(op.retain, baseOp.insert);\n                const handler = Delta.getHandler(embedType);\n                inverted.retain({ [embedType]: handler.invert(opData, baseOpData) }, AttributeMap_1.default.invert(op.attributes, baseOp.attributes));\n                return baseIndex + 1;\n            }\n            return baseIndex;\n        }, 0);\n        return inverted.chop();\n    }\n    transform(arg, priority = false) {\n        priority = !!priority;\n        if (typeof arg === 'number') {\n            return this.transformPosition(arg, priority);\n        }\n        const other = arg;\n        const thisIter = new OpIterator_1.default(this.ops);\n        const otherIter = new OpIterator_1.default(other.ops);\n        const delta = new Delta();\n        while (thisIter.hasNext() || otherIter.hasNext()) {\n            if (thisIter.peekType() === 'insert' &&\n                (priority || otherIter.peekType() !== 'insert')) {\n                delta.retain(Op_1.default.length(thisIter.next()));\n            }\n            else if (otherIter.peekType() === 'insert') {\n                delta.push(otherIter.next());\n            }\n            else {\n                const length = Math.min(thisIter.peekLength(), otherIter.peekLength());\n                const thisOp = thisIter.next(length);\n                const otherOp = otherIter.next(length);\n                if (thisOp.delete) {\n                    // Our delete either makes their delete redundant or removes their retain\n                    continue;\n                }\n                else if (otherOp.delete) {\n                    delta.push(otherOp);\n                }\n                else {\n                    const thisData = thisOp.retain;\n                    const otherData = otherOp.retain;\n                    let transformedData = typeof otherData === 'object' && otherData !== null\n                        ? otherData\n                        : length;\n                    if (typeof thisData === 'object' &&\n                        thisData !== null &&\n                        typeof otherData === 'object' &&\n                        otherData !== null) {\n                        const embedType = Object.keys(thisData)[0];\n                        if (embedType === Object.keys(otherData)[0]) {\n                            const handler = Delta.getHandler(embedType);\n                            if (handler) {\n                                transformedData = {\n                                    [embedType]: handler.transform(thisData[embedType], otherData[embedType], priority),\n                                };\n                            }\n                        }\n                    }\n                    // We retain either their retain or insert\n                    delta.retain(transformedData, AttributeMap_1.default.transform(thisOp.attributes, otherOp.attributes, priority));\n                }\n            }\n        }\n        return delta.chop();\n    }\n    transformPosition(index, priority = false) {\n        priority = !!priority;\n        const thisIter = new OpIterator_1.default(this.ops);\n        let offset = 0;\n        while (thisIter.hasNext() && offset <= index) {\n            const length = thisIter.peekLength();\n            const nextType = thisIter.peekType();\n            thisIter.next();\n            if (nextType === 'delete') {\n                index -= Math.min(length, index - offset);\n                continue;\n            }\n            else if (nextType === 'insert' && (offset < index || !priority)) {\n                index += length;\n            }\n            offset += length;\n        }\n        return index;\n    }\n}"
+  },
+  {
+    "packageName": "quill-delta",
+    "functionPath": "quill-delta.default.getHandler",
+    "parameterCount": 1,
+    "functionSignature": "getHandler(embedType)",
+    "functionBody": "getHandler(embedType) {\n        const handler = this.handlers[embedType];\n        if (!handler) {\n            throw new Error(`no handlers for embed type \"${embedType}\"`);\n        }\n        return handler;\n    }"
+  },
+  {
+    "packageName": "quill-delta",
+    "functionPath": "quill-delta.default.OpIterator",
+    "parameterCount": 1,
+    "functionSignature": "class Iterator",
+    "functionBody": "class Iterator {\n    constructor(ops) {\n        this.ops = ops;\n        this.index = 0;\n        this.offset = 0;\n    }\n    hasNext() {\n        return this.peekLength() < Infinity;\n    }\n    next(length) {\n        if (!length) {\n            length = Infinity;\n        }\n        const nextOp = this.ops[this.index];\n        if (nextOp) {\n            const offset = this.offset;\n            const opLength = Op_1.default.length(nextOp);\n            if (length >= opLength - offset) {\n                length = opLength - offset;\n                this.index += 1;\n                this.offset = 0;\n            }\n            else {\n                this.offset += length;\n            }\n            if (typeof nextOp.delete === 'number') {\n                return { delete: length };\n            }\n            else {\n                const retOp = {};\n                if (nextOp.attributes) {\n                    retOp.attributes = nextOp.attributes;\n                }\n                if (typeof nextOp.retain === 'number') {\n                    retOp.retain = length;\n                }\n                else if (typeof nextOp.retain === 'object' &&\n                    nextOp.retain !== null) {\n                    // offset should === 0, length should === 1\n                    retOp.retain = nextOp.retain;\n                }\n                else if (typeof nextOp.insert === 'string') {\n                    retOp.insert = nextOp.insert.substr(offset, length);\n                }\n                else {\n                    // offset should === 0, length should === 1\n                    retOp.insert = nextOp.insert;\n                }\n                return retOp;\n            }\n        }\n        else {\n            return { retain: Infinity };\n        }\n    }\n    peek() {\n        return this.ops[this.index];\n    }\n    peekLength() {\n        if (this.ops[this.index]) {\n            // Should never return 0 if our index is being managed correctly\n            return Op_1.default.length(this.ops[this.index]) - this.offset;\n        }\n        else {\n            return Infinity;\n        }\n    }\n    peekType() {\n        const op = this.ops[this.index];\n        if (op) {\n            if (typeof op.delete === 'number') {\n                return 'delete';\n            }\n            else if (typeof op.retain === 'number' ||\n                (typeof op.retain === 'object' && op.retain !== null)) {\n                return 'retain';\n            }\n            else {\n                return 'insert';\n            }\n        }\n        return 'retain';\n    }\n    rest() {\n        if (!this.hasNext()) {\n            return [];\n        }\n        else if (this.offset === 0) {\n            return this.ops.slice(this.index);\n        }\n        else {\n            const offset = this.offset;\n            const index = this.index;\n            const next = this.next();\n            const rest = this.ops.slice(this.index);\n            this.offset = offset;\n            this.index = index;\n            return [next].concat(rest);\n        }\n    }\n}"
+  },
+  {
+    "packageName": "quill-delta",
+    "functionPath": "quill-delta.default.prototype.changeLength",
+    "parameterCount": 0,
+    "functionSignature": "changeLength()",
+    "functionBody": "changeLength() {\n        return this.reduce((length, elem) => {\n            if (elem.insert) {\n                return length + Op_1.default.length(elem);\n            }\n            else if (elem.delete) {\n                return length - elem.delete;\n            }\n            return length;\n        }, 0);\n    }"
+  },
+  {
+    "packageName": "quill-delta",
+    "functionPath": "quill-delta.default.prototype.chop",
+    "parameterCount": 0,
+    "functionSignature": "chop()",
+    "functionBody": "chop() {\n        const lastOp = this.ops[this.ops.length - 1];\n        if (lastOp && typeof lastOp.retain === 'number' && !lastOp.attributes) {\n            this.ops.pop();\n        }\n        return this;\n    }"
+  },
+  {
+    "packageName": "quill-delta",
+    "functionPath": "quill-delta.default.prototype.concat",
+    "parameterCount": 1,
+    "functionSignature": "concat(other)",
+    "functionBody": "concat(other) {\n        const delta = new Delta(this.ops.slice());\n        if (other.ops.length > 0) {\n            delta.push(other.ops[0]);\n            delta.ops = delta.ops.concat(other.ops.slice(1));\n        }\n        return delta;\n    }"
+  },
+  {
+    "packageName": "quill-delta",
+    "functionPath": "quill-delta.default.prototype.delete",
+    "parameterCount": 1,
+    "functionSignature": "delete(length)",
+    "functionBody": "delete(length) {\n        if (length <= 0) {\n            return this;\n        }\n        return this.push({ delete: length });\n    }"
+  },
+  {
+    "packageName": "quill-delta",
+    "functionPath": "quill-delta.default.prototype.diff",
+    "parameterCount": 2,
+    "functionSignature": "diff(other, cursor)",
+    "functionBody": "diff(other, cursor) {\n        if (this.ops === other.ops) {\n            return new Delta();\n        }\n        const strings = [this, other].map((delta) => {\n            return delta\n                .map((op) => {\n                if (op.insert != null) {\n                    return typeof op.insert === 'string' ? op.insert : NULL_CHARACTER;\n                }\n                const prep = delta === other ? 'on' : 'with';\n                throw new Error('diff() called ' + prep + ' non-document');\n            })\n                .join('');\n        });\n        const retDelta = new Delta();\n        const diffResult = diff(strings[0], strings[1], cursor, true);\n        const thisIter = new OpIterator_1.default(this.ops);\n        const otherIter = new OpIterator_1.default(other.ops);\n        diffResult.forEach((component) => {\n            let length = component[1].length;\n            while (length > 0) {\n                let opLength = 0;\n                switch (component[0]) {\n                    case diff.INSERT:\n                        opLength = Math.min(otherIter.peekLength(), length);\n                        retDelta.push(otherIter.next(opLength));\n                        break;\n                    case diff.DELETE:\n                        opLength = Math.min(length, thisIter.peekLength());\n                        thisIter.next(opLength);\n                        retDelta.delete(opLength);\n                        break;\n                    case diff.EQUAL:\n                        opLength = Math.min(thisIter.peekLength(), otherIter.peekLength(), length);\n                        const thisOp = thisIter.next(opLength);\n                        const otherOp = otherIter.next(opLength);\n                        if (isEqual(thisOp.insert, otherOp.insert)) {\n                            retDelta.retain(opLength, AttributeMap_1.default.diff(thisOp.attributes, otherOp.attributes));\n                        }\n                        else {\n                            retDelta.push(otherOp).delete(opLength);\n                        }\n                        break;\n                }\n                length -= opLength;\n            }\n        });\n        return retDelta.chop();\n    }"
+  },
+  {
+    "packageName": "quill-delta",
+    "functionPath": "quill-delta.default.prototype.filter",
+    "parameterCount": 1,
+    "functionSignature": "filter(predicate)",
+    "functionBody": "filter(predicate) {\n        return this.ops.filter(predicate);\n    }"
+  },
+  {
+    "packageName": "quill-delta",
+    "functionPath": "quill-delta.default.prototype.insert",
+    "parameterCount": 2,
+    "functionSignature": "insert(arg, attributes)",
+    "functionBody": "insert(arg, attributes) {\n        const newOp = {};\n        if (typeof arg === 'string' && arg.length === 0) {\n            return this;\n        }\n        newOp.insert = arg;\n        if (attributes != null &&\n            typeof attributes === 'object' &&\n            Object.keys(attributes).length > 0) {\n            newOp.attributes = attributes;\n        }\n        return this.push(newOp);\n    }"
+  },
+  {
+    "packageName": "quill-delta",
+    "functionPath": "quill-delta.default.prototype.invert",
+    "parameterCount": 1,
+    "functionSignature": "invert(base)",
+    "functionBody": "invert(base) {\n        const inverted = new Delta();\n        this.reduce((baseIndex, op) => {\n            if (op.insert) {\n                inverted.delete(Op_1.default.length(op));\n            }\n            else if (typeof op.retain === 'number' && op.attributes == null) {\n                inverted.retain(op.retain);\n                return baseIndex + op.retain;\n            }\n            else if (op.delete || typeof op.retain === 'number') {\n                const length = (op.delete || op.retain);\n                const slice = base.slice(baseIndex, baseIndex + length);\n                slice.forEach((baseOp) => {\n                    if (op.delete) {\n                        inverted.push(baseOp);\n                    }\n                    else if (op.retain && op.attributes) {\n                        inverted.retain(Op_1.default.length(baseOp), AttributeMap_1.default.invert(op.attributes, baseOp.attributes));\n                    }\n                });\n                return baseIndex + length;\n            }\n            else if (typeof op.retain === 'object' && op.retain !== null) {\n                const slice = base.slice(baseIndex, baseIndex + 1);\n                const baseOp = new OpIterator_1.default(slice.ops).next();\n                const [embedType, opData, baseOpData] = getEmbedTypeAndData(op.retain, baseOp.insert);\n                const handler = Delta.getHandler(embedType);\n                inverted.retain({ [embedType]: handler.invert(opData, baseOpData) }, AttributeMap_1.default.invert(op.attributes, baseOp.attributes));\n                return baseIndex + 1;\n            }\n            return baseIndex;\n        }, 0);\n        return inverted.chop();\n    }"
+  },
+  {
+    "packageName": "quill-delta",
+    "functionPath": "quill-delta.default.prototype.length",
+    "parameterCount": 0,
+    "functionSignature": "length()",
+    "functionBody": "length() {\n        return this.reduce((length, elem) => {\n            return length + Op_1.default.length(elem);\n        }, 0);\n    }"
+  },
+  {
+    "packageName": "quill-delta",
+    "functionPath": "quill-delta.default.prototype.partition",
+    "parameterCount": 1,
+    "functionSignature": "partition(predicate)",
+    "functionBody": "partition(predicate) {\n        const passed = [];\n        const failed = [];\n        this.forEach((op) => {\n            const target = predicate(op) ? passed : failed;\n            target.push(op);\n        });\n        return [passed, failed];\n    }"
+  },
+  {
+    "packageName": "quill-delta",
+    "functionPath": "quill-delta.default.prototype.push",
+    "parameterCount": 1,
+    "functionSignature": "push(newOp)",
+    "functionBody": "push(newOp) {\n        let index = this.ops.length;\n        let lastOp = this.ops[index - 1];\n        newOp = cloneDeep(newOp);\n        if (typeof lastOp === 'object') {\n            if (typeof newOp.delete === 'number' &&\n                typeof lastOp.delete === 'number') {\n                this.ops[index - 1] = { delete: lastOp.delete + newOp.delete };\n                return this;\n            }\n            // Since it does not matter if we insert before or after deleting at the same index,\n            // always prefer to insert first\n            if (typeof lastOp.delete === 'number' && newOp.insert != null) {\n                index -= 1;\n                lastOp = this.ops[index - 1];\n                if (typeof lastOp !== 'object') {\n                    this.ops.unshift(newOp);\n                    return this;\n                }\n            }\n            if (isEqual(newOp.attributes, lastOp.attributes)) {\n                if (typeof newOp.insert === 'string' &&\n                    typeof lastOp.insert === 'string') {\n                    this.ops[index - 1] = { insert: lastOp.insert + newOp.insert };\n                    if (typeof newOp.attributes === 'object') {\n                        this.ops[index - 1].attributes = newOp.attributes;\n                    }\n                    return this;\n                }\n                else if (typeof newOp.retain === 'number' &&\n                    typeof lastOp.retain === 'number') {\n                    this.ops[index - 1] = { retain: lastOp.retain + newOp.retain };\n                    if (typeof newOp.attributes === 'object') {\n                        this.ops[index - 1].attributes = newOp.attributes;\n                    }\n                    return this;\n                }\n            }\n        }\n        if (index === this.ops.length) {\n            this.ops.push(newOp);\n        }\n        else {\n            this.ops.splice(index, 0, newOp);\n        }\n        return this;\n    }"
+  },
+  {
+    "packageName": "quill-delta",
+    "functionPath": "quill-delta.default.prototype.transform",
+    "parameterCount": 1,
+    "functionSignature": "transform(arg, priority = false)",
+    "functionBody": "transform(arg, priority = false) {\n        priority = !!priority;\n        if (typeof arg === 'number') {\n            return this.transformPosition(arg, priority);\n        }\n        const other = arg;\n        const thisIter = new OpIterator_1.default(this.ops);\n        const otherIter = new OpIterator_1.default(other.ops);\n        const delta = new Delta();\n        while (thisIter.hasNext() || otherIter.hasNext()) {\n            if (thisIter.peekType() === 'insert' &&\n                (priority || otherIter.peekType() !== 'insert')) {\n                delta.retain(Op_1.default.length(thisIter.next()));\n            }\n            else if (otherIter.peekType() === 'insert') {\n                delta.push(otherIter.next());\n            }\n            else {\n                const length = Math.min(thisIter.peekLength(), otherIter.peekLength());\n                const thisOp = thisIter.next(length);\n                const otherOp = otherIter.next(length);\n                if (thisOp.delete) {\n                    // Our delete either makes their delete redundant or removes their retain\n                    continue;\n                }\n                else if (otherOp.delete) {\n                    delta.push(otherOp);\n                }\n                else {\n                    const thisData = thisOp.retain;\n                    const otherData = otherOp.retain;\n                    let transformedData = typeof otherData === 'object' && otherData !== null\n                        ? otherData\n                        : length;\n                    if (typeof thisData === 'object' &&\n                        thisData !== null &&\n                        typeof otherData === 'object' &&\n                        otherData !== null) {\n                        const embedType = Object.keys(thisData)[0];\n                        if (embedType === Object.keys(otherData)[0]) {\n                            const handler = Delta.getHandler(embedType);\n                            if (handler) {\n                                transformedData = {\n                                    [embedType]: handler.transform(thisData[embedType], otherData[embedType], priority),\n                                };\n                            }\n                        }\n                    }\n                    // We retain either their retain or insert\n                    delta.retain(transformedData, AttributeMap_1.default.transform(thisOp.attributes, otherOp.attributes, priority));\n                }\n            }\n        }\n        return delta.chop();\n    }"
+  },
+  {
+    "packageName": "quill-delta",
+    "functionPath": "quill-delta.default.prototype.transformPosition",
+    "parameterCount": 1,
+    "functionSignature": "transformPosition(index, priority = false)",
+    "functionBody": "transformPosition(index, priority = false) {\n        priority = !!priority;\n        const thisIter = new OpIterator_1.default(this.ops);\n        let offset = 0;\n        while (thisIter.hasNext() && offset <= index) {\n            const length = thisIter.peekLength();\n            const nextType = thisIter.peekType();\n            thisIter.next();\n            if (nextType === 'delete') {\n                index -= Math.min(length, index - offset);\n                continue;\n            }\n            else if (nextType === 'insert' && (offset < index || !priority)) {\n                index += length;\n            }\n            offset += length;\n        }\n        return index;\n    }"
+  },
+  {
+    "packageName": "quill-delta",
+    "functionPath": "quill-delta.default.unregisterEmbed",
+    "parameterCount": 1,
+    "functionSignature": "unregisterEmbed(embedType)",
+    "functionBody": "unregisterEmbed(embedType) {\n        delete this.handlers[embedType];\n    }"
+  },
+  {
+    "packageName": "quill-delta",
+    "functionPath": "quill-delta.module.exports",
+    "parameterCount": 1,
+    "functionSignature": "class Delta",
+    "functionBody": "class Delta {\n    constructor(ops) {\n        // Assume we are given a well formed ops\n        if (Array.isArray(ops)) {\n            this.ops = ops;\n        }\n        else if (ops != null && Array.isArray(ops.ops)) {\n            this.ops = ops.ops;\n        }\n        else {\n            this.ops = [];\n        }\n    }\n    static registerEmbed(embedType, handler) {\n        this.handlers[embedType] = handler;\n    }\n    static unregisterEmbed(embedType) {\n        delete this.handlers[embedType];\n    }\n    static getHandler(embedType) {\n        const handler = this.handlers[embedType];\n        if (!handler) {\n            throw new Error(`no handlers for embed type \"${embedType}\"`);\n        }\n        return handler;\n    }\n    insert(arg, attributes) {\n        const newOp = {};\n        if (typeof arg === 'string' && arg.length === 0) {\n            return this;\n        }\n        newOp.insert = arg;\n        if (attributes != null &&\n            typeof attributes === 'object' &&\n            Object.keys(attributes).length > 0) {\n            newOp.attributes = attributes;\n        }\n        return this.push(newOp);\n    }\n    delete(length) {\n        if (length <= 0) {\n            return this;\n        }\n        return this.push({ delete: length });\n    }\n    retain(length, attributes) {\n        if (typeof length === 'number' && length <= 0) {\n            return this;\n        }\n        const newOp = { retain: length };\n        if (attributes != null &&\n            typeof attributes === 'object' &&\n            Object.keys(attributes).length > 0) {\n            newOp.attributes = attributes;\n        }\n        return this.push(newOp);\n    }\n    push(newOp) {\n        let index = this.ops.length;\n        let lastOp = this.ops[index - 1];\n        newOp = cloneDeep(newOp);\n        if (typeof lastOp === 'object') {\n            if (typeof newOp.delete === 'number' &&\n                typeof lastOp.delete === 'number') {\n                this.ops[index - 1] = { delete: lastOp.delete + newOp.delete };\n                return this;\n            }\n            // Since it does not matter if we insert before or after deleting at the same index,\n            // always prefer to insert first\n            if (typeof lastOp.delete === 'number' && newOp.insert != null) {\n                index -= 1;\n                lastOp = this.ops[index - 1];\n                if (typeof lastOp !== 'object') {\n                    this.ops.unshift(newOp);\n                    return this;\n                }\n            }\n            if (isEqual(newOp.attributes, lastOp.attributes)) {\n                if (typeof newOp.insert === 'string' &&\n                    typeof lastOp.insert === 'string') {\n                    this.ops[index - 1] = { insert: lastOp.insert + newOp.insert };\n                    if (typeof newOp.attributes === 'object') {\n                        this.ops[index - 1].attributes = newOp.attributes;\n                    }\n                    return this;\n                }\n                else if (typeof newOp.retain === 'number' &&\n                    typeof lastOp.retain === 'number') {\n                    this.ops[index - 1] = { retain: lastOp.retain + newOp.retain };\n                    if (typeof newOp.attributes === 'object') {\n                        this.ops[index - 1].attributes = newOp.attributes;\n                    }\n                    return this;\n                }\n            }\n        }\n        if (index === this.ops.length) {\n            this.ops.push(newOp);\n        }\n        else {\n            this.ops.splice(index, 0, newOp);\n        }\n        return this;\n    }\n    chop() {\n        const lastOp = this.ops[this.ops.length - 1];\n        if (lastOp && typeof lastOp.retain === 'number' && !lastOp.attributes) {\n            this.ops.pop();\n        }\n        return this;\n    }\n    filter(predicate) {\n        return this.ops.filter(predicate);\n    }\n    forEach(predicate) {\n        this.ops.forEach(predicate);\n    }\n    map(predicate) {\n        return this.ops.map(predicate);\n    }\n    partition(predicate) {\n        const passed = [];\n        const failed = [];\n        this.forEach((op) => {\n            const target = predicate(op) ? passed : failed;\n            target.push(op);\n        });\n        return [passed, failed];\n    }\n    reduce(predicate, initialValue) {\n        return this.ops.reduce(predicate, initialValue);\n    }\n    changeLength() {\n        return this.reduce((length, elem) => {\n            if (elem.insert) {\n                return length + Op_1.default.length(elem);\n            }\n            else if (elem.delete) {\n                return length - elem.delete;\n            }\n            return length;\n        }, 0);\n    }\n    length() {\n        return this.reduce((length, elem) => {\n            return length + Op_1.default.length(elem);\n        }, 0);\n    }\n    slice(start = 0, end = Infinity) {\n        const ops = [];\n        const iter = new OpIterator_1.default(this.ops);\n        let index = 0;\n        while (index < end && iter.hasNext()) {\n            let nextOp;\n            if (index < start) {\n                nextOp = iter.next(start - index);\n            }\n            else {\n                nextOp = iter.next(end - index);\n                ops.push(nextOp);\n            }\n            index += Op_1.default.length(nextOp);\n        }\n        return new Delta(ops);\n    }\n    compose(other) {\n        const thisIter = new OpIterator_1.default(this.ops);\n        const otherIter = new OpIterator_1.default(other.ops);\n        const ops = [];\n        const firstOther = otherIter.peek();\n        if (firstOther != null &&\n            typeof firstOther.retain === 'number' &&\n            firstOther.attributes == null) {\n            let firstLeft = firstOther.retain;\n            while (thisIter.peekType() === 'insert' &&\n                thisIter.peekLength() <= firstLeft) {\n                firstLeft -= thisIter.peekLength();\n                ops.push(thisIter.next());\n            }\n            if (firstOther.retain - firstLeft > 0) {\n                otherIter.next(firstOther.retain - firstLeft);\n            }\n        }\n        const delta = new Delta(ops);\n        while (thisIter.hasNext() || otherIter.hasNext()) {\n            if (otherIter.peekType() === 'insert') {\n                delta.push(otherIter.next());\n            }\n            else if (thisIter.peekType() === 'delete') {\n                delta.push(thisIter.next());\n            }\n            else {\n                const length = Math.min(thisIter.peekLength(), otherIter.peekLength());\n                const thisOp = thisIter.next(length);\n                const otherOp = otherIter.next(length);\n                if (otherOp.retain) {\n                    const newOp = {};\n                    if (typeof thisOp.retain === 'number') {\n                        newOp.retain =\n                            typeof otherOp.retain === 'number' ? length : otherOp.retain;\n                    }\n                    else {\n                        if (typeof otherOp.retain === 'number') {\n                            if (thisOp.retain == null) {\n                                newOp.insert = thisOp.insert;\n                            }\n                            else {\n                                newOp.retain = thisOp.retain;\n                            }\n                        }\n                        else {\n                            const action = thisOp.retain == null ? 'insert' : 'retain';\n                            const [embedType, thisData, otherData] = getEmbedTypeAndData(thisOp[action], otherOp.retain);\n                            const handler = Delta.getHandler(embedType);\n                            newOp[action] = {\n                                [embedType]: handler.compose(thisData, otherData, action === 'retain'),\n                            };\n                        }\n                    }\n                    // Preserve null when composing with a retain, otherwise remove it for inserts\n                    const attributes = AttributeMap_1.default.compose(thisOp.attributes, otherOp.attributes, typeof thisOp.retain === 'number');\n                    if (attributes) {\n                        newOp.attributes = attributes;\n                    }\n                    delta.push(newOp);\n                    // Optimization if rest of other is just retain\n                    if (!otherIter.hasNext() &&\n                        isEqual(delta.ops[delta.ops.length - 1], newOp)) {\n                        const rest = new Delta(thisIter.rest());\n                        return delta.concat(rest).chop();\n                    }\n                    // Other op should be delete, we could be an insert or retain\n                    // Insert + delete cancels out\n                }\n                else if (typeof otherOp.delete === 'number' &&\n                    (typeof thisOp.retain === 'number' ||\n                        (typeof thisOp.retain === 'object' && thisOp.retain !== null))) {\n                    delta.push(otherOp);\n                }\n            }\n        }\n        return delta.chop();\n    }\n    concat(other) {\n        const delta = new Delta(this.ops.slice());\n        if (other.ops.length > 0) {\n            delta.push(other.ops[0]);\n            delta.ops = delta.ops.concat(other.ops.slice(1));\n        }\n        return delta;\n    }\n    diff(other, cursor) {\n        if (this.ops === other.ops) {\n            return new Delta();\n        }\n        const strings = [this, other].map((delta) => {\n            return delta\n                .map((op) => {\n                if (op.insert != null) {\n                    return typeof op.insert === 'string' ? op.insert : NULL_CHARACTER;\n                }\n                const prep = delta === other ? 'on' : 'with';\n                throw new Error('diff() called ' + prep + ' non-document');\n            })\n                .join('');\n        });\n        const retDelta = new Delta();\n        const diffResult = diff(strings[0], strings[1], cursor, true);\n        const thisIter = new OpIterator_1.default(this.ops);\n        const otherIter = new OpIterator_1.default(other.ops);\n        diffResult.forEach((component) => {\n            let length = component[1].length;\n            while (length > 0) {\n                let opLength = 0;\n                switch (component[0]) {\n                    case diff.INSERT:\n                        opLength = Math.min(otherIter.peekLength(), length);\n                        retDelta.push(otherIter.next(opLength));\n                        break;\n                    case diff.DELETE:\n                        opLength = Math.min(length, thisIter.peekLength());\n                        thisIter.next(opLength);\n                        retDelta.delete(opLength);\n                        break;\n                    case diff.EQUAL:\n                        opLength = Math.min(thisIter.peekLength(), otherIter.peekLength(), length);\n                        const thisOp = thisIter.next(opLength);\n                        const otherOp = otherIter.next(opLength);\n                        if (isEqual(thisOp.insert, otherOp.insert)) {\n                            retDelta.retain(opLength, AttributeMap_1.default.diff(thisOp.attributes, otherOp.attributes));\n                        }\n                        else {\n                            retDelta.push(otherOp).delete(opLength);\n                        }\n                        break;\n                }\n                length -= opLength;\n            }\n        });\n        return retDelta.chop();\n    }\n    eachLine(predicate, newline = '\\n') {\n        const iter = new OpIterator_1.default(this.ops);\n        let line = new Delta();\n        let i = 0;\n        while (iter.hasNext()) {\n            if (iter.peekType() !== 'insert') {\n                return;\n            }\n            const thisOp = iter.peek();\n            const start = Op_1.default.length(thisOp) - iter.peekLength();\n            const index = typeof thisOp.insert === 'string'\n                ? thisOp.insert.indexOf(newline, start) - start\n                : -1;\n            if (index < 0) {\n                line.push(iter.next());\n            }\n            else if (index > 0) {\n                line.push(iter.next(index));\n            }\n            else {\n                if (predicate(line, iter.next(1).attributes || {}, i) === false) {\n                    return;\n                }\n                i += 1;\n                line = new Delta();\n            }\n        }\n        if (line.length() > 0) {\n            predicate(line, {}, i);\n        }\n    }\n    invert(base) {\n        const inverted = new Delta();\n        this.reduce((baseIndex, op) => {\n            if (op.insert) {\n                inverted.delete(Op_1.default.length(op));\n            }\n            else if (typeof op.retain === 'number' && op.attributes == null) {\n                inverted.retain(op.retain);\n                return baseIndex + op.retain;\n            }\n            else if (op.delete || typeof op.retain === 'number') {\n                const length = (op.delete || op.retain);\n                const slice = base.slice(baseIndex, baseIndex + length);\n                slice.forEach((baseOp) => {\n                    if (op.delete) {\n                        inverted.push(baseOp);\n                    }\n                    else if (op.retain && op.attributes) {\n                        inverted.retain(Op_1.default.length(baseOp), AttributeMap_1.default.invert(op.attributes, baseOp.attributes));\n                    }\n                });\n                return baseIndex + length;\n            }\n            else if (typeof op.retain === 'object' && op.retain !== null) {\n                const slice = base.slice(baseIndex, baseIndex + 1);\n                const baseOp = new OpIterator_1.default(slice.ops).next();\n                const [embedType, opData, baseOpData] = getEmbedTypeAndData(op.retain, baseOp.insert);\n                const handler = Delta.getHandler(embedType);\n                inverted.retain({ [embedType]: handler.invert(opData, baseOpData) }, AttributeMap_1.default.invert(op.attributes, baseOp.attributes));\n                return baseIndex + 1;\n            }\n            return baseIndex;\n        }, 0);\n        return inverted.chop();\n    }\n    transform(arg, priority = false) {\n        priority = !!priority;\n        if (typeof arg === 'number') {\n            return this.transformPosition(arg, priority);\n        }\n        const other = arg;\n        const thisIter = new OpIterator_1.default(this.ops);\n        const otherIter = new OpIterator_1.default(other.ops);\n        const delta = new Delta();\n        while (thisIter.hasNext() || otherIter.hasNext()) {\n            if (thisIter.peekType() === 'insert' &&\n                (priority || otherIter.peekType() !== 'insert')) {\n                delta.retain(Op_1.default.length(thisIter.next()));\n            }\n            else if (otherIter.peekType() === 'insert') {\n                delta.push(otherIter.next());\n            }\n            else {\n                const length = Math.min(thisIter.peekLength(), otherIter.peekLength());\n                const thisOp = thisIter.next(length);\n                const otherOp = otherIter.next(length);\n                if (thisOp.delete) {\n                    // Our delete either makes their delete redundant or removes their retain\n                    continue;\n                }\n                else if (otherOp.delete) {\n                    delta.push(otherOp);\n                }\n                else {\n                    const thisData = thisOp.retain;\n                    const otherData = otherOp.retain;\n                    let transformedData = typeof otherData === 'object' && otherData !== null\n                        ? otherData\n                        : length;\n                    if (typeof thisData === 'object' &&\n                        thisData !== null &&\n                        typeof otherData === 'object' &&\n                        otherData !== null) {\n                        const embedType = Object.keys(thisData)[0];\n                        if (embedType === Object.keys(otherData)[0]) {\n                            const handler = Delta.getHandler(embedType);\n                            if (handler) {\n                                transformedData = {\n                                    [embedType]: handler.transform(thisData[embedType], otherData[embedType], priority),\n                                };\n                            }\n                        }\n                    }\n                    // We retain either their retain or insert\n                    delta.retain(transformedData, AttributeMap_1.default.transform(thisOp.attributes, otherOp.attributes, priority));\n                }\n            }\n        }\n        return delta.chop();\n    }\n    transformPosition(index, priority = false) {\n        priority = !!priority;\n        const thisIter = new OpIterator_1.default(this.ops);\n        let offset = 0;\n        while (thisIter.hasNext() && offset <= index) {\n            const length = thisIter.peekLength();\n            const nextType = thisIter.peekType();\n            thisIter.next();\n            if (nextType === 'delete') {\n                index -= Math.min(length, index - offset);\n                continue;\n            }\n            else if (nextType === 'insert' && (offset < index || !priority)) {\n                index += length;\n            }\n            offset += length;\n        }\n        return index;\n    }\n}"
+  },
+  {
+    "packageName": "quill-delta",
+    "functionPath": "quill-delta.Op.length",
+    "parameterCount": 1,
+    "functionSignature": "function length(op)",
+    "functionBody": "function length(op) {\n        if (typeof op.delete === 'number') {\n            return op.delete;\n        }\n        else if (typeof op.retain === 'number') {\n            return op.retain;\n        }\n        else if (typeof op.retain === 'object' && op.retain !== null) {\n            return 1;\n        }\n        else {\n            return typeof op.insert === 'string' ? op.insert.length : 1;\n        }\n    }"
+  },
+  {
+    "packageName": "quill-delta",
+    "functionPath": "quill-delta.OpIterator",
+    "parameterCount": 1,
+    "functionSignature": "class Iterator",
+    "functionBody": "class Iterator {\n    constructor(ops) {\n        this.ops = ops;\n        this.index = 0;\n        this.offset = 0;\n    }\n    hasNext() {\n        return this.peekLength() < Infinity;\n    }\n    next(length) {\n        if (!length) {\n            length = Infinity;\n        }\n        const nextOp = this.ops[this.index];\n        if (nextOp) {\n            const offset = this.offset;\n            const opLength = Op_1.default.length(nextOp);\n            if (length >= opLength - offset) {\n                length = opLength - offset;\n                this.index += 1;\n                this.offset = 0;\n            }\n            else {\n                this.offset += length;\n            }\n            if (typeof nextOp.delete === 'number') {\n                return { delete: length };\n            }\n            else {\n                const retOp = {};\n                if (nextOp.attributes) {\n                    retOp.attributes = nextOp.attributes;\n                }\n                if (typeof nextOp.retain === 'number') {\n                    retOp.retain = length;\n                }\n                else if (typeof nextOp.retain === 'object' &&\n                    nextOp.retain !== null) {\n                    // offset should === 0, length should === 1\n                    retOp.retain = nextOp.retain;\n                }\n                else if (typeof nextOp.insert === 'string') {\n                    retOp.insert = nextOp.insert.substr(offset, length);\n                }\n                else {\n                    // offset should === 0, length should === 1\n                    retOp.insert = nextOp.insert;\n                }\n                return retOp;\n            }\n        }\n        else {\n            return { retain: Infinity };\n        }\n    }\n    peek() {\n        return this.ops[this.index];\n    }\n    peekLength() {\n        if (this.ops[this.index]) {\n            // Should never return 0 if our index is being managed correctly\n            return Op_1.default.length(this.ops[this.index]) - this.offset;\n        }\n        else {\n            return Infinity;\n        }\n    }\n    peekType() {\n        const op = this.ops[this.index];\n        if (op) {\n            if (typeof op.delete === 'number') {\n                return 'delete';\n            }\n            else if (typeof op.retain === 'number' ||\n                (typeof op.retain === 'object' && op.retain !== null)) {\n                return 'retain';\n            }\n            else {\n                return 'insert';\n            }\n        }\n        return 'retain';\n    }\n    rest() {\n        if (!this.hasNext()) {\n            return [];\n        }\n        else if (this.offset === 0) {\n            return this.ops.slice(this.index);\n        }\n        else {\n            const offset = this.offset;\n            const index = this.index;\n            const next = this.next();\n            const rest = this.ops.slice(this.index);\n            this.offset = offset;\n            this.index = index;\n            return [next].concat(rest);\n        }\n    }\n}"
+  },
+  {
+    "packageName": "quill-delta",
+    "functionPath": "quill-delta.OpIterator.prototype.hasNext",
+    "parameterCount": 0,
+    "functionSignature": "hasNext()",
+    "functionBody": "hasNext() {\n        return this.peekLength() < Infinity;\n    }"
+  },
+  {
+    "packageName": "quill-delta",
+    "functionPath": "quill-delta.OpIterator.prototype.next",
+    "parameterCount": 1,
+    "functionSignature": "next(length)",
+    "functionBody": "next(length) {\n        if (!length) {\n            length = Infinity;\n        }\n        const nextOp = this.ops[this.index];\n        if (nextOp) {\n            const offset = this.offset;\n            const opLength = Op_1.default.length(nextOp);\n            if (length >= opLength - offset) {\n                length = opLength - offset;\n                this.index += 1;\n                this.offset = 0;\n            }\n            else {\n                this.offset += length;\n            }\n            if (typeof nextOp.delete === 'number') {\n                return { delete: length };\n            }\n            else {\n                const retOp = {};\n                if (nextOp.attributes) {\n                    retOp.attributes = nextOp.attributes;\n                }\n                if (typeof nextOp.retain === 'number') {\n                    retOp.retain = length;\n                }\n                else if (typeof nextOp.retain === 'object' &&\n                    nextOp.retain !== null) {\n                    // offset should === 0, length should === 1\n                    retOp.retain = nextOp.retain;\n                }\n                else if (typeof nextOp.insert === 'string') {\n                    retOp.insert = nextOp.insert.substr(offset, length);\n                }\n                else {\n                    // offset should === 0, length should === 1\n                    retOp.insert = nextOp.insert;\n                }\n                return retOp;\n            }\n        }\n        else {\n            return { retain: Infinity };\n        }\n    }"
+  },
+  {
+    "packageName": "quill-delta",
+    "functionPath": "quill-delta.OpIterator.prototype.peek",
+    "parameterCount": 0,
+    "functionSignature": "peek()",
+    "functionBody": "peek() {\n        return this.ops[this.index];\n    }"
+  },
+  {
+    "packageName": "quill-delta",
+    "functionPath": "quill-delta.OpIterator.prototype.peekType",
+    "parameterCount": 0,
+    "functionSignature": "peekType()",
+    "functionBody": "peekType() {\n        const op = this.ops[this.index];\n        if (op) {\n            if (typeof op.delete === 'number') {\n                return 'delete';\n            }\n            else if (typeof op.retain === 'number' ||\n                (typeof op.retain === 'object' && op.retain !== null)) {\n                return 'retain';\n            }\n            else {\n                return 'insert';\n            }\n        }\n        return 'retain';\n    }"
+  },
+  {
+    "packageName": "quill-delta",
+    "functionPath": "quill-delta.OpIterator.prototype.rest",
+    "parameterCount": 0,
+    "functionSignature": "rest()",
+    "functionBody": "rest() {\n        if (!this.hasNext()) {\n            return [];\n        }\n        else if (this.offset === 0) {\n            return this.ops.slice(this.index);\n        }\n        else {\n            const offset = this.offset;\n            const index = this.index;\n            const next = this.next();\n            const rest = this.ops.slice(this.index);\n            this.offset = offset;\n            this.index = index;\n            return [next].concat(rest);\n        }\n    }"
+  },
+  {
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.addToMean",
+    "parameterCount": 3,
+    "functionSignature": "function addToMean(mean, n, newValue)",
+    "functionBody": "function addToMean(mean, n, newValue) {\n    return mean + (newValue - mean) / (n + 1);\n}"
+  },
+  {
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.approxEqual",
+    "parameterCount": 3,
+    "functionSignature": "function approxEqual(actual, expected, tolerance)",
+    "functionBody": "function approxEqual(actual, expected, tolerance) {\n    if ( tolerance === void 0 ) tolerance = epsilon;\n\n    return relativeError(actual, expected) <= tolerance;\n}"
+  },
+  {
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.averageSimple",
+    "parameterCount": 1,
+    "functionSignature": "function meanSimple(x)",
+    "functionBody": "function meanSimple(x) {\n    if (x.length === 0) {\n        throw new Error(\"meanSimple requires at least one data point\");\n    }\n\n    return sumSimple(x) / x.length;\n}"
+  },
+  {
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.BayesianClassifier",
+    "parameterCount": 0,
+    "functionSignature": "function BayesianClassifier()",
+    "functionBody": "function BayesianClassifier() {\n    // The number of items that are currently\n    // classified in the model\n    this.totalCount = 0;\n    // Every item classified in the model\n    this.data = {};\n}"
+  },
+  {
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.BayesianClassifier.prototype.score",
+    "parameterCount": 1,
+    "functionSignature": "function score (item)",
+    "functionBody": "function score (item) {\n    // Initialize an empty array of odds per category.\n    var odds = {};\n    var category;\n    // Iterate through each key in the item,\n    // then iterate through each category that has been used\n    // in previous calls to `.train()`\n    for (var k in item) {\n        var v = item[k];\n        for (category in this.data) {\n            // Create an empty object for storing key - value combinations\n            // for this category.\n            odds[category] = {};\n\n            // If this item doesn't even have a property, it counts for nothing,\n            // but if it does have the property that we're looking for from\n            // the item to categorize, it counts based on how popular it is\n            // versus the whole population.\n            if (this.data[category][k]) {\n                odds[category][k + \"_\" + v] =\n                    (this.data[category][k][v] || 0) / this.totalCount;\n            } else {\n                odds[category][k + \"_\" + v] = 0;\n            }\n        }\n    }\n\n    // Set up a new object that will contain sums of these odds by category\n    var oddsSums = {};\n\n    for (category in odds) {\n        // Tally all of the odds for each category-combination pair -\n        // the non-existence of a category does not add anything to the\n        // score.\n        oddsSums[category] = 0;\n        for (var combination in odds[category]) {\n            oddsSums[category] += odds[category][combination];\n        }\n    }\n\n    return oddsSums;\n}"
+  },
+  {
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.BayesianClassifier.prototype.train",
+    "parameterCount": 2,
+    "functionSignature": "function train (item, category)",
+    "functionBody": "function train (item, category) {\n    // If the data object doesn't have any values\n    // for this category, create a new object for it.\n    if (!this.data[category]) {\n        this.data[category] = {};\n    }\n\n    // Iterate through each key in the item.\n    for (var k in item) {\n        var v = item[k];\n        // Initialize the nested object `data[category][k][item[k]]`\n        // with an object of keys that equal 0.\n        if (this.data[category][k] === undefined) {\n            this.data[category][k] = {};\n        }\n        if (this.data[category][k][v] === undefined) {\n            this.data[category][k][v] = 0;\n        }\n\n        // And increment the key for this key/value combination.\n        this.data[category][k][v]++;\n    }\n\n    // Increment the number of items classified\n    this.totalCount++;\n}"
+  },
+  {
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.bernoulliDistribution",
+    "parameterCount": 1,
+    "functionSignature": "function bernoulliDistribution(p) /*: number[] */",
+    "functionBody": "function bernoulliDistribution(p) /*: number[] */ {\n    // Check that `p` is a valid probability (0 ≤ p ≤ 1)\n    if (p < 0 || p > 1) {\n        throw new Error(\n            \"bernoulliDistribution requires probability to be between 0 and 1 inclusive\"\n        );\n    }\n\n    return [1 - p, p];\n}"
+  },
+  {
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.binomialDistribution",
+    "parameterCount": 2,
+    "functionSignature": "function binomialDistribution(trials, probability) /*: ?number[] */",
+    "functionBody": "function binomialDistribution(trials, probability) /*: ?number[] */ {\n    // Check that `p` is a valid probability (0 ≤ p ≤ 1),\n    // that `n` is an integer, strictly positive.\n    if (probability < 0 || probability > 1 || trials <= 0 || trials % 1 !== 0) {\n        return undefined;\n    }\n\n    // We initialize `x`, the random variable, and `accumulator`, an accumulator\n    // for the cumulative distribution function to 0. `distribution_functions`\n    // is the object we'll return with the `probability_of_x` and the\n    // `cumulativeProbability_of_x`, as well as the calculated mean &\n    // variance. We iterate until the `cumulativeProbability_of_x` is\n    // within `epsilon` of 1.0.\n    var x = 0;\n    var cumulativeProbability = 0;\n    var cells = [];\n    var binomialCoefficient = 1;\n\n    // This algorithm iterates through each potential outcome,\n    // until the `cumulativeProbability` is very close to 1, at\n    // which point we've defined the vast majority of outcomes\n    do {\n        // a [probability mass function](https://en.wikipedia.org/wiki/Probability_mass_function)\n        cells[x] =\n            binomialCoefficient *\n            Math.pow(probability, x) *\n            Math.pow(1 - probability, trials - x);\n        cumulativeProbability += cells[x];\n        x++;\n        binomialCoefficient = (binomialCoefficient * (trials - x + 1)) / x;\n        // when the cumulativeProbability is nearly 1, we've calculated\n        // the useful range of this distribution\n    } while (cumulativeProbability < 1 - epsilon);\n\n    return cells;\n}"
+  },
+  {
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.bisect",
+    "parameterCount": 5,
+    "functionSignature": "function bisect(func, start, end, maxIterations, errorTolerance)",
+    "functionBody": "function bisect(func, start, end, maxIterations, errorTolerance) {\n    if (typeof func !== \"function\")\n        { throw new TypeError(\"func must be a function\"); }\n\n    for (var i = 0; i < maxIterations; i++) {\n        var output = (start + end) / 2;\n\n        if (\n            func(output) === 0 ||\n            Math.abs((end - start) / 2) < errorTolerance\n        ) {\n            return output;\n        }\n\n        if (sign(func(output)) === sign(func(start))) {\n            start = output;\n        } else {\n            end = output;\n        }\n    }\n\n    throw new Error(\"maximum number of iterations exceeded\");\n}"
+  },
+  {
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.chunk",
+    "parameterCount": 2,
+    "functionSignature": "function chunk(x, chunkSize)",
+    "functionBody": "function chunk(x, chunkSize) {\n    // a list of result chunks, as arrays in an array\n    var output = [];\n\n    // `chunkSize` must be zero or higher - otherwise the loop below,\n    // in which we call `start += chunkSize`, will loop infinitely.\n    // So, we'll detect and throw in that case to indicate\n    // invalid input.\n    if (chunkSize < 1) {\n        throw new Error(\"chunk size must be a positive number\");\n    }\n\n    if (Math.floor(chunkSize) !== chunkSize) {\n        throw new Error(\"chunk size must be an integer\");\n    }\n\n    // `start` is the index at which `.slice` will start selecting\n    // new array elements\n    for (var start = 0; start < x.length; start += chunkSize) {\n        // for each chunk, slice that part of the array and add it\n        // to the output. The `.slice` function does not change\n        // the original array.\n        output.push(x.slice(start, start + chunkSize));\n    }\n    return output;\n}"
+  },
+  {
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.ckmeans",
+    "parameterCount": 2,
+    "functionSignature": "function ckmeans(x, nClusters)",
+    "functionBody": "function ckmeans(x, nClusters) {\n    if (nClusters > x.length) {\n        throw new Error(\n            \"cannot generate more classes than there are data values\"\n        );\n    }\n\n    var sorted = numericSort(x);\n    // we'll use this as the maximum number of clusters\n    var uniqueCount = uniqueCountSorted(sorted);\n\n    // if all of the input values are identical, there's one cluster\n    // with all of the input in it.\n    if (uniqueCount === 1) {\n        return [sorted];\n    }\n\n    // named 'S' originally\n    var matrix = makeMatrix(nClusters, sorted.length);\n    // named 'J' originally\n    var backtrackMatrix = makeMatrix(nClusters, sorted.length);\n\n    // This is a dynamic programming way to solve the problem of minimizing\n    // within-cluster sum of squares. It's similar to linear regression\n    // in this way, and this calculation incrementally computes the\n    // sum of squares that are later read.\n    fillMatrices(sorted, matrix, backtrackMatrix);\n\n    // The real work of Ckmeans clustering happens in the matrix generation:\n    // the generated matrices encode all possible clustering combinations, and\n    // once they're generated we can solve for the best clustering groups\n    // very quickly.\n    var clusters = [];\n    var clusterRight = backtrackMatrix[0].length - 1;\n\n    // Backtrack the clusters from the dynamic programming matrix. This\n    // starts at the bottom-right corner of the matrix (if the top-left is 0, 0),\n    // and moves the cluster target with the loop.\n    for (var cluster = backtrackMatrix.length - 1; cluster >= 0; cluster--) {\n        var clusterLeft = backtrackMatrix[cluster][clusterRight];\n\n        // fill the cluster from the sorted input by taking a slice of the\n        // array. the backtrack matrix makes this easy - it stores the\n        // indexes where the cluster should start and end.\n        clusters[cluster] = sorted.slice(clusterLeft, clusterRight + 1);\n\n        if (cluster > 0) {\n            clusterRight = clusterLeft - 1;\n        }\n    }\n\n    return clusters;\n}"
+  },
+  {
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.combinationsReplacement",
+    "parameterCount": 2,
+    "functionSignature": "function combinationsReplacement(x, k)",
+    "functionBody": "function combinationsReplacement(x, k) {\n    var combinationList = [];\n\n    for (var i = 0; i < x.length; i++) {\n        if (k === 1) {\n            // If we're requested to find only one element, we don't need\n            // to recurse: just push `x[i]` onto the list of combinations.\n            combinationList.push([x[i]]);\n        } else {\n            // Otherwise, recursively find combinations, given `k - 1`. Note that\n            // we request `k - 1`, so if you were looking for k=3 combinations, we're\n            // requesting k=2. This -1 gets reversed in the for loop right after this\n            // code, since we concatenate `x[i]` onto the selected combinations,\n            // bringing `k` back up to your requested level.\n            // This recursion may go many levels deep, since it only stops once\n            // k=1.\n            var subsetCombinations = combinationsReplacement(\n                x.slice(i, x.length),\n                k - 1\n            );\n\n            for (var j = 0; j < subsetCombinations.length; j++) {\n                combinationList.push([x[i]].concat(subsetCombinations[j]));\n            }\n        }\n    }\n\n    return combinationList;\n}"
+  },
+  {
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.cumulativeStdLogisticProbability",
+    "parameterCount": 1,
+    "functionSignature": "function cumulativeStdLogisticProbability(x)",
+    "functionBody": "function cumulativeStdLogisticProbability(x) {\n    return 1 / (Math.exp(-x) + 1);\n}"
+  },
+  {
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.erf",
+    "parameterCount": 1,
+    "functionSignature": "function errorFunction(x)",
+    "functionBody": "function errorFunction(x) {\n    var t = 1 / (1 + 0.5 * Math.abs(x));\n    var tau =\n        t *\n        Math.exp(\n            -x * x +\n                ((((((((0.17087277 * t - 0.82215223) * t + 1.48851587) * t -\n                    1.13520398) *\n                    t +\n                    0.27886807) *\n                    t -\n                    0.18628806) *\n                    t +\n                    0.09678418) *\n                    t +\n                    0.37409196) *\n                    t +\n                    1.00002368) *\n                    t -\n                1.26551223\n        );\n    if (x >= 0) {\n        return 1 - tau;\n    } else {\n        return tau - 1;\n    }\n}"
+  },
+  {
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.geometricMean",
+    "parameterCount": 1,
+    "functionSignature": "function geometricMean(x)",
+    "functionBody": "function geometricMean(x) {\n    if (x.length === 0) {\n        throw new Error(\"geometricMean requires at least one data point\");\n    }\n\n    // the starting value.\n    var value = 1;\n\n    for (var i = 0; i < x.length; i++) {\n        // the geometric mean is only valid for positive numbers\n        if (x[i] < 0) {\n            throw new Error(\n                \"geometricMean requires only non-negative numbers as input\"\n            );\n        }\n\n        // repeatedly multiply the value by each number\n        value *= x[i];\n    }\n\n    return Math.pow(value, 1 / x.length);\n}"
+  },
+  {
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.harmonicMean",
+    "parameterCount": 1,
+    "functionSignature": "function harmonicMean(x)",
+    "functionBody": "function harmonicMean(x) {\n    if (x.length === 0) {\n        throw new Error(\"harmonicMean requires at least one data point\");\n    }\n\n    var reciprocalSum = 0;\n\n    for (var i = 0; i < x.length; i++) {\n        // the harmonic mean is only valid for positive numbers\n        if (x[i] <= 0) {\n            throw new Error(\n                \"harmonicMean requires only positive numbers as input\"\n            );\n        }\n\n        reciprocalSum += 1 / x[i];\n    }\n\n    // divide n by the reciprocal sum\n    return x.length / reciprocalSum;\n}"
+  },
+  {
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.interquartileRange",
+    "parameterCount": 1,
+    "functionSignature": "function interquartileRange(x)",
+    "functionBody": "function interquartileRange(x) {\n    // Interquartile range is the span between the upper quartile,\n    // at `0.75`, and lower quartile, `0.25`\n    var q1 = quantile(x, 0.75);\n    var q2 = quantile(x, 0.25);\n\n    if (typeof q1 === \"number\" && typeof q2 === \"number\") {\n        return q1 - q2;\n    }\n}"
+  },
+  {
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.kernelDensityEstimation",
+    "parameterCount": 3,
+    "functionSignature": "function kernelDensityEstimation(X, kernel, bandwidthMethod)",
+    "functionBody": "function kernelDensityEstimation(X, kernel, bandwidthMethod) {\n    var kernelFn;\n    if (kernel === undefined) {\n        kernelFn = kernels.gaussian;\n    } else if (typeof kernel === \"string\") {\n        if (!kernels[kernel]) {\n            throw new Error('Unknown kernel \"' + kernel + '\"');\n        }\n        kernelFn = kernels[kernel];\n    } else {\n        kernelFn = kernel;\n    }\n\n    var bandwidth;\n    if (typeof bandwidthMethod === \"undefined\") {\n        bandwidth = bandwidthMethods.nrd(X);\n    } else if (typeof bandwidthMethod === \"string\") {\n        if (!bandwidthMethods[bandwidthMethod]) {\n            throw new Error(\n                'Unknown bandwidth method \"' + bandwidthMethod + '\"'\n            );\n        }\n        bandwidth = bandwidthMethods[bandwidthMethod](X);\n    } else {\n        bandwidth = bandwidthMethod;\n    }\n\n    return function (x) {\n        var i = 0;\n        var sum = 0;\n        for (i = 0; i < X.length; i++) {\n            sum += kernelFn((x - X[i]) / bandwidth);\n        }\n        return sum / bandwidth / X.length;\n    };\n}"
+  },
+  {
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.linearRegression",
+    "parameterCount": 1,
+    "functionSignature": "function linearRegression(data)",
+    "functionBody": "function linearRegression(data) {\n    var m;\n    var b;\n\n    // Store data length in a local variable to reduce\n    // repeated object property lookups\n    var dataLength = data.length;\n\n    //if there's only one point, arbitrarily choose a slope of 0\n    //and a y-intercept of whatever the y of the initial point is\n    if (dataLength === 1) {\n        m = 0;\n        b = data[0][1];\n    } else {\n        // Initialize our sums and scope the `m` and `b`\n        // variables that define the line.\n        var sumX = 0;\n        var sumY = 0;\n        var sumXX = 0;\n        var sumXY = 0;\n\n        // Use local variables to grab point values\n        // with minimal object property lookups\n        var point;\n        var x;\n        var y;\n\n        // Gather the sum of all x values, the sum of all\n        // y values, and the sum of x^2 and (x*y) for each\n        // value.\n        //\n        // In math notation, these would be SS_x, SS_y, SS_xx, and SS_xy\n        for (var i = 0; i < dataLength; i++) {\n            point = data[i];\n            x = point[0];\n            y = point[1];\n\n            sumX += x;\n            sumY += y;\n\n            sumXX += x * x;\n            sumXY += x * y;\n        }\n\n        // `m` is the slope of the regression line\n        m =\n            (dataLength * sumXY - sumX * sumY) /\n            (dataLength * sumXX - sumX * sumX);\n\n        // `b` is the y-intercept of the line.\n        b = sumY / dataLength - (m * sumX) / dataLength;\n    }\n\n    // Return both values as an object.\n    return {\n        m: m,\n        b: b\n    };\n}"
+  },
+  {
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.logAverage",
+    "parameterCount": 1,
+    "functionSignature": "function logAverage(x)",
+    "functionBody": "function logAverage(x) {\n    if (x.length === 0) {\n        throw new Error(\"logAverage requires at least one data point\");\n    }\n\n    var value = 0;\n    for (var i = 0; i < x.length; i++) {\n        if (x[i] < 0) {\n            throw new Error(\n                \"logAverage requires only non-negative numbers as input\"\n            );\n        }\n        value += Math.log(x[i]);\n    }\n\n    return Math.exp(value / x.length);\n}"
+  },
+  {
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.logit",
+    "parameterCount": 1,
+    "functionSignature": "function logit(p)",
+    "functionBody": "function logit(p) {\n    if (p <= 0 || p >= 1) {\n        throw new Error(\"p must be strictly between zero and one\");\n    }\n    return Math.log(p / (1 - p));\n}"
+  },
+  {
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.max",
+    "parameterCount": 1,
+    "functionSignature": "function max(x)",
+    "functionBody": "function max(x) {\n    if (x.length === 0) {\n        throw new Error(\"max requires at least one data point\");\n    }\n\n    var value = x[0];\n    for (var i = 1; i < x.length; i++) {\n        if (x[i] > value) {\n            value = x[i];\n        }\n    }\n    return value;\n}"
+  },
+  {
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.mean",
+    "parameterCount": 1,
+    "functionSignature": "function mean(x)",
+    "functionBody": "function mean(x) {\n    if (x.length === 0) {\n        throw new Error(\"mean requires at least one data point\");\n    }\n\n    return sum(x) / x.length;\n}"
+  },
+  {
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.meanSimple",
+    "parameterCount": 1,
+    "functionSignature": "function meanSimple(x)",
+    "functionBody": "function meanSimple(x) {\n    if (x.length === 0) {\n        throw new Error(\"meanSimple requires at least one data point\");\n    }\n\n    return sumSimple(x) / x.length;\n}"
+  },
+  {
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.medianAbsoluteDeviation",
+    "parameterCount": 1,
+    "functionSignature": "function medianAbsoluteDeviation(x)",
+    "functionBody": "function medianAbsoluteDeviation(x) {\n    var medianValue = median(x);\n    var medianAbsoluteDeviations = [];\n\n    // Make a list of absolute deviations from the median\n    for (var i = 0; i < x.length; i++) {\n        medianAbsoluteDeviations.push(Math.abs(x[i] - medianValue));\n    }\n\n    // Find the median value of that list\n    return median(medianAbsoluteDeviations);\n}"
+  },
+  {
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.min",
+    "parameterCount": 1,
+    "functionSignature": "function min(x)",
+    "functionBody": "function min(x) {\n    if (x.length === 0) {\n        throw new Error(\"min requires at least one data point\");\n    }\n\n    var value = x[0];\n    for (var i = 1; i < x.length; i++) {\n        if (x[i] < value) {\n            value = x[i];\n        }\n    }\n    return value;\n}"
+  },
+  {
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.minSorted",
+    "parameterCount": 1,
+    "functionSignature": "function minSorted(x)",
+    "functionBody": "function minSorted(x) {\n    return x[0];\n}"
+  },
+  {
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.mode",
+    "parameterCount": 1,
+    "functionSignature": "function mode(x)",
+    "functionBody": "function mode(x) {\n    // Sorting the array lets us iterate through it below and be sure\n    // that every time we see a new number it's new and we'll never\n    // see the same number twice\n    return modeSorted(numericSort(x));\n}"
+  },
+  {
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.modeSorted",
+    "parameterCount": 1,
+    "functionSignature": "function modeSorted(sorted)",
+    "functionBody": "function modeSorted(sorted) {\n    // Handle edge cases:\n    // The mode of an empty list is undefined\n    if (sorted.length === 0) {\n        throw new Error(\"mode requires at least one data point\");\n    }\n    if (sorted.length === 1) {\n        return sorted[0];\n    }\n\n    // This assumes it is dealing with an array of size > 1, since size\n    // 0 and 1 are handled immediately. Hence it starts at index 1 in the\n    // array.\n    var last = sorted[0];\n    // store the mode as we find new modes\n    var value = Number.NaN;\n    // store how many times we've seen the mode\n    var maxSeen = 0;\n    // how many times the current candidate for the mode\n    // has been seen\n    var seenThis = 1;\n\n    // end at sorted.length + 1 to fix the case in which the mode is\n    // the highest number that occurs in the sequence. the last iteration\n    // compares sorted[i], which is undefined, to the highest number\n    // in the series\n    for (var i = 1; i < sorted.length + 1; i++) {\n        // we're seeing a new number pass by\n        if (sorted[i] !== last) {\n            // the last number is the new mode since we saw it more\n            // often than the old one\n            if (seenThis > maxSeen) {\n                maxSeen = seenThis;\n                value = last;\n            }\n            seenThis = 1;\n            last = sorted[i];\n            // if this isn't a new number, it's one more occurrence of\n            // the potential mode\n        } else {\n            seenThis++;\n        }\n    }\n    return value;\n}"
+  },
+  {
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.numericSort",
+    "parameterCount": 1,
+    "functionSignature": "function numericSort(x)",
+    "functionBody": "function numericSort(x) {\n    return (\n        x\n            // ensure the array is not changed in-place\n            .slice()\n            // comparator function that treats input as numeric\n            .sort(function (a, b) {\n                return a - b;\n            })\n    );\n}"
+  },
+  {
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.perceptron",
+    "parameterCount": 0,
+    "functionSignature": "function PerceptronModel()",
+    "functionBody": "function PerceptronModel() {\n    // The weights, or coefficients of the model;\n    // weights are only populated when training with data.\n    this.weights = [];\n    // The bias term, or intercept; it is also a weight but\n    // it's stored separately for convenience as it is always\n    // multiplied by one.\n    this.bias = 0;\n}"
+  },
+  {
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.PerceptronModel.prototype.predict",
+    "parameterCount": 1,
+    "functionSignature": "function predict (features)",
+    "functionBody": "function predict (features) {\n    // Only predict if previously trained\n    // on the same size feature array(s).\n    if (features.length !== this.weights.length) {\n        return null;\n    }\n\n    // Calculate the sum of features times weights,\n    // with the bias added (implicitly times one).\n    var score = 0;\n    for (var i = 0; i < this.weights.length; i++) {\n        score += this.weights[i] * features[i];\n    }\n    score += this.bias;\n\n    // Classify as 1 if the score is over 0, otherwise 0.\n    if (score > 0) {\n        return 1;\n    } else {\n        return 0;\n    }\n}"
+  },
+  {
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.PerceptronModel.prototype.train",
+    "parameterCount": 2,
+    "functionSignature": "function train (features, label)",
+    "functionBody": "function train (features, label) {\n    // Require that only labels of 0 or 1 are considered.\n    if (label !== 0 && label !== 1) {\n        return null;\n    }\n    // The length of the feature array determines\n    // the length of the weight array.\n    // The perceptron will continue learning as long as\n    // it keeps seeing feature arrays of the same length.\n    // When it sees a new data shape, it initializes.\n    if (features.length !== this.weights.length) {\n        this.weights = features;\n        this.bias = 1;\n    }\n    // Make a prediction based on current weights.\n    var prediction = this.predict(features);\n    // Update the weights if the prediction is wrong.\n    if (typeof prediction === \"number\" && prediction !== label) {\n        var gradient = label - prediction;\n        for (var i = 0; i < this.weights.length; i++) {\n            this.weights[i] += gradient * features[i];\n        }\n        this.bias += gradient;\n    }\n    return this;\n}"
+  },
+  {
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.permutationsHeap",
+    "parameterCount": 1,
+    "functionSignature": "function permutationsHeap(elements)",
+    "functionBody": "function permutationsHeap(elements) {\n    var indexes = new Array(elements.length);\n    var permutations = [elements.slice()];\n\n    for (var i = 0; i < elements.length; i++) {\n        indexes[i] = 0;\n    }\n\n    for (var i$1 = 0; i$1 < elements.length; ) {\n        if (indexes[i$1] < i$1) {\n            // At odd indexes, swap from indexes[i] instead\n            // of from the beginning of the array\n            var swapFrom = 0;\n            if (i$1 % 2 !== 0) {\n                swapFrom = indexes[i$1];\n            }\n\n            // swap between swapFrom and i, using\n            // a temporary variable as storage.\n            var temp = elements[swapFrom];\n            elements[swapFrom] = elements[i$1];\n            elements[i$1] = temp;\n\n            permutations.push(elements.slice());\n            indexes[i$1]++;\n            i$1 = 0;\n        } else {\n            indexes[i$1] = 0;\n            i$1++;\n        }\n    }\n\n    return permutations;\n}"
+  },
+  {
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.permutationTest",
+    "parameterCount": 5,
+    "functionSignature": "function permutationTest(sampleX, sampleY, alternative, k, randomSource)",
+    "functionBody": "function permutationTest(sampleX, sampleY, alternative, k, randomSource) {\n    // Set default arguments\n    if (k === undefined) {\n        k = 10000;\n    }\n    if (alternative === undefined) {\n        alternative = \"two_side\";\n    }\n    if (\n        alternative !== \"two_side\" &&\n        alternative !== \"greater\" &&\n        alternative !== \"less\"\n    ) {\n        throw new Error(\n            \"`alternative` must be either 'two_side', 'greater', or 'less'.\"\n        );\n    }\n\n    // get means for each sample\n    var meanX = mean(sampleX);\n    var meanY = mean(sampleY);\n\n    // calculate initial test statistic. This will be our point of comparison with\n    // the generated test statistics.\n    var testStatistic = meanX - meanY;\n\n    // create test-statistic distribution\n    var testStatDsn = new Array(k);\n\n    // combine datsets so we can easily shuffle later\n    var allData = sampleX.concat(sampleY);\n    var midIndex = Math.floor(allData.length / 2);\n\n    for (var i = 0; i < k; i++) {\n        // 1. shuffle data assignments\n        shuffleInPlace(allData, randomSource);\n        var permLeft = allData.slice(0, midIndex);\n        var permRight = allData.slice(midIndex, allData.length);\n\n        // 2.re-calculate test statistic\n        var permTestStatistic = mean(permLeft) - mean(permRight);\n\n        // 3. store test statistic to build test statistic distribution\n        testStatDsn[i] = permTestStatistic;\n    }\n\n    // Calculate p-value depending on alternative\n    // For this test, we calculate the percentage of 'extreme' test statistics (subject to our hypothesis)\n    // more info on permutation test p-value calculations: https://onlinecourses.science.psu.edu/stat464/node/35\n    var numExtremeTStats = 0;\n    if (alternative === \"two_side\") {\n        for (var i$1 = 0; i$1 <= k; i$1++) {\n            if (Math.abs(testStatDsn[i$1]) >= Math.abs(testStatistic)) {\n                numExtremeTStats += 1;\n            }\n        }\n    } else if (alternative === \"greater\") {\n        for (var i$2 = 0; i$2 <= k; i$2++) {\n            if (testStatDsn[i$2] >= testStatistic) {\n                numExtremeTStats += 1;\n            }\n        }\n    } else {\n        // alternative === 'less'\n        for (var i$3 = 0; i$3 <= k; i$3++) {\n            /* c8 ignore start */\n            if (testStatDsn[i$3] <= testStatistic) {\n                numExtremeTStats += 1;\n            }\n            /* c8 ignore end */\n        }\n    }\n\n    return numExtremeTStats / k;\n}"
+  },
+  {
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.poissonDistribution",
+    "parameterCount": 1,
+    "functionSignature": "function poissonDistribution(lambda) /*: ?number[] */",
+    "functionBody": "function poissonDistribution(lambda) /*: ?number[] */ {\n    // Check that lambda is strictly positive\n    if (lambda <= 0) {\n        return undefined;\n    }\n\n    // our current place in the distribution\n    var x = 0;\n    // and we keep track of the current cumulative probability, in\n    // order to know when to stop calculating chances.\n    var cumulativeProbability = 0;\n    // the calculated cells to be returned\n    var cells = [];\n    var factorialX = 1;\n\n    // This algorithm iterates through each potential outcome,\n    // until the `cumulativeProbability` is very close to 1, at\n    // which point we've defined the vast majority of outcomes\n    do {\n        // a [probability mass function](https://en.wikipedia.org/wiki/Probability_mass_function)\n        cells[x] = (Math.exp(-lambda) * Math.pow(lambda, x)) / factorialX;\n        cumulativeProbability += cells[x];\n        x++;\n        factorialX *= x;\n        // when the cumulativeProbability is nearly 1, we've calculated\n        // the useful range of this distribution\n    } while (cumulativeProbability < 1 - epsilon);\n\n    return cells;\n}"
+  },
+  {
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.probit",
+    "parameterCount": 1,
+    "functionSignature": "function probit(p)",
+    "functionBody": "function probit(p) {\n    if (p === 0) {\n        p = epsilon;\n    } else if (p >= 1) {\n        p = 1 - epsilon;\n    }\n    return Math.sqrt(2) * inverseErrorFunction(2 * p - 1);\n}"
+  },
+  {
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.product",
+    "parameterCount": 1,
+    "functionSignature": "function product(x)",
+    "functionBody": "function product(x) {\n    var value = 1;\n    for (var i = 0; i < x.length; i++) {\n        value *= x[i];\n    }\n    return value;\n}"
+  },
+  {
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.quantile",
+    "parameterCount": 2,
+    "functionSignature": "function quantile(x, p)",
+    "functionBody": "function quantile(x, p) {\n    var copy = x.slice();\n\n    if (Array.isArray(p)) {\n        // rearrange elements so that each element corresponding to a requested\n        // quantile is on a place it would be if the array was fully sorted\n        multiQuantileSelect(copy, p);\n        // Initialize the result array\n        var results = [];\n        // For each requested quantile\n        for (var i = 0; i < p.length; i++) {\n            results[i] = quantileSorted(copy, p[i]);\n        }\n        return results;\n    } else {\n        var idx = quantileIndex(copy.length, p);\n        quantileSelect(copy, idx, 0, copy.length - 1);\n        return quantileSorted(copy, p);\n    }\n}"
+  },
+  {
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.quantileRank",
+    "parameterCount": 2,
+    "functionSignature": "function quantileRank(x, value)",
+    "functionBody": "function quantileRank(x, value) {\n    // Cloning and sorting the array\n    var sortedCopy = numericSort(x);\n\n    return quantileRankSorted(sortedCopy, value);\n}"
+  },
+  {
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.quantileRankSorted",
+    "parameterCount": 2,
+    "functionSignature": "function quantileRankSorted(x, value)",
+    "functionBody": "function quantileRankSorted(x, value) {\n    // Value is lesser than any value in the array\n    if (value < x[0]) {\n        return 0;\n    }\n\n    // Value is greater than any value in the array\n    if (value > x[x.length - 1]) {\n        return 1;\n    }\n\n    var l = lowerBound(x, value);\n\n    // Value is not in the array\n    if (x[l] !== value) {\n        return l / x.length;\n    }\n\n    l++;\n\n    var u = upperBound(x, value);\n\n    // The value exists only once in the array\n    if (u === l) {\n        return l / x.length;\n    }\n\n    // Here, we are basically computing the mean of the range of indices\n    // containing our searched value. But, instead, of initializing an\n    // array and looping over it, there is a dedicated math formula that\n    // we apply below to get the result.\n    var r = u - l + 1;\n    var sum = (r * (u + l)) / 2;\n    var mean = sum / r;\n\n    return mean / x.length;\n}"
+  },
+  {
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.quantileSorted",
+    "parameterCount": 2,
+    "functionSignature": "function quantileSorted(x, p)",
+    "functionBody": "function quantileSorted(x, p) {\n    // Use (n-1) * p for index, matching numpy's linear method (type=7)\n    var idx = (x.length - 1) * p;\n    if (x.length === 0) {\n        throw new Error(\"quantile requires at least one data point.\");\n    } else if (p < 0 || p > 1) {\n        throw new Error(\"quantiles must be between 0 and 1\");\n    } else if (p === 1) {\n        // If p is 1, directly return the last element\n        return x[x.length - 1];\n    } else if (p === 0) {\n        // If p is 0, directly return the first element\n        return x[0];\n    } else if (idx % 1 !== 0) {\n        // If idx is not integer, interpolate linearly between floor and ceil\n        var lower = Math.floor(idx);\n        var upper = Math.ceil(idx);\n        var fraction = idx - lower;\n        return x[lower] + fraction * (x[upper] - x[lower]);\n    } else {\n        // If idx is integer, type=7 returns the value at that index\n        return x[idx];\n    }\n}"
+  },
+  {
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.quickselect",
+    "parameterCount": 4,
+    "functionSignature": "function quickselect(arr, k, left, right)",
+    "functionBody": "function quickselect(arr, k, left, right) {\n    left = left || 0;\n    right = right || arr.length - 1;\n\n    while (right > left) {\n        // 600 and 0.5 are arbitrary constants chosen in the original paper to minimize execution time\n        if (right - left > 600) {\n            var n = right - left + 1;\n            var m = k - left + 1;\n            var z = Math.log(n);\n            var s = 0.5 * Math.exp((2 * z) / 3);\n            var sd = 0.5 * Math.sqrt((z * s * (n - s)) / n);\n            if (m - n / 2 < 0) { sd *= -1; }\n            var newLeft = Math.max(left, Math.floor(k - (m * s) / n + sd));\n            var newRight = Math.min(\n                right,\n                Math.floor(k + ((n - m) * s) / n + sd)\n            );\n            quickselect(arr, k, newLeft, newRight);\n        }\n\n        var t = arr[k];\n        var i = left;\n        var j = right;\n\n        swap(arr, left, k);\n        if (arr[right] > t) { swap(arr, left, right); }\n\n        while (i < j) {\n            swap(arr, i, j);\n            i++;\n            j--;\n            while (arr[i] < t) { i++; }\n            while (arr[j] > t) { j--; }\n        }\n\n        if (arr[left] === t) { swap(arr, left, j); }\n        else {\n            j++;\n            swap(arr, j, right);\n        }\n\n        if (j <= k) { left = j + 1; }\n        if (k <= j) { right = j - 1; }\n    }\n}"
+  },
+  {
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.rSquared",
+    "parameterCount": 2,
+    "functionSignature": "function rSquared(x, func)",
+    "functionBody": "function rSquared(x, func) {\n    if (x.length < 2) {\n        return 1;\n    }\n\n    // Compute the average y value for the actual\n    // data set in order to compute the\n    // _total sum of squares_\n    var sum = 0;\n    for (var i = 0; i < x.length; i++) {\n        sum += x[i][1];\n    }\n    var average = sum / x.length;\n\n    // Compute the total sum of squares - the\n    // squared difference between each point\n    // and the average of all points.\n    var sumOfSquares = 0;\n    for (var j = 0; j < x.length; j++) {\n        sumOfSquares += Math.pow(average - x[j][1], 2);\n    }\n\n    // Finally estimate the error: the squared\n    // difference between the estimate and the actual data\n    // value at each point.\n    var err = 0;\n    for (var k = 0; k < x.length; k++) {\n        err += Math.pow(x[k][1] - func(x[k][0]), 2);\n    }\n\n    // As the error grows larger, its ratio to the\n    // sum of squares increases and the r squared\n    // value grows lower.\n    return 1 - err / sumOfSquares;\n}"
+  },
+  {
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.sample",
+    "parameterCount": 3,
+    "functionSignature": "function sample(x, n, randomSource)",
+    "functionBody": "function sample(x, n, randomSource) {\n    // shuffle the original array using a fisher-yates shuffle\n    var shuffled = shuffle(x, randomSource);\n\n    // and then return a subset of it - the first `n` elements.\n    return shuffled.slice(0, n);\n}"
+  },
+  {
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.sampleCorrelation",
+    "parameterCount": 2,
+    "functionSignature": "function sampleCorrelation(x, y)",
+    "functionBody": "function sampleCorrelation(x, y) {\n    var cov = sampleCovariance(x, y);\n    var xstd = sampleStandardDeviation(x);\n    var ystd = sampleStandardDeviation(y);\n\n    return cov / xstd / ystd;\n}"
+  },
+  {
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.sampleCovariance",
+    "parameterCount": 2,
+    "functionSignature": "function sampleCovariance(x, y)",
+    "functionBody": "function sampleCovariance(x, y) {\n    // The two datasets must have the same length which must be more than 1\n    if (x.length !== y.length) {\n        throw new Error(\"sampleCovariance requires samples with equal lengths\");\n    }\n\n    if (x.length < 2) {\n        throw new Error(\n            \"sampleCovariance requires at least two data points in each sample\"\n        );\n    }\n\n    // determine the mean of each dataset so that we can judge each\n    // value of the dataset fairly as the difference from the mean. this\n    // way, if one dataset is [1, 2, 3] and [2, 3, 4], their covariance\n    // does not suffer because of the difference in absolute values\n    var xmean = mean(x);\n    var ymean = mean(y);\n    var sum = 0;\n\n    // for each pair of values, the covariance increases when their\n    // difference from the mean is associated - if both are well above\n    // or if both are well below\n    // the mean, the covariance increases significantly.\n    for (var i = 0; i < x.length; i++) {\n        sum += (x[i] - xmean) * (y[i] - ymean);\n    }\n\n    // this is Bessels' Correction: an adjustment made to sample statistics\n    // that allows for the reduced degree of freedom entailed in calculating\n    // values from samples rather than complete populations.\n    var besselsCorrection = x.length - 1;\n\n    // the covariance is weighted by the length of the datasets.\n    return sum / besselsCorrection;\n}"
+  },
+  {
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.sampleRankCorrelation",
+    "parameterCount": 2,
+    "functionSignature": "function sampleRankCorrelation(x, y)",
+    "functionBody": "function sampleRankCorrelation(x, y) {\n    var xIndexes = x\n        .map(function (value, index) { return [value, index]; })\n        .sort(function (a, b) { return a[0] - b[0]; })\n        .map(function (pair) { return pair[1]; });\n    var yIndexes = y\n        .map(function (value, index) { return [value, index]; })\n        .sort(function (a, b) { return a[0] - b[0]; })\n        .map(function (pair) { return pair[1]; });\n\n    // At this step, we have an array of indexes\n    // that map from sorted numbers to their original indexes. We reverse\n    // that so that it is an array of the sorted destination index.\n    var xRanks = Array(xIndexes.length);\n    var yRanks = Array(xIndexes.length);\n    for (var i = 0; i < xIndexes.length; i++) {\n        xRanks[xIndexes[i]] = i;\n        yRanks[yIndexes[i]] = i;\n    }\n\n    return sampleCorrelation(xRanks, yRanks);\n}"
+  },
+  {
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.sampleSkewness",
+    "parameterCount": 1,
+    "functionSignature": "function sampleSkewness(x)",
+    "functionBody": "function sampleSkewness(x) {\n    if (x.length < 3) {\n        throw new Error(\"sampleSkewness requires at least three data points\");\n    }\n\n    var meanValue = mean(x);\n    var tempValue;\n    var sumSquaredDeviations = 0;\n    var sumCubedDeviations = 0;\n\n    for (var i = 0; i < x.length; i++) {\n        tempValue = x[i] - meanValue;\n        sumSquaredDeviations += tempValue * tempValue;\n        sumCubedDeviations += tempValue * tempValue * tempValue;\n    }\n\n    // this is Bessels' Correction: an adjustment made to sample statistics\n    // that allows for the reduced degree of freedom entailed in calculating\n    // values from samples rather than complete populations.\n    var besselsCorrection = x.length - 1;\n\n    // Find the mean value of that list\n    var theSampleStandardDeviation = Math.sqrt(\n        sumSquaredDeviations / besselsCorrection\n    );\n\n    var n = x.length;\n    var cubedS = Math.pow(theSampleStandardDeviation, 3);\n\n    return (n * sumCubedDeviations) / ((n - 1) * (n - 2) * cubedS);\n}"
+  },
+  {
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.sampleStandardDeviation",
+    "parameterCount": 1,
+    "functionSignature": "function sampleStandardDeviation(x)",
+    "functionBody": "function sampleStandardDeviation(x) {\n    var sampleVarianceX = sampleVariance(x);\n    return Math.sqrt(sampleVarianceX);\n}"
+  },
+  {
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.sampleVariance",
+    "parameterCount": 1,
+    "functionSignature": "function sampleVariance(x)",
+    "functionBody": "function sampleVariance(x) {\n    if (x.length < 2) {\n        throw new Error(\"sampleVariance requires at least two data points\");\n    }\n\n    var sumSquaredDeviationsValue = sumNthPowerDeviations(x, 2);\n\n    // this is Bessels' Correction: an adjustment made to sample statistics\n    // that allows for the reduced degree of freedom entailed in calculating\n    // values from samples rather than complete populations.\n    var besselsCorrection = x.length - 1;\n\n    // Find the mean value of that list\n    return sumSquaredDeviationsValue / besselsCorrection;\n}"
+  },
+  {
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.sampleWithReplacement",
+    "parameterCount": 3,
+    "functionSignature": "function sampleWithReplacement(x, n, randomSource)",
+    "functionBody": "function sampleWithReplacement(x, n, randomSource) {\n    if (x.length === 0) {\n        return [];\n    }\n\n    // a custom random number source can be provided if you want to use\n    // a fixed seed or another random number generator, like\n    // [random-js](https://www.npmjs.org/package/random-js)\n    randomSource = randomSource || Math.random;\n\n    var length = x.length;\n    var sample = [];\n\n    for (var i = 0; i < n; i++) {\n        var index = Math.floor(randomSource() * length);\n\n        sample.push(x[index]);\n    }\n\n    return sample;\n}"
+  },
+  {
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.shuffle",
+    "parameterCount": 2,
+    "functionSignature": "function shuffle(x, randomSource)",
+    "functionBody": "function shuffle(x, randomSource) {\n    // slice the original array so that it is not modified\n    var sample = x.slice();\n\n    // and then shuffle that shallow-copied array, in place\n    return shuffleInPlace(sample, randomSource);\n}"
+  },
+  {
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.shuffleInPlace",
+    "parameterCount": 2,
+    "functionSignature": "function shuffleInPlace(x, randomSource)",
+    "functionBody": "function shuffleInPlace(x, randomSource) {\n    // a custom random number source can be provided if you want to use\n    // a fixed seed or another random number generator, like\n    // [random-js](https://www.npmjs.org/package/random-js)\n    randomSource = randomSource || Math.random;\n\n    // store the current length of the x to determine\n    // when no elements remain to shuffle.\n    var length = x.length;\n\n    // temporary is used to hold an item when it is being\n    // swapped between indices.\n    var temporary;\n\n    // The index to swap at each stage.\n    var index;\n\n    // While there are still items to shuffle\n    while (length > 0) {\n        // choose a random index within the subset of the array\n        // that is not yet shuffled\n        index = Math.floor(randomSource() * length--);\n\n        // store the value that we'll move temporarily\n        temporary = x[length];\n\n        // swap the value at `x[length]` with `x[index]`\n        x[length] = x[index];\n        x[index] = temporary;\n    }\n\n    return x;\n}"
+  },
+  {
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.sign",
+    "parameterCount": 1,
+    "functionSignature": "function sign(x)",
+    "functionBody": "function sign(x) {\n    if (typeof x === \"number\") {\n        if (x < 0) {\n            return -1;\n        } else if (x === 0) {\n            return 0;\n        } else {\n            return 1;\n        }\n    } else {\n        throw new TypeError(\"not a number\");\n    }\n}"
+  },
+  {
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.silhouette",
+    "parameterCount": 2,
+    "functionSignature": "function silhouette(points, labels)",
+    "functionBody": "function silhouette(points, labels) {\n    if (points.length !== labels.length) {\n        throw new Error(\"must have exactly as many labels as points\");\n    }\n    var groupings = createGroups(labels);\n    var distances = calculateAllDistances(points);\n    var result = [];\n    for (var i = 0; i < points.length; i++) {\n        var s = 0;\n        if (groupings[labels[i]].length > 1) {\n            var a = meanDistanceFromPointToGroup(\n                i,\n                groupings[labels[i]],\n                distances\n            );\n            var b = meanDistanceToNearestGroup(\n                i,\n                labels,\n                groupings,\n                distances\n            );\n            s = (b - a) / Math.max(a, b);\n        }\n        result.push(s);\n    }\n    return result;\n}"
+  },
+  {
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.silhouetteMetric",
+    "parameterCount": 2,
+    "functionSignature": "function silhouetteMetric(points, labels)",
+    "functionBody": "function silhouetteMetric(points, labels) {\n    var values = silhouette(points, labels);\n    return max(values);\n}"
+  },
+  {
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.standardDeviation",
+    "parameterCount": 1,
+    "functionSignature": "function standardDeviation(x)",
+    "functionBody": "function standardDeviation(x) {\n    if (x.length === 1) {\n        return 0;\n    }\n    var v = variance(x);\n    return Math.sqrt(v);\n}"
+  },
+  {
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.sumNthPowerDeviations",
+    "parameterCount": 2,
+    "functionSignature": "function sumNthPowerDeviations(x, n)",
+    "functionBody": "function sumNthPowerDeviations(x, n) {\n    var meanValue = mean(x);\n    var sum = 0;\n    var tempValue;\n    var i;\n\n    // This is an optimization: when n is 2 (we're computing a number squared),\n    // multiplying the number by itself is significantly faster than using\n    // the Math.pow method.\n    if (n === 2) {\n        for (i = 0; i < x.length; i++) {\n            tempValue = x[i] - meanValue;\n            sum += tempValue * tempValue;\n        }\n    } else {\n        for (i = 0; i < x.length; i++) {\n            sum += Math.pow(x[i] - meanValue, n);\n        }\n    }\n\n    return sum;\n}"
+  },
+  {
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.sumSimple",
+    "parameterCount": 1,
+    "functionSignature": "function sumSimple(x)",
+    "functionBody": "function sumSimple(x) {\n    var value = 0;\n    for (var i = 0; i < x.length; i++) {\n        if (typeof x[i] !== \"number\") {\n            return Number.NaN;\n        }\n        value += x[i];\n    }\n    return value;\n}"
+  },
+  {
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.tTestTwoSample",
+    "parameterCount": 3,
+    "functionSignature": "function tTestTwoSample(sampleX, sampleY, difference)",
+    "functionBody": "function tTestTwoSample(sampleX, sampleY, difference) {\n    var n = sampleX.length;\n    var m = sampleY.length;\n\n    // If either sample doesn't actually have any values, we can't\n    // compute this at all, so we return `null`.\n    if (!n || !m) {\n        return null;\n    }\n\n    // default difference (mu) is zero\n    if (!difference) {\n        difference = 0;\n    }\n\n    var meanX = mean(sampleX);\n    var meanY = mean(sampleY);\n    var sampleVarianceX = sampleVariance(sampleX);\n    var sampleVarianceY = sampleVariance(sampleY);\n\n    if (\n        typeof meanX === \"number\" &&\n        typeof meanY === \"number\" &&\n        typeof sampleVarianceX === \"number\" &&\n        typeof sampleVarianceY === \"number\"\n    ) {\n        var weightedVariance =\n            ((n - 1) * sampleVarianceX + (m - 1) * sampleVarianceY) /\n            (n + m - 2);\n\n        return (\n            (meanX - meanY - difference) /\n            Math.sqrt(weightedVariance * (1 / n + 1 / m))\n        );\n    }\n}"
+  },
+  {
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.uniqueCountSorted",
+    "parameterCount": 1,
+    "functionSignature": "function uniqueCountSorted(x)",
+    "functionBody": "function uniqueCountSorted(x) {\n    var uniqueValueCount = 0;\n    var lastSeenValue;\n    for (var i = 0; i < x.length; i++) {\n        if (i === 0 || x[i] !== lastSeenValue) {\n            lastSeenValue = x[i];\n            uniqueValueCount++;\n        }\n    }\n    return uniqueValueCount;\n}"
+  },
+  {
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.variance",
+    "parameterCount": 1,
+    "functionSignature": "function variance(x)",
+    "functionBody": "function variance(x) {\n    if (x.length === 0) {\n        throw new Error(\"variance requires at least one data point\");\n    }\n\n    // Find the mean of squared deviations between the\n    // mean value and each value.\n    return sumNthPowerDeviations(x, 2) / x.length;\n}"
+  },
+  {
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.weightedQuantile",
+    "parameterCount": 3,
+    "functionSignature": "function weightedQuantile(x, weights, p)",
+    "functionBody": "function weightedQuantile(x, weights, p) {\n    var totalWeight = validateWeightedInput(x, weights, \"weightedQuantile\");\n    var sorted = [];\n\n    for (var i = 0; i < x.length; i++) {\n        sorted.push([x[i], weights[i]]);\n    }\n\n    sorted.sort(compareValue);\n\n    if (Array.isArray(p)) {\n        var results = [];\n\n        for (var i$1 = 0; i$1 < p.length; i$1++) {\n            results[i$1] = weightedQuantileSorted(sorted, totalWeight, p[i$1]);\n        }\n\n        return results;\n    }\n\n    return weightedQuantileSorted(sorted, totalWeight, p);\n}"
+  },
+  {
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.weightedStandardDeviation",
+    "parameterCount": 2,
+    "functionSignature": "function weightedStandardDeviation(x, weights)",
+    "functionBody": "function weightedStandardDeviation(x, weights) {\n    return Math.sqrt(weightedVariance(x, weights));\n}"
+  },
+  {
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.weightedVariance",
+    "parameterCount": 2,
+    "functionSignature": "function weightedVariance(x, weights)",
+    "functionBody": "function weightedVariance(x, weights) {\n    var totalWeight = validateWeightedInput(x, weights, \"weightedVariance\");\n    var mean = weightedMean(x, weights);\n    var weightedSumSquaredDeviations = 0;\n\n    for (var i = 0; i < x.length; i++) {\n        var deviation = x[i] - mean;\n        weightedSumSquaredDeviations += weights[i] * deviation * deviation;\n    }\n\n    return weightedSumSquaredDeviations / totalWeight;\n}"
+  },
+  {
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.wilcoxonRankSum",
+    "parameterCount": 2,
+    "functionSignature": "function wilcoxonRankSum(sampleX, sampleY)",
+    "functionBody": "function wilcoxonRankSum(sampleX, sampleY) {\n    if (!sampleX.length || !sampleY.length) {\n        throw new Error(\"Neither sample can be empty\");\n    }\n\n    var pooledSamples = sampleX\n        .map(function (x) { return ({ label: \"x\", value: x }); })\n        .concat(sampleY.map(function (y) { return ({ label: \"y\", value: y }); }))\n        .sort(function (a, b) { return a.value - b.value; });\n\n    for (var rank = 0; rank < pooledSamples.length; rank++) {\n        pooledSamples[rank].rank = rank;\n    }\n\n    var tiedRanks = [pooledSamples[0].rank];\n    for (var i = 1; i < pooledSamples.length; i++) {\n        if (pooledSamples[i].value === pooledSamples[i - 1].value) {\n            tiedRanks.push(pooledSamples[i].rank);\n            if (i === pooledSamples.length - 1) {\n                replaceRanksInPlace(pooledSamples, tiedRanks);\n            }\n        } else if (tiedRanks.length > 1) {\n            replaceRanksInPlace(pooledSamples, tiedRanks);\n        } else {\n            tiedRanks = [pooledSamples[i].rank];\n        }\n    }\n\n    function replaceRanksInPlace(pooledSamples, tiedRanks) {\n        var average = (tiedRanks[0] + tiedRanks[tiedRanks.length - 1]) / 2;\n        for (var i = 0; i < tiedRanks.length; i++) {\n            pooledSamples[tiedRanks[i]].rank = average;\n        }\n    }\n\n    var rankSum = 0;\n\n    for (var i$1 = 0; i$1 < pooledSamples.length; i$1++) {\n        var sample = pooledSamples[i$1];\n        if (sample.label === \"x\") {\n            rankSum += sample.rank + 1;\n        }\n    }\n\n    return rankSum;\n}"
+  },
+  {
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.zScore",
+    "parameterCount": 3,
+    "functionSignature": "function zScore(x, mean, standardDeviation)",
+    "functionBody": "function zScore(x, mean, standardDeviation) {\n    return (x - mean) / standardDeviation;\n}"
+  }
+]
