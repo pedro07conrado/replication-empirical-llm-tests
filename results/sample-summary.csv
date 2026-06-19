@@ -1,0 +1,7 @@
+packageName,totalFunctions,sampledFunctions,samplePercentage
+complex.js,53,35,66.04
+countries-and-timezones,14,9,64.29
+geo-point,19,12,63.16
+plural,8,5,62.50
+quill-delta,39,28,71.79
+simple-statistics,103,68,66.02
