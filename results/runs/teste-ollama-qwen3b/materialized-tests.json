@@ -1,0 +1,29 @@
+[
+  {
+    "promptId": "countries-and-timezones-countries-and-timezones-default-getalltimezones-signature-only",
+    "packageName": "countries-and-timezones",
+    "functionPath": "countries-and-timezones.default.getAllTimezones",
+    "promptVariant": "signature-only",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/countries-and-timezones/countries-and-timezones-countries-and-timezones-default-getalltimezones-signature-only.test.js"
+  },
+  {
+    "promptId": "countries-and-timezones-countries-and-timezones-default-getcountriesfortimezone-signature-only",
+    "packageName": "countries-and-timezones",
+    "functionPath": "countries-and-timezones.default.getCountriesForTimezone",
+    "promptVariant": "signature-only",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/countries-and-timezones/countries-and-timezones-countries-and-timezones-default-getcountriesfortimezone-signature-only.test.js"
+  },
+  {
+    "promptId": "countries-and-timezones-countries-and-timezones-default-getcountry-signature-only",
+    "packageName": "countries-and-timezones",
+    "functionPath": "countries-and-timezones.default.getCountry",
+    "promptVariant": "signature-only",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/countries-and-timezones/countries-and-timezones-countries-and-timezones-default-getcountry-signature-only.test.js"
+  }
+]

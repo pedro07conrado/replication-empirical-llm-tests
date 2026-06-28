@@ -19,7 +19,7 @@ export interface SampleSummaryRecord {
 
 export type PromptVariant = "signature-only" | "signature-and-body" | "full";
 
-export type LLMProvider = "mock" | "openai" | "gemini";
+export type LLMProvider = "mock" | "openai" | "gemini" | "ollama";
 
 export interface GeneratedPrompt {
   promptId: string;
@@ -85,6 +85,59 @@ export interface LLMGeneration {
   estimatedCost: number;
   equivalentPaidCost?: number;
   latencyMs: number;
+  finishReason?: string;
   rawResponse?: unknown;
   createdAt: string;
+}
+
+export interface MaterializedTest {
+  promptId: string;
+  packageName: string;
+  functionPath: string;
+  promptVariant: PromptVariant;
+  provider: LLMProvider;
+  model: string;
+  testFilePath: string;
+  finishReason?: string;
+}
+
+export type TestFailureCategory =
+  | "syntax-error"
+  | "import-error"
+  | "type-error"
+  | "assertion-error"
+  | "timeout"
+  | "filesystem-error"
+  | "incomplete-generation"
+  | "unknown-error";
+
+export interface TestExecutionResult {
+  promptId: string;
+  packageName: string;
+  functionPath: string;
+  promptVariant: PromptVariant;
+  provider: LLMProvider;
+  model: string;
+  testFilePath: string;
+  passed: boolean;
+  exitCode: number | null;
+  stdout: string;
+  stderr: string;
+  errorMessage?: string;
+  failureCategory?: TestFailureCategory;
+  durationMs: number;
+}
+
+export interface CoverageResult {
+  packageName: string;
+  provider: string;
+  model: string;
+  promptVariant: string;
+  totalTests: number;
+  passingTestsUsed: number;
+  statementCoverage: number | null;
+  branchCoverage: number | null;
+  functionCoverage: number | null;
+  lineCoverage: number | null;
+  coverageReportPath: string;
 }

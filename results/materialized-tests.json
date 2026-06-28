@@ -1,0 +1,1415 @@
+[
+  {
+    "promptId": "complex-js-complex-js-complex-full",
+    "packageName": "complex.js",
+    "functionPath": "complex.js.Complex",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/complex.js/complex-js-complex-js-complex-full.test.js"
+  },
+  {
+    "promptId": "complex-js-complex-js-complex-prototype-abs-full",
+    "packageName": "complex.js",
+    "functionPath": "complex.js.Complex.prototype.abs",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/complex.js/complex-js-complex-js-complex-prototype-abs-full.test.js"
+  },
+  {
+    "promptId": "complex-js-complex-js-complex-prototype-acos-full",
+    "packageName": "complex.js",
+    "functionPath": "complex.js.Complex.prototype.acos",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/complex.js/complex-js-complex-js-complex-prototype-acos-full.test.js"
+  },
+  {
+    "promptId": "complex-js-complex-js-complex-prototype-acosh-full",
+    "packageName": "complex.js",
+    "functionPath": "complex.js.Complex.prototype.acosh",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/complex.js/complex-js-complex-js-complex-prototype-acosh-full.test.js"
+  },
+  {
+    "promptId": "complex-js-complex-js-complex-prototype-acot-full",
+    "packageName": "complex.js",
+    "functionPath": "complex.js.Complex.prototype.acot",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/complex.js/complex-js-complex-js-complex-prototype-acot-full.test.js"
+  },
+  {
+    "promptId": "complex-js-complex-js-complex-prototype-acoth-full",
+    "packageName": "complex.js",
+    "functionPath": "complex.js.Complex.prototype.acoth",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/complex.js/complex-js-complex-js-complex-prototype-acoth-full.test.js"
+  },
+  {
+    "promptId": "complex-js-complex-js-complex-prototype-acsc-full",
+    "packageName": "complex.js",
+    "functionPath": "complex.js.Complex.prototype.acsc",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/complex.js/complex-js-complex-js-complex-prototype-acsc-full.test.js"
+  },
+  {
+    "promptId": "complex-js-complex-js-complex-prototype-arg-full",
+    "packageName": "complex.js",
+    "functionPath": "complex.js.Complex.prototype.arg",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/complex.js/complex-js-complex-js-complex-prototype-arg-full.test.js"
+  },
+  {
+    "promptId": "complex-js-complex-js-complex-prototype-asech-full",
+    "packageName": "complex.js",
+    "functionPath": "complex.js.Complex.prototype.asech",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/complex.js/complex-js-complex-js-complex-prototype-asech-full.test.js"
+  },
+  {
+    "promptId": "complex-js-complex-js-complex-prototype-asinh-full",
+    "packageName": "complex.js",
+    "functionPath": "complex.js.Complex.prototype.asinh",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/complex.js/complex-js-complex-js-complex-prototype-asinh-full.test.js"
+  },
+  {
+    "promptId": "complex-js-complex-js-complex-prototype-atan-full",
+    "packageName": "complex.js",
+    "functionPath": "complex.js.Complex.prototype.atan",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/complex.js/complex-js-complex-js-complex-prototype-atan-full.test.js"
+  },
+  {
+    "promptId": "complex-js-complex-js-complex-prototype-atanh-full",
+    "packageName": "complex.js",
+    "functionPath": "complex.js.Complex.prototype.atanh",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/complex.js/complex-js-complex-js-complex-prototype-atanh-full.test.js"
+  },
+  {
+    "promptId": "complex-js-complex-js-complex-prototype-ceil-full",
+    "packageName": "complex.js",
+    "functionPath": "complex.js.Complex.prototype.ceil",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/complex.js/complex-js-complex-js-complex-prototype-ceil-full.test.js"
+  },
+  {
+    "promptId": "complex-js-complex-js-complex-prototype-clone-full",
+    "packageName": "complex.js",
+    "functionPath": "complex.js.Complex.prototype.clone",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/complex.js/complex-js-complex-js-complex-prototype-clone-full.test.js"
+  },
+  {
+    "promptId": "complex-js-complex-js-complex-prototype-conjugate-full",
+    "packageName": "complex.js",
+    "functionPath": "complex.js.Complex.prototype.conjugate",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/complex.js/complex-js-complex-js-complex-prototype-conjugate-full.test.js"
+  },
+  {
+    "promptId": "complex-js-complex-js-complex-prototype-coth-full",
+    "packageName": "complex.js",
+    "functionPath": "complex.js.Complex.prototype.coth",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/complex.js/complex-js-complex-js-complex-prototype-coth-full.test.js"
+  },
+  {
+    "promptId": "complex-js-complex-js-complex-prototype-csch-full",
+    "packageName": "complex.js",
+    "functionPath": "complex.js.Complex.prototype.csch",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/complex.js/complex-js-complex-js-complex-prototype-csch-full.test.js"
+  },
+  {
+    "promptId": "complex-js-complex-js-complex-prototype-equals-full",
+    "packageName": "complex.js",
+    "functionPath": "complex.js.Complex.prototype.equals",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/complex.js/complex-js-complex-js-complex-prototype-equals-full.test.js"
+  },
+  {
+    "promptId": "complex-js-complex-js-complex-prototype-exp-full",
+    "packageName": "complex.js",
+    "functionPath": "complex.js.Complex.prototype.exp",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/complex.js/complex-js-complex-js-complex-prototype-exp-full.test.js"
+  },
+  {
+    "promptId": "complex-js-complex-js-complex-prototype-floor-full",
+    "packageName": "complex.js",
+    "functionPath": "complex.js.Complex.prototype.floor",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/complex.js/complex-js-complex-js-complex-prototype-floor-full.test.js"
+  },
+  {
+    "promptId": "complex-js-complex-js-complex-prototype-isinfinite-full",
+    "packageName": "complex.js",
+    "functionPath": "complex.js.Complex.prototype.isInfinite",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/complex.js/complex-js-complex-js-complex-prototype-isinfinite-full.test.js"
+  },
+  {
+    "promptId": "complex-js-complex-js-complex-prototype-iszero-full",
+    "packageName": "complex.js",
+    "functionPath": "complex.js.Complex.prototype.isZero",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/complex.js/complex-js-complex-js-complex-prototype-iszero-full.test.js"
+  },
+  {
+    "promptId": "complex-js-complex-js-complex-prototype-log-full",
+    "packageName": "complex.js",
+    "functionPath": "complex.js.Complex.prototype.log",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/complex.js/complex-js-complex-js-complex-prototype-log-full.test.js"
+  },
+  {
+    "promptId": "complex-js-complex-js-complex-prototype-mul-full",
+    "packageName": "complex.js",
+    "functionPath": "complex.js.Complex.prototype.mul",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/complex.js/complex-js-complex-js-complex-prototype-mul-full.test.js"
+  },
+  {
+    "promptId": "complex-js-complex-js-complex-prototype-round-full",
+    "packageName": "complex.js",
+    "functionPath": "complex.js.Complex.prototype.round",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/complex.js/complex-js-complex-js-complex-prototype-round-full.test.js"
+  },
+  {
+    "promptId": "complex-js-complex-js-complex-prototype-sec-full",
+    "packageName": "complex.js",
+    "functionPath": "complex.js.Complex.prototype.sec",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/complex.js/complex-js-complex-js-complex-prototype-sec-full.test.js"
+  },
+  {
+    "promptId": "complex-js-complex-js-complex-prototype-sech-full",
+    "packageName": "complex.js",
+    "functionPath": "complex.js.Complex.prototype.sech",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/complex.js/complex-js-complex-js-complex-prototype-sech-full.test.js"
+  },
+  {
+    "promptId": "complex-js-complex-js-complex-prototype-sign-full",
+    "packageName": "complex.js",
+    "functionPath": "complex.js.Complex.prototype.sign",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/complex.js/complex-js-complex-js-complex-prototype-sign-full.test.js"
+  },
+  {
+    "promptId": "complex-js-complex-js-complex-prototype-sinh-full",
+    "packageName": "complex.js",
+    "functionPath": "complex.js.Complex.prototype.sinh",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/complex.js/complex-js-complex-js-complex-prototype-sinh-full.test.js"
+  },
+  {
+    "promptId": "complex-js-complex-js-complex-prototype-sqrt-full",
+    "packageName": "complex.js",
+    "functionPath": "complex.js.Complex.prototype.sqrt",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/complex.js/complex-js-complex-js-complex-prototype-sqrt-full.test.js"
+  },
+  {
+    "promptId": "complex-js-complex-js-complex-prototype-tanh-full",
+    "packageName": "complex.js",
+    "functionPath": "complex.js.Complex.prototype.tanh",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/complex.js/complex-js-complex-js-complex-prototype-tanh-full.test.js"
+  },
+  {
+    "promptId": "complex-js-complex-js-complex-prototype-tostring-full",
+    "packageName": "complex.js",
+    "functionPath": "complex.js.Complex.prototype.toString",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/complex.js/complex-js-complex-js-complex-prototype-tostring-full.test.js"
+  },
+  {
+    "promptId": "complex-js-complex-js-complex-prototype-tovector-full",
+    "packageName": "complex.js",
+    "functionPath": "complex.js.Complex.prototype.toVector",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/complex.js/complex-js-complex-js-complex-prototype-tovector-full.test.js"
+  },
+  {
+    "promptId": "complex-js-complex-js-complex-prototype-valueof-full",
+    "packageName": "complex.js",
+    "functionPath": "complex.js.Complex.prototype.valueOf",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/complex.js/complex-js-complex-js-complex-prototype-valueof-full.test.js"
+  },
+  {
+    "promptId": "complex-js-complex-js-default-full",
+    "packageName": "complex.js",
+    "functionPath": "complex.js.default",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/complex.js/complex-js-complex-js-default-full.test.js"
+  },
+  {
+    "promptId": "countries-and-timezones-countries-and-timezones-default-getalltimezones-full",
+    "packageName": "countries-and-timezones",
+    "functionPath": "countries-and-timezones.default.getAllTimezones",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/countries-and-timezones/countries-and-timezones-countries-and-timezones-default-getalltimezones-full.test.js"
+  },
+  {
+    "promptId": "countries-and-timezones-countries-and-timezones-default-getcountriesfortimezone-full",
+    "packageName": "countries-and-timezones",
+    "functionPath": "countries-and-timezones.default.getCountriesForTimezone",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/countries-and-timezones/countries-and-timezones-countries-and-timezones-default-getcountriesfortimezone-full.test.js"
+  },
+  {
+    "promptId": "countries-and-timezones-countries-and-timezones-default-getcountry-full",
+    "packageName": "countries-and-timezones",
+    "functionPath": "countries-and-timezones.default.getCountry",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/countries-and-timezones/countries-and-timezones-countries-and-timezones-default-getcountry-full.test.js"
+  },
+  {
+    "promptId": "countries-and-timezones-countries-and-timezones-default-getcountryfortimezone-full",
+    "packageName": "countries-and-timezones",
+    "functionPath": "countries-and-timezones.default.getCountryForTimezone",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/countries-and-timezones/countries-and-timezones-countries-and-timezones-default-getcountryfortimezone-full.test.js"
+  },
+  {
+    "promptId": "countries-and-timezones-countries-and-timezones-default-gettimezone-full",
+    "packageName": "countries-and-timezones",
+    "functionPath": "countries-and-timezones.default.getTimezone",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/countries-and-timezones/countries-and-timezones-countries-and-timezones-default-gettimezone-full.test.js"
+  },
+  {
+    "promptId": "countries-and-timezones-countries-and-timezones-default-gettimezonesforcountry-full",
+    "packageName": "countries-and-timezones",
+    "functionPath": "countries-and-timezones.default.getTimezonesForCountry",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/countries-and-timezones/countries-and-timezones-countries-and-timezones-default-gettimezonesforcountry-full.test.js"
+  },
+  {
+    "promptId": "countries-and-timezones-countries-and-timezones-getallcountries-full",
+    "packageName": "countries-and-timezones",
+    "functionPath": "countries-and-timezones.getAllCountries",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/countries-and-timezones/countries-and-timezones-countries-and-timezones-getallcountries-full.test.js"
+  },
+  {
+    "promptId": "countries-and-timezones-countries-and-timezones-getalltimezones-full",
+    "packageName": "countries-and-timezones",
+    "functionPath": "countries-and-timezones.getAllTimezones",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/countries-and-timezones/countries-and-timezones-countries-and-timezones-getalltimezones-full.test.js"
+  },
+  {
+    "promptId": "countries-and-timezones-countries-and-timezones-getcountry-full",
+    "packageName": "countries-and-timezones",
+    "functionPath": "countries-and-timezones.getCountry",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/countries-and-timezones/countries-and-timezones-countries-and-timezones-getcountry-full.test.js"
+  },
+  {
+    "promptId": "geo-point-geo-point-geopoint-full",
+    "packageName": "geo-point",
+    "functionPath": "geo-point.GeoPoint",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/geo-point/geo-point-geo-point-geopoint-full.test.js"
+  },
+  {
+    "promptId": "geo-point-geo-point-geopoint-calculatedistance-full",
+    "packageName": "geo-point",
+    "functionPath": "geo-point.GeoPoint.calculateDistance",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/geo-point/geo-point-geo-point-geopoint-calculatedistance-full.test.js"
+  },
+  {
+    "promptId": "geo-point-geo-point-geopoint-fromlatlngarray-full",
+    "packageName": "geo-point",
+    "functionPath": "geo-point.GeoPoint.fromLatLngArray",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/geo-point/geo-point-geo-point-geopoint-fromlatlngarray-full.test.js"
+  },
+  {
+    "promptId": "geo-point-geo-point-geopoint-fromlnglatarray-full",
+    "packageName": "geo-point",
+    "functionPath": "geo-point.GeoPoint.fromLngLatArray",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/geo-point/geo-point-geo-point-geopoint-fromlnglatarray-full.test.js"
+  },
+  {
+    "promptId": "geo-point-geo-point-geopoint-fromobject-full",
+    "packageName": "geo-point",
+    "functionPath": "geo-point.GeoPoint.fromObject",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/geo-point/geo-point-geo-point-geopoint-fromobject-full.test.js"
+  },
+  {
+    "promptId": "geo-point-geo-point-geopoint-prototype-adjustprecision-full",
+    "packageName": "geo-point",
+    "functionPath": "geo-point.GeoPoint.prototype.adjustPrecision",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/geo-point/geo-point-geo-point-geopoint-prototype-adjustprecision-full.test.js"
+  },
+  {
+    "promptId": "geo-point-geo-point-geopoint-prototype-calculatedestination-full",
+    "packageName": "geo-point",
+    "functionPath": "geo-point.GeoPoint.prototype.calculateDestination",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/geo-point/geo-point-geo-point-geopoint-prototype-calculatedestination-full.test.js"
+  },
+  {
+    "promptId": "geo-point-geo-point-geopoint-prototype-calculatedistance-full",
+    "packageName": "geo-point",
+    "functionPath": "geo-point.GeoPoint.prototype.calculateDistance",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/geo-point/geo-point-geo-point-geopoint-prototype-calculatedistance-full.test.js"
+  },
+  {
+    "promptId": "geo-point-geo-point-geopoint-prototype-tolatlngarray-full",
+    "packageName": "geo-point",
+    "functionPath": "geo-point.GeoPoint.prototype.toLatLngArray",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/geo-point/geo-point-geo-point-geopoint-prototype-tolatlngarray-full.test.js"
+  },
+  {
+    "promptId": "geo-point-geo-point-geopoint-prototype-toobject-full",
+    "packageName": "geo-point",
+    "functionPath": "geo-point.GeoPoint.prototype.toObject",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/geo-point/geo-point-geo-point-geopoint-prototype-toobject-full.test.js"
+  },
+  {
+    "promptId": "geo-point-geo-point-geopoint-prototype-tostring-full",
+    "packageName": "geo-point",
+    "functionPath": "geo-point.GeoPoint.prototype.toString",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/geo-point/geo-point-geo-point-geopoint-prototype-tostring-full.test.js"
+  },
+  {
+    "promptId": "geo-point-geo-point-geopoint-totile-full",
+    "packageName": "geo-point",
+    "functionPath": "geo-point.GeoPoint.toTile",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/geo-point/geo-point-geo-point-geopoint-totile-full.test.js"
+  },
+  {
+    "promptId": "plural-plural-addrule-full",
+    "packageName": "plural",
+    "functionPath": "plural.addRule",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/plural/plural-plural-addrule-full.test.js"
+  },
+  {
+    "promptId": "plural-plural-default-full",
+    "packageName": "plural",
+    "functionPath": "plural.default",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/plural/plural-plural-default-full.test.js"
+  },
+  {
+    "promptId": "plural-plural-default-monkeypatch-full",
+    "packageName": "plural",
+    "functionPath": "plural.default.monkeyPatch",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/plural/plural-plural-default-monkeypatch-full.test.js"
+  },
+  {
+    "promptId": "plural-plural-default-unmonkeypatch-full",
+    "packageName": "plural",
+    "functionPath": "plural.default.unmonkeyPatch",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/plural/plural-plural-default-unmonkeypatch-full.test.js"
+  },
+  {
+    "promptId": "plural-plural-unmonkeypatch-full",
+    "packageName": "plural",
+    "functionPath": "plural.unmonkeyPatch",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/plural/plural-plural-unmonkeypatch-full.test.js"
+  },
+  {
+    "promptId": "quill-delta-quill-delta-attributemap-compose-full",
+    "packageName": "quill-delta",
+    "functionPath": "quill-delta.AttributeMap.compose",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/quill-delta/quill-delta-quill-delta-attributemap-compose-full.test.js"
+  },
+  {
+    "promptId": "quill-delta-quill-delta-attributemap-diff-full",
+    "packageName": "quill-delta",
+    "functionPath": "quill-delta.AttributeMap.diff",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/quill-delta/quill-delta-quill-delta-attributemap-diff-full.test.js"
+  },
+  {
+    "promptId": "quill-delta-quill-delta-default-full",
+    "packageName": "quill-delta",
+    "functionPath": "quill-delta.default",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/quill-delta/quill-delta-quill-delta-default-full.test.js"
+  },
+  {
+    "promptId": "quill-delta-quill-delta-default-default-full",
+    "packageName": "quill-delta",
+    "functionPath": "quill-delta.default.default",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/quill-delta/quill-delta-quill-delta-default-default-full.test.js"
+  },
+  {
+    "promptId": "quill-delta-quill-delta-default-gethandler-full",
+    "packageName": "quill-delta",
+    "functionPath": "quill-delta.default.getHandler",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/quill-delta/quill-delta-quill-delta-default-gethandler-full.test.js"
+  },
+  {
+    "promptId": "quill-delta-quill-delta-default-opiterator-full",
+    "packageName": "quill-delta",
+    "functionPath": "quill-delta.default.OpIterator",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/quill-delta/quill-delta-quill-delta-default-opiterator-full.test.js"
+  },
+  {
+    "promptId": "quill-delta-quill-delta-default-prototype-changelength-full",
+    "packageName": "quill-delta",
+    "functionPath": "quill-delta.default.prototype.changeLength",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/quill-delta/quill-delta-quill-delta-default-prototype-changelength-full.test.js"
+  },
+  {
+    "promptId": "quill-delta-quill-delta-default-prototype-chop-full",
+    "packageName": "quill-delta",
+    "functionPath": "quill-delta.default.prototype.chop",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/quill-delta/quill-delta-quill-delta-default-prototype-chop-full.test.js"
+  },
+  {
+    "promptId": "quill-delta-quill-delta-default-prototype-concat-full",
+    "packageName": "quill-delta",
+    "functionPath": "quill-delta.default.prototype.concat",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/quill-delta/quill-delta-quill-delta-default-prototype-concat-full.test.js"
+  },
+  {
+    "promptId": "quill-delta-quill-delta-default-prototype-delete-full",
+    "packageName": "quill-delta",
+    "functionPath": "quill-delta.default.prototype.delete",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/quill-delta/quill-delta-quill-delta-default-prototype-delete-full.test.js"
+  },
+  {
+    "promptId": "quill-delta-quill-delta-default-prototype-diff-full",
+    "packageName": "quill-delta",
+    "functionPath": "quill-delta.default.prototype.diff",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/quill-delta/quill-delta-quill-delta-default-prototype-diff-full.test.js"
+  },
+  {
+    "promptId": "quill-delta-quill-delta-default-prototype-filter-full",
+    "packageName": "quill-delta",
+    "functionPath": "quill-delta.default.prototype.filter",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/quill-delta/quill-delta-quill-delta-default-prototype-filter-full.test.js"
+  },
+  {
+    "promptId": "quill-delta-quill-delta-default-prototype-insert-full",
+    "packageName": "quill-delta",
+    "functionPath": "quill-delta.default.prototype.insert",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/quill-delta/quill-delta-quill-delta-default-prototype-insert-full.test.js"
+  },
+  {
+    "promptId": "quill-delta-quill-delta-default-prototype-invert-full",
+    "packageName": "quill-delta",
+    "functionPath": "quill-delta.default.prototype.invert",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/quill-delta/quill-delta-quill-delta-default-prototype-invert-full.test.js"
+  },
+  {
+    "promptId": "quill-delta-quill-delta-default-prototype-length-full",
+    "packageName": "quill-delta",
+    "functionPath": "quill-delta.default.prototype.length",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/quill-delta/quill-delta-quill-delta-default-prototype-length-full.test.js"
+  },
+  {
+    "promptId": "quill-delta-quill-delta-default-prototype-partition-full",
+    "packageName": "quill-delta",
+    "functionPath": "quill-delta.default.prototype.partition",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/quill-delta/quill-delta-quill-delta-default-prototype-partition-full.test.js"
+  },
+  {
+    "promptId": "quill-delta-quill-delta-default-prototype-push-full",
+    "packageName": "quill-delta",
+    "functionPath": "quill-delta.default.prototype.push",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/quill-delta/quill-delta-quill-delta-default-prototype-push-full.test.js"
+  },
+  {
+    "promptId": "quill-delta-quill-delta-default-prototype-transform-full",
+    "packageName": "quill-delta",
+    "functionPath": "quill-delta.default.prototype.transform",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/quill-delta/quill-delta-quill-delta-default-prototype-transform-full.test.js"
+  },
+  {
+    "promptId": "quill-delta-quill-delta-default-prototype-transformposition-full",
+    "packageName": "quill-delta",
+    "functionPath": "quill-delta.default.prototype.transformPosition",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/quill-delta/quill-delta-quill-delta-default-prototype-transformposition-full.test.js"
+  },
+  {
+    "promptId": "quill-delta-quill-delta-default-unregisterembed-full",
+    "packageName": "quill-delta",
+    "functionPath": "quill-delta.default.unregisterEmbed",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/quill-delta/quill-delta-quill-delta-default-unregisterembed-full.test.js"
+  },
+  {
+    "promptId": "quill-delta-quill-delta-module-exports-full",
+    "packageName": "quill-delta",
+    "functionPath": "quill-delta.module.exports",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/quill-delta/quill-delta-quill-delta-module-exports-full.test.js"
+  },
+  {
+    "promptId": "quill-delta-quill-delta-op-length-full",
+    "packageName": "quill-delta",
+    "functionPath": "quill-delta.Op.length",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/quill-delta/quill-delta-quill-delta-op-length-full.test.js"
+  },
+  {
+    "promptId": "quill-delta-quill-delta-opiterator-full",
+    "packageName": "quill-delta",
+    "functionPath": "quill-delta.OpIterator",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/quill-delta/quill-delta-quill-delta-opiterator-full.test.js"
+  },
+  {
+    "promptId": "quill-delta-quill-delta-opiterator-prototype-hasnext-full",
+    "packageName": "quill-delta",
+    "functionPath": "quill-delta.OpIterator.prototype.hasNext",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/quill-delta/quill-delta-quill-delta-opiterator-prototype-hasnext-full.test.js"
+  },
+  {
+    "promptId": "quill-delta-quill-delta-opiterator-prototype-next-full",
+    "packageName": "quill-delta",
+    "functionPath": "quill-delta.OpIterator.prototype.next",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/quill-delta/quill-delta-quill-delta-opiterator-prototype-next-full.test.js"
+  },
+  {
+    "promptId": "quill-delta-quill-delta-opiterator-prototype-peek-full",
+    "packageName": "quill-delta",
+    "functionPath": "quill-delta.OpIterator.prototype.peek",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/quill-delta/quill-delta-quill-delta-opiterator-prototype-peek-full.test.js"
+  },
+  {
+    "promptId": "quill-delta-quill-delta-opiterator-prototype-peektype-full",
+    "packageName": "quill-delta",
+    "functionPath": "quill-delta.OpIterator.prototype.peekType",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/quill-delta/quill-delta-quill-delta-opiterator-prototype-peektype-full.test.js"
+  },
+  {
+    "promptId": "quill-delta-quill-delta-opiterator-prototype-rest-full",
+    "packageName": "quill-delta",
+    "functionPath": "quill-delta.OpIterator.prototype.rest",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/quill-delta/quill-delta-quill-delta-opiterator-prototype-rest-full.test.js"
+  },
+  {
+    "promptId": "simple-statistics-simple-statistics-addtomean-full",
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.addToMean",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/simple-statistics/simple-statistics-simple-statistics-addtomean-full.test.js"
+  },
+  {
+    "promptId": "simple-statistics-simple-statistics-approxequal-full",
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.approxEqual",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/simple-statistics/simple-statistics-simple-statistics-approxequal-full.test.js"
+  },
+  {
+    "promptId": "simple-statistics-simple-statistics-averagesimple-full",
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.averageSimple",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/simple-statistics/simple-statistics-simple-statistics-averagesimple-full.test.js"
+  },
+  {
+    "promptId": "simple-statistics-simple-statistics-bayesianclassifier-full",
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.BayesianClassifier",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/simple-statistics/simple-statistics-simple-statistics-bayesianclassifier-full.test.js"
+  },
+  {
+    "promptId": "simple-statistics-simple-statistics-bayesianclassifier-prototype-score-full",
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.BayesianClassifier.prototype.score",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/simple-statistics/simple-statistics-simple-statistics-bayesianclassifier-prototype-score-full.test.js"
+  },
+  {
+    "promptId": "simple-statistics-simple-statistics-bayesianclassifier-prototype-train-full",
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.BayesianClassifier.prototype.train",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/simple-statistics/simple-statistics-simple-statistics-bayesianclassifier-prototype-train-full.test.js"
+  },
+  {
+    "promptId": "simple-statistics-simple-statistics-bernoullidistribution-full",
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.bernoulliDistribution",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/simple-statistics/simple-statistics-simple-statistics-bernoullidistribution-full.test.js"
+  },
+  {
+    "promptId": "simple-statistics-simple-statistics-binomialdistribution-full",
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.binomialDistribution",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/simple-statistics/simple-statistics-simple-statistics-binomialdistribution-full.test.js"
+  },
+  {
+    "promptId": "simple-statistics-simple-statistics-bisect-full",
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.bisect",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/simple-statistics/simple-statistics-simple-statistics-bisect-full.test.js"
+  },
+  {
+    "promptId": "simple-statistics-simple-statistics-chunk-full",
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.chunk",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/simple-statistics/simple-statistics-simple-statistics-chunk-full.test.js"
+  },
+  {
+    "promptId": "simple-statistics-simple-statistics-ckmeans-full",
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.ckmeans",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/simple-statistics/simple-statistics-simple-statistics-ckmeans-full.test.js"
+  },
+  {
+    "promptId": "simple-statistics-simple-statistics-combinationsreplacement-full",
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.combinationsReplacement",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/simple-statistics/simple-statistics-simple-statistics-combinationsreplacement-full.test.js"
+  },
+  {
+    "promptId": "simple-statistics-simple-statistics-cumulativestdlogisticprobability-full",
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.cumulativeStdLogisticProbability",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/simple-statistics/simple-statistics-simple-statistics-cumulativestdlogisticprobability-full.test.js"
+  },
+  {
+    "promptId": "simple-statistics-simple-statistics-erf-full",
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.erf",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/simple-statistics/simple-statistics-simple-statistics-erf-full.test.js"
+  },
+  {
+    "promptId": "simple-statistics-simple-statistics-geometricmean-full",
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.geometricMean",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/simple-statistics/simple-statistics-simple-statistics-geometricmean-full.test.js"
+  },
+  {
+    "promptId": "simple-statistics-simple-statistics-harmonicmean-full",
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.harmonicMean",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/simple-statistics/simple-statistics-simple-statistics-harmonicmean-full.test.js"
+  },
+  {
+    "promptId": "simple-statistics-simple-statistics-interquartilerange-full",
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.interquartileRange",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/simple-statistics/simple-statistics-simple-statistics-interquartilerange-full.test.js"
+  },
+  {
+    "promptId": "simple-statistics-simple-statistics-kerneldensityestimation-full",
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.kernelDensityEstimation",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/simple-statistics/simple-statistics-simple-statistics-kerneldensityestimation-full.test.js"
+  },
+  {
+    "promptId": "simple-statistics-simple-statistics-linearregression-full",
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.linearRegression",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/simple-statistics/simple-statistics-simple-statistics-linearregression-full.test.js"
+  },
+  {
+    "promptId": "simple-statistics-simple-statistics-logaverage-full",
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.logAverage",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/simple-statistics/simple-statistics-simple-statistics-logaverage-full.test.js"
+  },
+  {
+    "promptId": "simple-statistics-simple-statistics-logit-full",
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.logit",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/simple-statistics/simple-statistics-simple-statistics-logit-full.test.js"
+  },
+  {
+    "promptId": "simple-statistics-simple-statistics-max-full",
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.max",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/simple-statistics/simple-statistics-simple-statistics-max-full.test.js"
+  },
+  {
+    "promptId": "simple-statistics-simple-statistics-mean-full",
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.mean",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/simple-statistics/simple-statistics-simple-statistics-mean-full.test.js"
+  },
+  {
+    "promptId": "simple-statistics-simple-statistics-meansimple-full",
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.meanSimple",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/simple-statistics/simple-statistics-simple-statistics-meansimple-full.test.js"
+  },
+  {
+    "promptId": "simple-statistics-simple-statistics-medianabsolutedeviation-full",
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.medianAbsoluteDeviation",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/simple-statistics/simple-statistics-simple-statistics-medianabsolutedeviation-full.test.js"
+  },
+  {
+    "promptId": "simple-statistics-simple-statistics-min-full",
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.min",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/simple-statistics/simple-statistics-simple-statistics-min-full.test.js"
+  },
+  {
+    "promptId": "simple-statistics-simple-statistics-minsorted-full",
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.minSorted",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/simple-statistics/simple-statistics-simple-statistics-minsorted-full.test.js"
+  },
+  {
+    "promptId": "simple-statistics-simple-statistics-mode-full",
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.mode",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/simple-statistics/simple-statistics-simple-statistics-mode-full.test.js"
+  },
+  {
+    "promptId": "simple-statistics-simple-statistics-modesorted-full",
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.modeSorted",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/simple-statistics/simple-statistics-simple-statistics-modesorted-full.test.js"
+  },
+  {
+    "promptId": "simple-statistics-simple-statistics-numericsort-full",
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.numericSort",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/simple-statistics/simple-statistics-simple-statistics-numericsort-full.test.js"
+  },
+  {
+    "promptId": "simple-statistics-simple-statistics-perceptron-full",
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.perceptron",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/simple-statistics/simple-statistics-simple-statistics-perceptron-full.test.js"
+  },
+  {
+    "promptId": "simple-statistics-simple-statistics-perceptronmodel-prototype-predict-full",
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.PerceptronModel.prototype.predict",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/simple-statistics/simple-statistics-simple-statistics-perceptronmodel-prototype-predict-full.test.js"
+  },
+  {
+    "promptId": "simple-statistics-simple-statistics-perceptronmodel-prototype-train-full",
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.PerceptronModel.prototype.train",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/simple-statistics/simple-statistics-simple-statistics-perceptronmodel-prototype-train-full.test.js"
+  },
+  {
+    "promptId": "simple-statistics-simple-statistics-permutationsheap-full",
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.permutationsHeap",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/simple-statistics/simple-statistics-simple-statistics-permutationsheap-full.test.js"
+  },
+  {
+    "promptId": "simple-statistics-simple-statistics-permutationtest-full",
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.permutationTest",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/simple-statistics/simple-statistics-simple-statistics-permutationtest-full.test.js"
+  },
+  {
+    "promptId": "simple-statistics-simple-statistics-poissondistribution-full",
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.poissonDistribution",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/simple-statistics/simple-statistics-simple-statistics-poissondistribution-full.test.js"
+  },
+  {
+    "promptId": "simple-statistics-simple-statistics-probit-full",
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.probit",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/simple-statistics/simple-statistics-simple-statistics-probit-full.test.js"
+  },
+  {
+    "promptId": "simple-statistics-simple-statistics-product-full",
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.product",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/simple-statistics/simple-statistics-simple-statistics-product-full.test.js"
+  },
+  {
+    "promptId": "simple-statistics-simple-statistics-quantile-full",
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.quantile",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/simple-statistics/simple-statistics-simple-statistics-quantile-full.test.js"
+  },
+  {
+    "promptId": "simple-statistics-simple-statistics-quantilerank-full",
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.quantileRank",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/simple-statistics/simple-statistics-simple-statistics-quantilerank-full.test.js"
+  },
+  {
+    "promptId": "simple-statistics-simple-statistics-quantileranksorted-full",
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.quantileRankSorted",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/simple-statistics/simple-statistics-simple-statistics-quantileranksorted-full.test.js"
+  },
+  {
+    "promptId": "simple-statistics-simple-statistics-quantilesorted-full",
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.quantileSorted",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/simple-statistics/simple-statistics-simple-statistics-quantilesorted-full.test.js"
+  },
+  {
+    "promptId": "simple-statistics-simple-statistics-quickselect-full",
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.quickselect",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/simple-statistics/simple-statistics-simple-statistics-quickselect-full.test.js"
+  },
+  {
+    "promptId": "simple-statistics-simple-statistics-rsquared-full",
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.rSquared",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/simple-statistics/simple-statistics-simple-statistics-rsquared-full.test.js"
+  },
+  {
+    "promptId": "simple-statistics-simple-statistics-sample-full",
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.sample",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/simple-statistics/simple-statistics-simple-statistics-sample-full.test.js"
+  },
+  {
+    "promptId": "simple-statistics-simple-statistics-samplecorrelation-full",
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.sampleCorrelation",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/simple-statistics/simple-statistics-simple-statistics-samplecorrelation-full.test.js"
+  },
+  {
+    "promptId": "simple-statistics-simple-statistics-samplecovariance-full",
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.sampleCovariance",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/simple-statistics/simple-statistics-simple-statistics-samplecovariance-full.test.js"
+  },
+  {
+    "promptId": "simple-statistics-simple-statistics-samplerankcorrelation-full",
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.sampleRankCorrelation",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/simple-statistics/simple-statistics-simple-statistics-samplerankcorrelation-full.test.js"
+  },
+  {
+    "promptId": "simple-statistics-simple-statistics-sampleskewness-full",
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.sampleSkewness",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/simple-statistics/simple-statistics-simple-statistics-sampleskewness-full.test.js"
+  },
+  {
+    "promptId": "simple-statistics-simple-statistics-samplestandarddeviation-full",
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.sampleStandardDeviation",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/simple-statistics/simple-statistics-simple-statistics-samplestandarddeviation-full.test.js"
+  },
+  {
+    "promptId": "simple-statistics-simple-statistics-samplevariance-full",
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.sampleVariance",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/simple-statistics/simple-statistics-simple-statistics-samplevariance-full.test.js"
+  },
+  {
+    "promptId": "simple-statistics-simple-statistics-samplewithreplacement-full",
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.sampleWithReplacement",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/simple-statistics/simple-statistics-simple-statistics-samplewithreplacement-full.test.js"
+  },
+  {
+    "promptId": "simple-statistics-simple-statistics-shuffle-full",
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.shuffle",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/simple-statistics/simple-statistics-simple-statistics-shuffle-full.test.js"
+  },
+  {
+    "promptId": "simple-statistics-simple-statistics-shuffleinplace-full",
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.shuffleInPlace",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/simple-statistics/simple-statistics-simple-statistics-shuffleinplace-full.test.js"
+  },
+  {
+    "promptId": "simple-statistics-simple-statistics-sign-full",
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.sign",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/simple-statistics/simple-statistics-simple-statistics-sign-full.test.js"
+  },
+  {
+    "promptId": "simple-statistics-simple-statistics-silhouette-full",
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.silhouette",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/simple-statistics/simple-statistics-simple-statistics-silhouette-full.test.js"
+  },
+  {
+    "promptId": "simple-statistics-simple-statistics-silhouettemetric-full",
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.silhouetteMetric",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/simple-statistics/simple-statistics-simple-statistics-silhouettemetric-full.test.js"
+  },
+  {
+    "promptId": "simple-statistics-simple-statistics-standarddeviation-full",
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.standardDeviation",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/simple-statistics/simple-statistics-simple-statistics-standarddeviation-full.test.js"
+  },
+  {
+    "promptId": "simple-statistics-simple-statistics-sumnthpowerdeviations-full",
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.sumNthPowerDeviations",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/simple-statistics/simple-statistics-simple-statistics-sumnthpowerdeviations-full.test.js"
+  },
+  {
+    "promptId": "simple-statistics-simple-statistics-sumsimple-full",
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.sumSimple",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/simple-statistics/simple-statistics-simple-statistics-sumsimple-full.test.js"
+  },
+  {
+    "promptId": "simple-statistics-simple-statistics-ttesttwosample-full",
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.tTestTwoSample",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/simple-statistics/simple-statistics-simple-statistics-ttesttwosample-full.test.js"
+  },
+  {
+    "promptId": "simple-statistics-simple-statistics-uniquecountsorted-full",
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.uniqueCountSorted",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/simple-statistics/simple-statistics-simple-statistics-uniquecountsorted-full.test.js"
+  },
+  {
+    "promptId": "simple-statistics-simple-statistics-variance-full",
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.variance",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/simple-statistics/simple-statistics-simple-statistics-variance-full.test.js"
+  },
+  {
+    "promptId": "simple-statistics-simple-statistics-weightedquantile-full",
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.weightedQuantile",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/simple-statistics/simple-statistics-simple-statistics-weightedquantile-full.test.js"
+  },
+  {
+    "promptId": "simple-statistics-simple-statistics-weightedstandarddeviation-full",
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.weightedStandardDeviation",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/simple-statistics/simple-statistics-simple-statistics-weightedstandarddeviation-full.test.js"
+  },
+  {
+    "promptId": "simple-statistics-simple-statistics-weightedvariance-full",
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.weightedVariance",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/simple-statistics/simple-statistics-simple-statistics-weightedvariance-full.test.js"
+  },
+  {
+    "promptId": "simple-statistics-simple-statistics-wilcoxonranksum-full",
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.wilcoxonRankSum",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/simple-statistics/simple-statistics-simple-statistics-wilcoxonranksum-full.test.js"
+  },
+  {
+    "promptId": "simple-statistics-simple-statistics-zscore-full",
+    "packageName": "simple-statistics",
+    "functionPath": "simple-statistics.zScore",
+    "promptVariant": "full",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/simple-statistics/simple-statistics-simple-statistics-zscore-full.test.js"
+  }
+]

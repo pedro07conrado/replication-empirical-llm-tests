@@ -114,11 +114,16 @@ function parseProvider(value: string | undefined): LLMProvider | undefined {
 
   const normalizedValue = value.toLowerCase();
 
-  if (normalizedValue === "mock" || normalizedValue === "openai" || normalizedValue === "gemini") {
+  if (
+    normalizedValue === "mock" ||
+    normalizedValue === "openai" ||
+    normalizedValue === "gemini" ||
+    normalizedValue === "ollama"
+  ) {
     return normalizedValue;
   }
 
-  throw new Error("LLM_PROVIDER must be one of: mock, openai, gemini.");
+  throw new Error("LLM_PROVIDER must be one of: mock, openai, gemini, ollama.");
 }
 
 function parsePositiveInteger(value: string | undefined): number | undefined {

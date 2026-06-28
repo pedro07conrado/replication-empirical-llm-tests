@@ -1,0 +1,7 @@
+packageName,provider,model,promptVariant,totalTests,passingTestsUsed,statementCoverage,branchCoverage,functionCoverage,lineCoverage,coverageReportPath
+complex.js,ollama,qwen2.5-coder:3b,full,35,8,12.61,8.15,18.64,12.23,coverage/complex.js
+countries-and-timezones,none,none,none,9,0,,,,,coverage/countries-and-timezones
+geo-point,ollama,qwen2.5-coder:3b,full,12,5,31.32,40,38.09,31.16,coverage/geo-point
+plural,none,none,none,5,0,,,,,coverage/plural
+quill-delta,ollama,qwen2.5-coder:3b,full,28,5,18.89,12.59,21.15,18.48,coverage/quill-delta
+simple-statistics,ollama,qwen2.5-coder:3b,full,68,21,28.92,27.62,27.94,28.51,coverage/simple-statistics

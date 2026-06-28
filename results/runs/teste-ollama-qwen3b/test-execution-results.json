@@ -1,0 +1,50 @@
+[
+  {
+    "promptId": "countries-and-timezones-countries-and-timezones-default-getalltimezones-signature-only",
+    "packageName": "countries-and-timezones",
+    "functionPath": "countries-and-timezones.default.getAllTimezones",
+    "promptVariant": "signature-only",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/countries-and-timezones/countries-and-timezones-countries-and-timezones-default-getalltimezones-signature-only.test.js",
+    "passed": false,
+    "exitCode": 1,
+    "stdout": "",
+    "stderr": "\n Exception during run: TypeError: \"\" is not a function\n    at Object.<anonymous> (C:\\Users\\Pedro conrado\\Documents\\replication-empirical-llm-tests\\generated-tests\\countries-and-timezones\\countries-and-timezones-countries-and-timezones-default-getalltimezones-signature-only.test.js:1:3)\n    at Module._compile (node:internal/modules/cjs/loader:1804:14)\n    at Object..js (node:internal/modules/cjs/loader:1936:10)\n    at Module.load (node:internal/modules/cjs/loader:1525:32)\n    at Module._load (node:internal/modules/cjs/loader:1327:12)\n    at TracingChannel.traceSync (node:diagnostics_channel:328:14)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:245:24)\n    at loadCJSModuleWithModuleLoad (node:internal/modules/esm/translators:339:3)\n    at ModuleWrap.<anonymous> (node:internal/modules/esm/translators:242:7)\n    at ModuleJob.run (node:internal/modules/esm/module_job:430:25)\n    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:661:26)\n    at async formattedImport (C:\\Users\\Pedro conrado\\Documents\\replication-empirical-llm-tests\\node_modules\\mocha\\lib\\nodejs\\esm-utils.js:10:14)\n    at async Object.requireModule [as requireOrImport] (C:\\Users\\Pedro conrado\\Documents\\replication-empirical-llm-tests\\node_modules\\mocha\\lib\\nodejs\\esm-utils.js:102:30)\n    at async exports.loadFilesAsync (C:\\Users\\Pedro conrado\\Documents\\replication-empirical-llm-tests\\node_modules\\mocha\\lib\\nodejs\\esm-utils.js:155:20)\n    at async singleRun (C:\\Users\\Pedro conrado\\Documents\\replication-empirical-llm-tests\\node_modules\\mocha\\lib\\cli\\run-helpers.js:174:3)\n    at async exports.handler (C:\\Users\\Pedro conrado\\Documents\\replication-empirical-llm-tests\\node_modules\\mocha\\lib\\cli\\run.js:384:5)\n",
+    "errorMessage": "Exception during run: TypeError: \"\" is not a function",
+    "failureCategory": "type-error",
+    "durationMs": 376
+  },
+  {
+    "promptId": "countries-and-timezones-countries-and-timezones-default-getcountriesfortimezone-signature-only",
+    "packageName": "countries-and-timezones",
+    "functionPath": "countries-and-timezones.default.getCountriesForTimezone",
+    "promptVariant": "signature-only",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/countries-and-timezones/countries-and-timezones-countries-and-timezones-default-getcountriesfortimezone-signature-only.test.js",
+    "passed": false,
+    "exitCode": 1,
+    "stdout": "",
+    "stderr": "\n Exception during run: C:\\Users\\Pedro conrado\\Documents\\replication-empirical-llm-tests\\generated-tests\\countries-and-timezones\\countries-and-timezones-countries-and-timezones-default-getcountriesfortimezone-signature-only.test.js:20\n      assert.equal(e.message, `Unknown timezone: ${invalidTzName}`, 'Correct error message');\n                               ^^^^^^^\n\nSyntaxError: Unexpected identifier 'Unknown'\n    at wrapSafe (node:internal/modules/cjs/loader:1735:18)\n    at Module._compile (node:internal/modules/cjs/loader:1778:20)\n    at Object..js (node:internal/modules/cjs/loader:1936:10)\n    at Module.load (node:internal/modules/cjs/loader:1525:32)\n    at Module._load (node:internal/modules/cjs/loader:1327:12)\n    at TracingChannel.traceSync (node:diagnostics_channel:328:14)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:245:24)\n    at loadCJSModuleWithModuleLoad (node:internal/modules/esm/translators:339:3)\n    at ModuleWrap.<anonymous> (node:internal/modules/esm/translators:242:7)\n    at ModuleJob.run (node:internal/modules/esm/module_job:430:25)\n    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:661:26)\n    at async formattedImport (C:\\Users\\Pedro conrado\\Documents\\replication-empirical-llm-tests\\node_modules\\mocha\\lib\\nodejs\\esm-utils.js:10:14)\n    at async Object.requireModule [as requireOrImport] (C:\\Users\\Pedro conrado\\Documents\\replication-empirical-llm-tests\\node_modules\\mocha\\lib\\nodejs\\esm-utils.js:102:30)\n    at async exports.loadFilesAsync (C:\\Users\\Pedro conrado\\Documents\\replication-empirical-llm-tests\\node_modules\\mocha\\lib\\nodejs\\esm-utils.js:155:20)\n    at async singleRun (C:\\Users\\Pedro conrado\\Documents\\replication-empirical-llm-tests\\node_modules\\mocha\\lib\\cli\\run-helpers.js:174:3)\n    at async exports.handler (C:\\Users\\Pedro conrado\\Documents\\replication-empirical-llm-tests\\node_modules\\mocha\\lib\\cli\\run.js:384:5)\n",
+    "errorMessage": "SyntaxError: Unexpected identifier 'Unknown'",
+    "failureCategory": "syntax-error",
+    "durationMs": 270
+  },
+  {
+    "promptId": "countries-and-timezones-countries-and-timezones-default-getcountry-signature-only",
+    "packageName": "countries-and-timezones",
+    "functionPath": "countries-and-timezones.default.getCountry",
+    "promptVariant": "signature-only",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "testFilePath": "generated-tests/countries-and-timezones/countries-and-timezones-countries-and-timezones-default-getcountry-signature-only.test.js",
+    "passed": false,
+    "exitCode": 1,
+    "stdout": "",
+    "stderr": "\n Exception during run: TypeError: \"\" is not a function\n    at Object.<anonymous> (C:\\Users\\Pedro conrado\\Documents\\replication-empirical-llm-tests\\generated-tests\\countries-and-timezones\\countries-and-timezones-countries-and-timezones-default-getcountry-signature-only.test.js:1:3)\n    at Module._compile (node:internal/modules/cjs/loader:1804:14)\n    at Object..js (node:internal/modules/cjs/loader:1936:10)\n    at Module.load (node:internal/modules/cjs/loader:1525:32)\n    at Module._load (node:internal/modules/cjs/loader:1327:12)\n    at TracingChannel.traceSync (node:diagnostics_channel:328:14)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:245:24)\n    at loadCJSModuleWithModuleLoad (node:internal/modules/esm/translators:339:3)\n    at ModuleWrap.<anonymous> (node:internal/modules/esm/translators:242:7)\n    at ModuleJob.run (node:internal/modules/esm/module_job:430:25)\n    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:661:26)\n    at async formattedImport (C:\\Users\\Pedro conrado\\Documents\\replication-empirical-llm-tests\\node_modules\\mocha\\lib\\nodejs\\esm-utils.js:10:14)\n    at async Object.requireModule [as requireOrImport] (C:\\Users\\Pedro conrado\\Documents\\replication-empirical-llm-tests\\node_modules\\mocha\\lib\\nodejs\\esm-utils.js:102:30)\n    at async exports.loadFilesAsync (C:\\Users\\Pedro conrado\\Documents\\replication-empirical-llm-tests\\node_modules\\mocha\\lib\\nodejs\\esm-utils.js:155:20)\n    at async singleRun (C:\\Users\\Pedro conrado\\Documents\\replication-empirical-llm-tests\\node_modules\\mocha\\lib\\cli\\run-helpers.js:174:3)\n    at async exports.handler (C:\\Users\\Pedro conrado\\Documents\\replication-empirical-llm-tests\\node_modules\\mocha\\lib\\cli\\run.js:384:5)\n",
+    "errorMessage": "Exception during run: TypeError: \"\" is not a function",
+    "failureCategory": "type-error",
+    "durationMs": 215
+  }
+]

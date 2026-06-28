@@ -1,0 +1,80 @@
+[
+  {
+    "packageName": "complex.js",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "promptVariant": "full",
+    "totalTests": 35,
+    "passingTestsUsed": 8,
+    "statementCoverage": 12.61,
+    "branchCoverage": 8.15,
+    "functionCoverage": 18.64,
+    "lineCoverage": 12.23,
+    "coverageReportPath": "coverage/complex.js"
+  },
+  {
+    "packageName": "countries-and-timezones",
+    "provider": "none",
+    "model": "none",
+    "promptVariant": "none",
+    "totalTests": 9,
+    "passingTestsUsed": 0,
+    "statementCoverage": null,
+    "branchCoverage": null,
+    "functionCoverage": null,
+    "lineCoverage": null,
+    "coverageReportPath": "coverage/countries-and-timezones"
+  },
+  {
+    "packageName": "geo-point",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "promptVariant": "full",
+    "totalTests": 12,
+    "passingTestsUsed": 5,
+    "statementCoverage": 31.32,
+    "branchCoverage": 40,
+    "functionCoverage": 38.09,
+    "lineCoverage": 31.16,
+    "coverageReportPath": "coverage/geo-point"
+  },
+  {
+    "packageName": "plural",
+    "provider": "none",
+    "model": "none",
+    "promptVariant": "none",
+    "totalTests": 5,
+    "passingTestsUsed": 0,
+    "statementCoverage": null,
+    "branchCoverage": null,
+    "functionCoverage": null,
+    "lineCoverage": null,
+    "coverageReportPath": "coverage/plural"
+  },
+  {
+    "packageName": "quill-delta",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "promptVariant": "full",
+    "totalTests": 28,
+    "passingTestsUsed": 5,
+    "statementCoverage": 18.89,
+    "branchCoverage": 12.59,
+    "functionCoverage": 21.15,
+    "lineCoverage": 18.48,
+    "coverageReportPath": "coverage/quill-delta"
+  },
+  {
+    "packageName": "simple-statistics",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "promptVariant": "full",
+    "totalTests": 68,
+    "passingTestsUsed": 21,
+    "statementCoverage": 28.92,
+    "branchCoverage": 27.62,
+    "functionCoverage": 27.94,
+    "lineCoverage": 28.51,
+    "coverageReportPath": "coverage/simple-statistics"
+  }
+]

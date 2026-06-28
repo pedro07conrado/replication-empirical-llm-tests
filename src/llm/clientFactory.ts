@@ -2,6 +2,7 @@ import { defaultGeminiModelName, defaultModelName } from "../config/models.js";
 import type { LLMClient, LLMProvider } from "../types.js";
 import { GeminiClient } from "./geminiClient.js";
 import { MockLLMClient } from "./mockLLMClient.js";
+import { OllamaClient } from "./ollamaClient.js";
 import { OpenAIClient } from "./openAIClient.js";
 
 const DEFAULT_MAX_OUTPUT_TOKENS = 1_024;
@@ -11,6 +12,14 @@ export function createLLMClientFromEnv(): LLMClient {
   const openAIApiKey = process.env.OPENAI_API_KEY;
   const geminiApiKey = process.env.GEMINI_API_KEY;
   const maxOutputTokens = parseInteger(process.env.LLM_MAX_OUTPUT_TOKENS) ?? DEFAULT_MAX_OUTPUT_TOKENS;
+
+  if (provider === "ollama") {
+    return new OllamaClient({
+      baseUrl: process.env.OLLAMA_BASE_URL,
+      model: process.env.LLM_MODEL ?? "qwen2.5-coder:3b",
+      maxOutputTokens
+    });
+  }
 
   if (provider === "gemini") {
     return geminiApiKey
@@ -64,11 +73,16 @@ function parseProvider(value: string | undefined): LLMProvider | undefined {
 
   const normalizedProvider = value.toLowerCase();
 
-  if (normalizedProvider === "gemini" || normalizedProvider === "openai" || normalizedProvider === "mock") {
+  if (
+    normalizedProvider === "gemini" ||
+    normalizedProvider === "openai" ||
+    normalizedProvider === "ollama" ||
+    normalizedProvider === "mock"
+  ) {
     return normalizedProvider;
   }
 
-  throw new Error("LLM_PROVIDER must be one of: gemini, openai, mock.");
+  throw new Error("LLM_PROVIDER must be one of: gemini, openai, ollama, mock.");
 }
 
 function parseInteger(value: string | undefined): number | undefined {
