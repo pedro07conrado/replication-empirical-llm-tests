@@ -20,7 +20,7 @@ Nesta primeira etapa, o projeto coleta funcoes publicas exportadas por pacotes n
 - Seleciona uma amostra estratificada por pacote com seed fixa.
 - Gera prompts para testes unitarios Mocha usando `assert` nativo do Node.js.
 - Estima tokens e custo antes da execucao contra provedores de LLM.
-- Executa prompts em um cliente LLM generico, usando mock local por padrao.
+- Executa prompts em um cliente LLM generico, com suporte a Mock, Gemini e OpenAI.
 
 ## Pacotes-alvo iniciais
 
@@ -29,6 +29,7 @@ Nesta primeira etapa, o projeto coleta funcoes publicas exportadas por pacotes n
 - `geo-point`
 - `complex.js`
 - `quill-delta`
+- `simple-statistics`
 
 ## Estrutura
 
@@ -47,6 +48,7 @@ src/
     sampleApiFunctions.ts
   llm/
     clientFactory.ts
+    geminiClient.ts
     mockLLMClient.ts
     openAIClient.ts
   metrics/
@@ -141,10 +143,10 @@ Esses valores servem para planejamento antes da chamada ao LLM. Em execucoes rea
 
 ## Geracao com LLM
 
-Para executar os prompts contra um cliente LLM:
+Para executar os prompts contra um cliente LLM, use sempre `--limit` ou `--all`:
 
 ```bash
-npm run generate:tests:llm
+npm run generate:tests:llm -- --limit 5
 ```
 
 O comando le `results/generated-prompts.json` e salva:
@@ -153,21 +155,44 @@ O comando le `results/generated-prompts.json` e salva:
 results/llm-generations.json
 ```
 
-Por padrao, se `OPENAI_API_KEY` nao estiver configurada, o projeto usa `MockLLMClient`, sem chamada externa e sem custo real. Para usar a OpenAI:
+Por padrao, se nenhuma chave estiver configurada, o projeto usa `MockLLMClient`, sem chamada externa e sem custo real.
+
+Para usar Gemini como provedor principal:
 
 ```bash
-OPENAI_API_KEY=... LLM_MODEL=gpt-4.1-mini npm run generate:tests:llm
+GEMINI_API_KEY=... LLM_PROVIDER=gemini LLM_MODEL=gemini-2.5-flash npm run generate:tests:llm -- --limit 5
 ```
 
-O modelo tambem pode ser alterado com `LLM_MODEL`. Quando a API real retorna `usage`, os tokens reais sao usados nos campos `inputTokens`, `outputTokens` e `totalTokens`.
+No PowerShell:
+
+```powershell
+$env:GEMINI_API_KEY="..."
+$env:LLM_PROVIDER="gemini"
+$env:LLM_MODEL="gemini-2.5-flash"
+$env:GEMINI_FREE_TIER="true"
+npm run generate:tests:llm -- --limit 5
+```
+
+`LLM_MAX_OUTPUT_TOKENS` controla o limite de saida por chamada. O Gemini usa `temperature: 0` para reduzir variabilidade. Quando a API retorna `usageMetadata`, o projeto salva `promptTokenCount`, `candidatesTokenCount` e `totalTokenCount` como `inputTokens`, `outputTokens` e `totalTokens`.
+
+Quando `GEMINI_FREE_TIER=true`, `estimatedCost` fica `0`; se existir preco configurado em `src/config/models.ts`, `equivalentPaidCost` registra o custo equivalente pago. `gemini-2.5-flash` e o modelo recomendado para novos testes. `gemini-2.0-flash` continua configuravel via `LLM_MODEL`, mas a documentacao atual de precos da Gemini indica que ele foi desligado em 1 de junho de 2026.
+
+Para usar OpenAI:
+
+```bash
+OPENAI_API_KEY=... LLM_PROVIDER=openai LLM_MODEL=gpt-4.1-mini npm run generate:tests:llm -- --limit 5
+```
+
+O modelo tambem pode ser alterado com `LLM_MODEL`. Quando a API real retorna `usage` ou `usageMetadata`, os tokens reais sao usados nos campos `inputTokens`, `outputTokens` e `totalTokens`.
 
 Use filtros para controlar custo:
 
 ```bash
 npm run generate:tests:llm -- --limit 5
-npm run generate:tests:llm -- --package countries-and-timezones
-npm run generate:tests:llm -- --variant signature-only
+npm run generate:tests:llm -- --limit 5 --package countries-and-timezones
+npm run generate:tests:llm -- --limit 5 --variant signature-only
 npm run generate:tests:llm -- --limit 5 --package countries-and-timezones --variant signature-only
+npm run generate:tests:llm -- --all
 ```
 
 ## Estrategia de amostragem

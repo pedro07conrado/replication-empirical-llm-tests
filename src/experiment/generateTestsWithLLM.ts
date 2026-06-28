@@ -4,6 +4,7 @@ import { createLLMClientFromEnv } from "../llm/clientFactory.js";
 import type { GeneratedPrompt, LLMGeneration, PromptVariant } from "../types.js";
 
 interface CliOptions {
+  all?: boolean;
   limit?: number;
   packageName?: string;
   variant?: PromptVariant;
@@ -18,6 +19,7 @@ async function main(): Promise<void> {
 
   const cliOptions = parseCliOptions(process.argv.slice(2));
   const prompts = await readGeneratedPrompts(INPUT_FILE);
+  validateSafetyOptions(cliOptions);
   const selectedPrompts = applyFilters(prompts, cliOptions);
   const llmClient = createLLMClientFromEnv();
   const generations: LLMGeneration[] = [];
@@ -30,6 +32,7 @@ async function main(): Promise<void> {
       packageName: prompt.packageName,
       functionPath: prompt.functionPath,
       promptVariant: prompt.promptVariant,
+      provider: response.provider,
       model: response.model,
       promptText: prompt.promptText,
       generatedText: response.text,
@@ -37,7 +40,9 @@ async function main(): Promise<void> {
       outputTokens: response.outputTokens,
       totalTokens: response.totalTokens,
       estimatedCost: response.estimatedCost,
+      equivalentPaidCost: response.equivalentPaidCost,
       latencyMs: response.latencyMs,
+      rawResponse: response.rawResponse,
       createdAt: new Date().toISOString()
     });
   }
@@ -88,6 +93,11 @@ function parseCliOptions(args: string[]): CliOptions {
     const arg = args[index];
     const nextArg = args[index + 1];
 
+    if (arg === "--all") {
+      options.all = true;
+      continue;
+    }
+
     if (arg === "--limit" && nextArg) {
       const limit = Number.parseInt(nextArg, 10);
 
@@ -120,6 +130,16 @@ function parseCliOptions(args: string[]): CliOptions {
   }
 
   return options;
+}
+
+function validateSafetyOptions(options: CliOptions): void {
+  if (options.limit === undefined && !options.all) {
+    throw new Error("Refusing to run all prompts without an explicit --limit or --all.");
+  }
+
+  if (options.limit !== undefined && options.all) {
+    throw new Error("Use either --limit or --all, not both.");
+  }
 }
 
 function applyFilters(prompts: GeneratedPrompt[], options: CliOptions): GeneratedPrompt[] {

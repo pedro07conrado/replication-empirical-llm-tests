@@ -19,6 +19,8 @@ export interface SampleSummaryRecord {
 
 export type PromptVariant = "signature-only" | "signature-and-body" | "full";
 
+export type LLMProvider = "mock" | "openai" | "gemini";
+
 export interface GeneratedPrompt {
   promptId: string;
   packageName: string;
@@ -36,11 +38,13 @@ export interface ModelPricing {
 
 export interface LLMResponse {
   text: string;
+  provider: LLMProvider;
   model: string;
   inputTokens: number;
   outputTokens: number;
   totalTokens: number;
   estimatedCost: number;
+  equivalentPaidCost?: number;
   latencyMs: number;
   rawResponse?: unknown;
 }
@@ -54,6 +58,7 @@ export interface TokenEstimate {
   packageName: string;
   functionPath: string;
   promptVariant: PromptVariant;
+  provider: LLMProvider;
   modelName: string;
   estimatedInputTokens: number;
   estimatedMaxOutputTokens: number;
@@ -61,6 +66,7 @@ export interface TokenEstimate {
   estimatedInputCost: number;
   estimatedOutputCost: number;
   estimatedTotalCost: number;
+  equivalentPaidCost?: number;
   createdAt: string;
 }
 
@@ -69,6 +75,7 @@ export interface LLMGeneration {
   packageName: string;
   functionPath: string;
   promptVariant: PromptVariant;
+  provider: LLMProvider;
   model: string;
   promptText: string;
   generatedText: string;
@@ -76,6 +83,8 @@ export interface LLMGeneration {
   outputTokens: number;
   totalTokens: number;
   estimatedCost: number;
+  equivalentPaidCost?: number;
   latencyMs: number;
+  rawResponse?: unknown;
   createdAt: string;
 }
