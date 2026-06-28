@@ -65,6 +65,7 @@ export class OpenAIClient implements LLMClient {
 
     return {
       text,
+      provider: "openai",
       model: extractModel(rawResponse) ?? this.model,
       inputTokens,
       outputTokens,

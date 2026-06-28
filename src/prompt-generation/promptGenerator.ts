@@ -1,6 +1,20 @@
 import type { ApiFunctionRecord, GeneratedPrompt, PromptVariant } from "../types.js";
 
 const PROMPT_VARIANTS: PromptVariant[] = ["signature-only", "signature-and-body", "full"];
+const OUTPUT_REQUIREMENTS = [
+  "Return only complete JavaScript test code.",
+  "Generate exactly one Mocha `it` test case.",
+  "Do not generate multiple test cases.",
+  "Do not include Markdown fences.",
+  "Do not include explanations.",
+  "Do not include comments unless strictly necessary.",
+  "Use at most 6 assertions.",
+  "Prefer simple representative inputs.",
+  "The test must be syntactically complete.",
+  "Always close all parentheses, braces and brackets.",
+  "Always call done() exactly once.",
+  "Keep the generated test under 80 lines."
+];
 
 export function generatePromptsForFunctions(
   apiFunctions: ApiFunctionRecord[],
@@ -31,7 +45,8 @@ function buildPromptText(apiFunction: ApiFunctionRecord, promptVariant: PromptVa
     "Generate a unit test for the JavaScript API function described below.",
     "",
     "Use Mocha and Node.js native assert.",
-    "Return only the test code. Do not include explanations or Markdown fences.",
+    "Output requirements:",
+    ...OUTPUT_REQUIREMENTS.map((requirement) => `- ${requirement}`),
     "",
     "The generated test must follow this style:",
     "",
@@ -45,6 +60,8 @@ function buildPromptText(apiFunction: ApiFunctionRecord, promptVariant: PromptVa
     "    done();",
     "  });",
     "});",
+    "",
+    "Replace the placeholder with the actual test code while keeping the same base structure.",
     "",
     "Function under test:",
     ...contextSections
@@ -60,7 +77,7 @@ function buildContextSections(apiFunction: ApiFunctionRecord, promptVariant: Pro
   ];
 
   if (promptVariant === "signature-and-body" || promptVariant === "full") {
-    sections.push("", "Function body:", "```javascript", apiFunction.functionBody ?? "unavailable", "```");
+    sections.push("", "Function body starts:", apiFunction.functionBody ?? "unavailable", "Function body ends.");
   }
 
   if (promptVariant === "full") {

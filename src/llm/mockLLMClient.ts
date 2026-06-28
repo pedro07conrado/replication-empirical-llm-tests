@@ -31,6 +31,7 @@ export class MockLLMClient implements LLMClient {
 
     return {
       text: MOCK_OUTPUT,
+      provider: "mock",
       model: this.modelName,
       inputTokens,
       outputTokens,
@@ -38,7 +39,6 @@ export class MockLLMClient implements LLMClient {
       estimatedCost,
       latencyMs: Date.now() - startedAt,
       rawResponse: {
-        provider: "mock",
         note: "No external LLM call was made."
       }
     };

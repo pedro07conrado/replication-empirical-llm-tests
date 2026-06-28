@@ -13,6 +13,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@google/genai": "^2.10.0",
     "complex.js": "^2.4.2",
     "countries-and-timezones": "^3.8.0",
     "geo-point": "^2.0.1",

@@ -1,10 +1,13 @@
-import type { GeneratedPrompt, ModelPricing, TokenEstimate } from "../types.js";
+import type { GeneratedPrompt, LLMProvider, ModelPricing, TokenEstimate } from "../types.js";
 
 const CHARACTERS_PER_TOKEN = 4;
 
 interface TokenEstimateOptions {
-  modelPricing: ModelPricing;
+  provider: LLMProvider;
+  modelName: string;
+  modelPricing?: ModelPricing;
   estimatedMaxOutputTokens: number;
+  freeTier?: boolean;
   createdAt?: string;
 }
 
@@ -17,21 +20,31 @@ export function estimateTokensForPrompts(
   return prompts.map((prompt) => {
     const estimatedInputTokens = estimateTokensFromText(prompt.promptText);
     const estimatedMaxOutputTokens = options.estimatedMaxOutputTokens;
-    const estimatedInputCost = calculateInputCost(estimatedInputTokens, options.modelPricing);
-    const estimatedOutputCost = calculateOutputCost(estimatedMaxOutputTokens, options.modelPricing);
+    const estimatedInputCost = options.modelPricing
+      ? calculateInputCost(estimatedInputTokens, options.modelPricing)
+      : 0;
+    const estimatedOutputCost = options.modelPricing
+      ? calculateOutputCost(estimatedMaxOutputTokens, options.modelPricing)
+      : 0;
+    const equivalentPaidCost = options.modelPricing
+      ? roundCost(estimatedInputCost + estimatedOutputCost)
+      : undefined;
+    const estimatedTotalCost = options.freeTier ? 0 : equivalentPaidCost ?? 0;
 
     return {
       promptId: prompt.promptId,
       packageName: prompt.packageName,
       functionPath: prompt.functionPath,
       promptVariant: prompt.promptVariant,
-      modelName: options.modelPricing.modelName,
+      provider: options.provider,
+      modelName: options.modelName,
       estimatedInputTokens,
       estimatedMaxOutputTokens,
       estimatedTotalTokens: estimatedInputTokens + estimatedMaxOutputTokens,
       estimatedInputCost,
       estimatedOutputCost,
-      estimatedTotalCost: roundCost(estimatedInputCost + estimatedOutputCost),
+      estimatedTotalCost,
+      equivalentPaidCost,
       createdAt
     };
   });
