@@ -1,0 +1,32 @@
+[
+  {
+    "promptId": "countries-and-timezones-countries-and-timezones-default-getalltimezones-signature-only",
+    "packageName": "countries-and-timezones",
+    "functionPath": "countries-and-timezones.default.getAllTimezones",
+    "promptVariant": "signature-only",
+    "provider": "gemini",
+    "model": "gemini-2.5-flash",
+    "testFilePath": "generated-tests/countries-and-timezones/countries-and-timezones-countries-and-timezones-default-getalltimezones-signature-only.test.js",
+    "finishReason": "STOP"
+  },
+  {
+    "promptId": "countries-and-timezones-countries-and-timezones-default-getcountriesfortimezone-signature-only",
+    "packageName": "countries-and-timezones",
+    "functionPath": "countries-and-timezones.default.getCountriesForTimezone",
+    "promptVariant": "signature-only",
+    "provider": "gemini",
+    "model": "gemini-2.5-flash",
+    "testFilePath": "generated-tests/countries-and-timezones/countries-and-timezones-countries-and-timezones-default-getcountriesfortimezone-signature-only.test.js",
+    "finishReason": "STOP"
+  },
+  {
+    "promptId": "countries-and-timezones-countries-and-timezones-default-getcountry-signature-only",
+    "packageName": "countries-and-timezones",
+    "functionPath": "countries-and-timezones.default.getCountry",
+    "promptVariant": "signature-only",
+    "provider": "gemini",
+    "model": "gemini-2.5-flash",
+    "testFilePath": "generated-tests/countries-and-timezones/countries-and-timezones-countries-and-timezones-default-getcountry-signature-only.test.js",
+    "finishReason": "STOP"
+  }
+]

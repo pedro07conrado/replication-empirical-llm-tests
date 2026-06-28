@@ -45,6 +45,8 @@ src/
     estimateTokens.ts
     generatePrompts.ts
     generateTestsWithLLM.ts
+    materializeTests.ts
+    runGeneratedTests.ts
     sampleApiFunctions.ts
   llm/
     clientFactory.ts
@@ -57,6 +59,10 @@ src/
     promptGenerator.ts
   sampling/
     stratifiedSampler.ts
+  test-execution/
+    testExecutor.ts
+  test-materialization/
+    testMaterializer.ts
   types.ts
 results/
 generated-tests/
@@ -194,6 +200,39 @@ npm run generate:tests:llm -- --limit 5 --variant signature-only
 npm run generate:tests:llm -- --limit 5 --package countries-and-timezones --variant signature-only
 npm run generate:tests:llm -- --all
 ```
+
+Para materializar os testes gerados como arquivos `.test.js`:
+
+```bash
+npm run materialize:tests
+```
+
+O comando le `results/llm-generations.json`, salva cada `generatedText` em:
+
+```text
+generated-tests/<packageName>/<promptId>.test.js
+```
+
+e cria:
+
+```text
+results/materialized-tests.json
+```
+
+Para executar os testes materializados com Mocha:
+
+```bash
+npm run run:tests
+```
+
+O executor roda cada arquivo individualmente, nao para no primeiro erro e salva:
+
+```text
+results/test-execution-results.json
+results/test-execution-summary.csv
+```
+
+Falhas sao classificadas como `syntax-error`, `import-error`, `type-error`, `assertion-error`, `timeout`, `filesystem-error`, `incomplete-generation` ou `unknown-error`. Geracoes com `finishReason` igual a `MAX_TOKENS` sao marcadas como `incomplete-generation`.
 
 ## Estrategia de amostragem
 

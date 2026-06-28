@@ -1,0 +1,48 @@
+[
+  {
+    "promptId": "countries-and-timezones-countries-and-timezones-default-getalltimezones-signature-only",
+    "packageName": "countries-and-timezones",
+    "functionPath": "countries-and-timezones.default.getAllTimezones",
+    "promptVariant": "signature-only",
+    "provider": "gemini",
+    "model": "gemini-2.5-flash",
+    "testFilePath": "generated-tests/countries-and-timezones/countries-and-timezones-countries-and-timezones-default-getalltimezones-signature-only.test.js",
+    "passed": true,
+    "exitCode": 0,
+    "stdout": "\n\n  test countries-and-timezones\n    √ test countries-and-timezones.default.getAllTimezones\n\n\n  1 passing (9ms)\n\n",
+    "stderr": "",
+    "durationMs": 382
+  },
+  {
+    "promptId": "countries-and-timezones-countries-and-timezones-default-getcountriesfortimezone-signature-only",
+    "packageName": "countries-and-timezones",
+    "functionPath": "countries-and-timezones.default.getCountriesForTimezone",
+    "promptVariant": "signature-only",
+    "provider": "gemini",
+    "model": "gemini-2.5-flash",
+    "testFilePath": "generated-tests/countries-and-timezones/countries-and-timezones-countries-and-timezones-default-getcountriesfortimezone-signature-only.test.js",
+    "passed": false,
+    "exitCode": 1,
+    "stdout": "\n\n  test countries-and-timezones\n    1) test countries-and-timezones.default.getCountriesForTimezone\n\n\n  0 passing (8ms)\n  1 failing\n\n  1) test countries-and-timezones\n       test countries-and-timezones.default.getCountriesForTimezone:\n\n      AssertionError [ERR_ASSERTION]: Result array should contain exactly one country for Europe/London\n\n4 !== 1\n\n      + expected - actual\n\n      -4\n      +1\n      \n      at Context.<anonymous> (generated-tests\\countries-and-timezones\\countries-and-timezones-countries-and-timezones-default-getcountriesfortimezone-signature-only.test.js:11:12)\n      at process.processImmediate (node:internal/timers:504:21)\n\n\n\n",
+    "stderr": "",
+    "errorMessage": "AssertionError [ERR_ASSERTION]: Result array should contain exactly one country for Europe/London",
+    "failureCategory": "assertion-error",
+    "durationMs": 383
+  },
+  {
+    "promptId": "countries-and-timezones-countries-and-timezones-default-getcountry-signature-only",
+    "packageName": "countries-and-timezones",
+    "functionPath": "countries-and-timezones.default.getCountry",
+    "promptVariant": "signature-only",
+    "provider": "gemini",
+    "model": "gemini-2.5-flash",
+    "testFilePath": "generated-tests/countries-and-timezones/countries-and-timezones-countries-and-timezones-default-getcountry-signature-only.test.js",
+    "passed": false,
+    "exitCode": 1,
+    "stdout": "\n\n  test countries-and-timezones\n    1) test countries-and-timezones.default.getCountry\n\n\n  0 passing (7ms)\n  1 failing\n\n  1) test countries-and-timezones\n       test countries-and-timezones.default.getCountry:\n\n      AssertionError [ERR_ASSERTION]: Country name should be correct for US\n+ actual - expected\n\n+ 'United States of America'\n- 'United States'\n                ^\n\n      + expected - actual\n\n      -United States of America\n      +United States\n      \n      at Context.<anonymous> (generated-tests\\countries-and-timezones\\countries-and-timezones-countries-and-timezones-default-getcountry-signature-only.test.js:10:12)\n      at process.processImmediate (node:internal/timers:504:21)\n\n\n\n",
+    "stderr": "",
+    "errorMessage": "AssertionError [ERR_ASSERTION]: Country name should be correct for US",
+    "failureCategory": "assertion-error",
+    "durationMs": 302
+  }
+]
