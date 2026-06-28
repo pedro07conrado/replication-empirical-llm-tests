@@ -1,5 +1,6 @@
-import { mkdir, readFile, writeFile } from "node:fs/promises";
+import { mkdir, readFile } from "node:fs/promises";
 import path from "node:path";
+import { extractRunIdArg, resolveRunPaths, writeJsonArtifact } from "./runManager.js";
 import { createLLMClientFromEnv } from "../llm/clientFactory.js";
 import type { GeneratedPrompt, LLMGeneration, PromptVariant } from "../types.js";
 
@@ -17,10 +18,17 @@ const OUTPUT_FILE = path.join(RESULTS_DIR, "llm-generations.json");
 async function main(): Promise<void> {
   await mkdir(RESULTS_DIR, { recursive: true });
 
-  const cliOptions = parseCliOptions(process.argv.slice(2));
+  const { runId, remainingArgs } = extractRunIdArg(process.argv.slice(2));
+  const cliOptions = parseCliOptions(remainingArgs);
   const prompts = await readGeneratedPrompts(INPUT_FILE);
   validateSafetyOptions(cliOptions);
   const selectedPrompts = applyFilters(prompts, cliOptions);
+  const runPaths = await resolveRunPaths(RESULTS_DIR, runId, {
+    provider: process.env.LLM_PROVIDER,
+    model: process.env.LLM_MODEL,
+    packageName: cliOptions.packageName,
+    variant: cliOptions.variant
+  });
   const llmClient = createLLMClientFromEnv();
   const generations: LLMGeneration[] = [];
 
@@ -47,11 +55,13 @@ async function main(): Promise<void> {
     });
   }
 
-  await writeFile(OUTPUT_FILE, `${JSON.stringify(generations, null, 2)}\n`, "utf8");
+  await writeJsonArtifact(OUTPUT_FILE, runPaths.runDir, "llm-generations.json", generations);
 
   console.log(`Read ${prompts.length} generated prompts from ${INPUT_FILE}`);
   console.log(`Selected ${selectedPrompts.length} prompts for generation.`);
   console.log(`Saved ${generations.length} LLM generations to ${OUTPUT_FILE}`);
+  console.log(`Preserved run artifacts in ${runPaths.runDir}`);
+  console.log(`Run ID: ${runPaths.runId}`);
 }
 
 async function readGeneratedPrompts(filePath: string): Promise<GeneratedPrompt[]> {

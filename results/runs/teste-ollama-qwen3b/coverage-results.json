@@ -1,0 +1,15 @@
+[
+  {
+    "packageName": "countries-and-timezones",
+    "provider": "none",
+    "model": "none",
+    "promptVariant": "none",
+    "totalTests": 3,
+    "passingTestsUsed": 0,
+    "statementCoverage": null,
+    "branchCoverage": null,
+    "functionCoverage": null,
+    "lineCoverage": null,
+    "coverageReportPath": "coverage/countries-and-timezones"
+  }
+]

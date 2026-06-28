@@ -20,7 +20,7 @@ Nesta primeira etapa, o projeto coleta funcoes publicas exportadas por pacotes n
 - Seleciona uma amostra estratificada por pacote com seed fixa.
 - Gera prompts para testes unitarios Mocha usando `assert` nativo do Node.js.
 - Estima tokens e custo antes da execucao contra provedores de LLM.
-- Executa prompts em um cliente LLM generico, com suporte a Mock, Gemini e OpenAI.
+- Executa prompts em um cliente LLM generico, com suporte a Mock, Ollama, Gemini e OpenAI.
 
 ## Pacotes-alvo iniciais
 
@@ -46,12 +46,17 @@ src/
     generatePrompts.ts
     generateTestsWithLLM.ts
     materializeTests.ts
+    runManager.ts
+    runCoverage.ts
     runGeneratedTests.ts
     sampleApiFunctions.ts
+  coverage/
+    coverageRunner.ts
   llm/
     clientFactory.ts
     geminiClient.ts
     mockLLMClient.ts
+    ollamaClient.ts
     openAIClient.ts
   metrics/
     tokenEstimator.ts
@@ -159,9 +164,43 @@ O comando le `results/generated-prompts.json` e salva:
 
 ```text
 results/llm-generations.json
+results/runs/<runId>/llm-generations.json
 ```
 
 Por padrao, se nenhuma chave estiver configurada, o projeto usa `MockLLMClient`, sem chamada externa e sem custo real.
+
+Para usar Ollama localmente:
+
+1. Instale o Ollama: https://ollama.com
+2. Baixe o modelo:
+
+```bash
+ollama pull qwen2.5-coder:3b
+```
+
+3. Garanta que o Ollama esteja rodando. Abra o aplicativo Ollama ou rode:
+
+```bash
+ollama serve
+```
+
+4. Configure as variaveis e rode um piloto:
+
+```bash
+LLM_PROVIDER=ollama OLLAMA_BASE_URL=http://localhost:11434 LLM_MODEL=qwen2.5-coder:3b LLM_MAX_OUTPUT_TOKENS=2048 npm run generate:tests:llm -- --run-id piloto-ollama-countries-signature-10 --limit 10 --package countries-and-timezones --variant signature-only
+```
+
+No PowerShell:
+
+```powershell
+$env:LLM_PROVIDER="ollama"
+$env:OLLAMA_BASE_URL="http://localhost:11434"
+$env:LLM_MODEL="qwen2.5-coder:3b"
+$env:LLM_MAX_OUTPUT_TOKENS="2048"
+npm run generate:tests:llm -- --run-id piloto-ollama-countries-signature-10 --limit 10 --package countries-and-timezones --variant signature-only
+```
+
+Como a execucao e local, `estimatedCost` e `equivalentPaidCost` ficam `0`. Se o Ollama nao estiver rodando, o cliente mostra uma mensagem pedindo para abrir o aplicativo ou executar `ollama serve`. Se o modelo nao existir, a mensagem sugere `ollama pull qwen2.5-coder:3b`.
 
 Para usar Gemini como provedor principal:
 
@@ -217,6 +256,7 @@ e cria:
 
 ```text
 results/materialized-tests.json
+results/runs/<runId>/materialized-tests.json
 ```
 
 Para executar os testes materializados com Mocha:
@@ -230,9 +270,53 @@ O executor roda cada arquivo individualmente, nao para no primeiro erro e salva:
 ```text
 results/test-execution-results.json
 results/test-execution-summary.csv
+results/runs/<runId>/test-execution-results.json
+results/runs/<runId>/test-execution-summary.csv
 ```
 
 Falhas sao classificadas como `syntax-error`, `import-error`, `type-error`, `assertion-error`, `timeout`, `filesystem-error`, `incomplete-generation` ou `unknown-error`. Geracoes com `finishReason` igual a `MAX_TOKENS` sao marcadas como `incomplete-generation`.
+
+Para medir cobertura com nyc/Istanbul usando somente os testes que passaram:
+
+```bash
+npm run run:coverage
+```
+
+O comando le `results/test-execution-results.json` e `results/materialized-tests.json`, agrupa os testes por pacote e executa `nyc + mocha` apenas com os testes passados de cada pacote. Como os pacotes sob teste ficam em `node_modules`, a execucao usa `--exclude-node-modules=false` e restringe `--include` ao pacote avaliado.
+
+Relatorios por pacote sao salvos em:
+
+```text
+coverage/<packageName>/
+```
+
+Os resultados consolidados sao salvos em:
+
+```text
+results/coverage-results.json
+results/coverage-summary.csv
+results/runs/<runId>/coverage-results.json
+results/runs/<runId>/coverage-summary.csv
+```
+
+## Execucoes com runId
+
+Para preservar rodadas experimentais, os comandos de geracao, materializacao, execucao e cobertura aceitam `--run-id`. Os arquivos em `results/` continuam funcionando como `latest`, e cada rodada tambem e salva em:
+
+```text
+results/runs/<runId>/
+```
+
+Exemplo de rodada completa:
+
+```bash
+npm run generate:tests:llm -- --run-id piloto-countries-signature-10 --limit 10 --package countries-and-timezones --variant signature-only
+npm run materialize:tests -- --run-id piloto-countries-signature-10
+npm run run:tests -- --run-id piloto-countries-signature-10
+npm run run:coverage -- --run-id piloto-countries-signature-10
+```
+
+Se `--run-id` nao for informado, o projeto gera um identificador automatico com data/hora e, quando disponivel, provider, modelo, pacote e variante.
 
 ## Estrategia de amostragem
 

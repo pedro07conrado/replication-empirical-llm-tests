@@ -1,5 +1,6 @@
-import { mkdir, readFile, writeFile } from "node:fs/promises";
+import { mkdir, readFile } from "node:fs/promises";
 import path from "node:path";
+import { extractRunIdArg, resolveRunPaths, writeJsonArtifact, writeTextArtifact } from "./runManager.js";
 import { executeMaterializedTests } from "../test-execution/testExecutor.js";
 import type { LLMProvider, MaterializedTest, PromptVariant, TestExecutionResult } from "../types.js";
 
@@ -11,19 +12,31 @@ const SUMMARY_OUTPUT_FILE = path.join(RESULTS_DIR, "test-execution-summary.csv")
 async function main(): Promise<void> {
   await mkdir(RESULTS_DIR, { recursive: true });
 
-  const materializedTests = await readMaterializedTests(INPUT_FILE);
-  const executionResults = await executeMaterializedTests(materializedTests);
+  const { runId, remainingArgs } = extractRunIdArg(process.argv.slice(2));
 
-  await writeFile(RESULTS_OUTPUT_FILE, `${JSON.stringify(executionResults, null, 2)}\n`, "utf8");
-  await writeFile(SUMMARY_OUTPUT_FILE, toSummaryCsv(executionResults), "utf8");
+  if (remainingArgs.length > 0) {
+    throw new Error(`Unknown argument for run:tests: ${remainingArgs[0]}`);
+  }
+
+  const inputRunPaths = runId ? await resolveRunPaths(RESULTS_DIR, runId) : undefined;
+  const inputFile = inputRunPaths ? path.join(inputRunPaths.runDir, "materialized-tests.json") : INPUT_FILE;
+  const materializedTests = await readMaterializedTests(inputFile);
+  const runPaths = inputRunPaths ?? await resolveRunPaths(RESULTS_DIR, undefined, getRunContext(materializedTests));
+  const executionResults = await executeMaterializedTests(materializedTests);
+  const summaryCsv = toSummaryCsv(executionResults);
+
+  await writeJsonArtifact(RESULTS_OUTPUT_FILE, runPaths.runDir, "test-execution-results.json", executionResults);
+  await writeTextArtifact(SUMMARY_OUTPUT_FILE, runPaths.runDir, "test-execution-summary.csv", summaryCsv);
 
   const passedCount = executionResults.filter((result) => result.passed).length;
   const failedCount = executionResults.length - passedCount;
 
-  console.log(`Read ${materializedTests.length} materialized tests from ${INPUT_FILE}`);
+  console.log(`Read ${materializedTests.length} materialized tests from ${inputFile}`);
   console.log(`Executed ${executionResults.length} tests: ${passedCount} passed, ${failedCount} failed.`);
   console.log(`Saved execution results to ${RESULTS_OUTPUT_FILE}`);
   console.log(`Saved execution summary to ${SUMMARY_OUTPUT_FILE}`);
+  console.log(`Preserved run artifacts in ${runPaths.runDir}`);
+  console.log(`Run ID: ${runPaths.runId}`);
 }
 
 async function readMaterializedTests(filePath: string): Promise<MaterializedTest[]> {
@@ -97,7 +110,30 @@ function isPromptVariant(value: unknown): value is PromptVariant {
 }
 
 function isProvider(value: unknown): value is LLMProvider {
-  return value === "mock" || value === "openai" || value === "gemini";
+  return value === "mock" || value === "openai" || value === "gemini" || value === "ollama";
+}
+
+function getRunContext(materializedTests: MaterializedTest[]): {
+  provider?: string;
+  model?: string;
+  packageName?: string;
+  variant?: string;
+} {
+  return {
+    provider: getSingleOrMixed(materializedTests.map((test) => test.provider)),
+    model: getSingleOrMixed(materializedTests.map((test) => test.model)),
+    packageName: getSingleOrMixed(materializedTests.map((test) => test.packageName)),
+    variant: getSingleOrMixed(materializedTests.map((test) => test.promptVariant))
+  };
+}
+
+function getSingleOrMixed(values: string[]): string | undefined {
+  if (values.length === 0) {
+    return undefined;
+  }
+
+  const uniqueValues = [...new Set(values)].sort();
+  return uniqueValues.length === 1 ? uniqueValues[0] : "mixed";
 }
 
 main().catch((error: unknown) => {

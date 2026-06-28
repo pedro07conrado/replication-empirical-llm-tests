@@ -10,6 +10,7 @@
     "generate:prompts": "tsx src/experiment/generatePrompts.ts",
     "generate:tests:llm": "tsx src/experiment/generateTestsWithLLM.ts",
     "materialize:tests": "tsx src/experiment/materializeTests.ts",
+    "run:coverage": "tsx src/experiment/runCoverage.ts",
     "run:tests": "tsx src/experiment/runGeneratedTests.ts",
     "sample:functions": "tsx src/experiment/sampleApiFunctions.ts",
     "typecheck": "tsc --noEmit"
@@ -27,6 +28,7 @@
     "@types/mocha": "^10.0.10",
     "@types/node": "^20.14.10",
     "mocha": "^11.7.6",
+    "nyc": "^18.0.0",
     "tsx": "^4.20.3",
     "typescript": "^5.5.3"
   }

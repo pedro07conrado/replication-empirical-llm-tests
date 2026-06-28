@@ -1,5 +1,6 @@
-import { mkdir, readFile, writeFile } from "node:fs/promises";
+import { mkdir, readFile } from "node:fs/promises";
 import path from "node:path";
+import { extractRunIdArg, resolveRunPaths, writeJsonArtifact } from "./runManager.js";
 import { materializeGeneratedTests } from "../test-materialization/testMaterializer.js";
 import type { LLMGeneration, LLMProvider, PromptVariant } from "../types.js";
 
@@ -11,14 +12,25 @@ const OUTPUT_FILE = path.join(RESULTS_DIR, "materialized-tests.json");
 async function main(): Promise<void> {
   await mkdir(RESULTS_DIR, { recursive: true });
 
-  const generations = await readLLMGenerations(INPUT_FILE);
+  const { runId, remainingArgs } = extractRunIdArg(process.argv.slice(2));
+
+  if (remainingArgs.length > 0) {
+    throw new Error(`Unknown argument for materialize:tests: ${remainingArgs[0]}`);
+  }
+
+  const inputRunPaths = runId ? await resolveRunPaths(RESULTS_DIR, runId) : undefined;
+  const inputFile = inputRunPaths ? path.join(inputRunPaths.runDir, "llm-generations.json") : INPUT_FILE;
+  const generations = await readLLMGenerations(inputFile);
+  const runPaths = inputRunPaths ?? await resolveRunPaths(RESULTS_DIR, undefined, getRunContext(generations));
   const materializedTests = await materializeGeneratedTests(generations, GENERATED_TESTS_DIR);
 
-  await writeFile(OUTPUT_FILE, `${JSON.stringify(materializedTests, null, 2)}\n`, "utf8");
+  await writeJsonArtifact(OUTPUT_FILE, runPaths.runDir, "materialized-tests.json", materializedTests);
 
-  console.log(`Read ${generations.length} LLM generations from ${INPUT_FILE}`);
+  console.log(`Read ${generations.length} LLM generations from ${inputFile}`);
   console.log(`Materialized ${materializedTests.length} tests into ${GENERATED_TESTS_DIR}`);
   console.log(`Saved materialized test index to ${OUTPUT_FILE}`);
+  console.log(`Preserved run artifacts in ${runPaths.runDir}`);
+  console.log(`Run ID: ${runPaths.runId}`);
 }
 
 async function readLLMGenerations(filePath: string): Promise<LLMGeneration[]> {
@@ -59,7 +71,30 @@ function isPromptVariant(value: unknown): value is PromptVariant {
 }
 
 function isProvider(value: unknown): value is LLMProvider {
-  return value === "mock" || value === "openai" || value === "gemini";
+  return value === "mock" || value === "openai" || value === "gemini" || value === "ollama";
+}
+
+function getRunContext(generations: LLMGeneration[]): {
+  provider?: string;
+  model?: string;
+  packageName?: string;
+  variant?: string;
+} {
+  return {
+    provider: getSingleOrMixed(generations.map((generation) => generation.provider)),
+    model: getSingleOrMixed(generations.map((generation) => generation.model)),
+    packageName: getSingleOrMixed(generations.map((generation) => generation.packageName)),
+    variant: getSingleOrMixed(generations.map((generation) => generation.promptVariant))
+  };
+}
+
+function getSingleOrMixed(values: string[]): string | undefined {
+  if (values.length === 0) {
+    return undefined;
+  }
+
+  const uniqueValues = [...new Set(values)].sort();
+  return uniqueValues.length === 1 ? uniqueValues[0] : "mixed";
 }
 
 main().catch((error: unknown) => {

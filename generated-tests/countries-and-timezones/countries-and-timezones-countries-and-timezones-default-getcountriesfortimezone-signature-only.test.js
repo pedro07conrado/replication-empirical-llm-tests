@@ -4,15 +4,26 @@ let pkg = require('countries-and-timezones');
 
 describe('test countries-and-timezones', function() {
   it('test countries-and-timezones.default.getCountriesForTimezone', function(done) {
-    const timezoneName = 'Europe/London';
-    const result = pkg.default.getCountriesForTimezone(timezoneName);
+    // Test with a valid timezone name
+    let tzName = 'America/New_York';
+    let result = pkg.default.getCountriesForTimezone(tzName);
+    assert.isArray(result, 'Expected an array');
+    assert.notEqual(result.length, 0, 'Array should not be empty');
 
-    assert.ok(Array.isArray(result), 'Result should be an array');
-    assert.strictEqual(result.length, 1, 'Result array should contain exactly one country for Europe/London');
-    assert.strictEqual(result[0].id, 'GB', 'The country ID should be GB');
-    assert.strictEqual(result[0].name, 'United Kingdom', 'The country name should be United Kingdom');
-    assert.ok(Array.isArray(result[0].timezones), 'The country timezones property should be an array');
-    assert.ok(result[0].timezones.includes(timezoneName), `The country timezones should include ${timezoneName}`);
+    // Test with an invalid timezone name
+    let invalidTzName = 'Invalid/TimeZone';
+    try {
+      pkg.default.getCountriesForTimezone(invalidTzName);
+      assert.fail('Expected an error for invalid timezone');
+    } catch (e) {
+      assert.equal(e.message, `Unknown timezone: ${invalidTzName}`, 'Correct error message');
+    }
+
+    // Test with a valid timezone name and options
+    let options = { includeHistorical: true };
+    result = pkg.default.getCountriesForTimezone(tzName, options);
+    assert.isArray(result, 'Expected an array');
+    assert.notEqual(result.length, 0, 'Array should not be empty');
 
     done();
   });

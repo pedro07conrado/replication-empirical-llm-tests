@@ -19,7 +19,7 @@ export interface SampleSummaryRecord {
 
 export type PromptVariant = "signature-only" | "signature-and-body" | "full";
 
-export type LLMProvider = "mock" | "openai" | "gemini";
+export type LLMProvider = "mock" | "openai" | "gemini" | "ollama";
 
 export interface GeneratedPrompt {
   promptId: string;
@@ -126,4 +126,18 @@ export interface TestExecutionResult {
   errorMessage?: string;
   failureCategory?: TestFailureCategory;
   durationMs: number;
+}
+
+export interface CoverageResult {
+  packageName: string;
+  provider: string;
+  model: string;
+  promptVariant: string;
+  totalTests: number;
+  passingTestsUsed: number;
+  statementCoverage: number | null;
+  branchCoverage: number | null;
+  functionCoverage: number | null;
+  lineCoverage: number | null;
+  coverageReportPath: string;
 }
